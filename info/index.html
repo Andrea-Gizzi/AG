@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AG/</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" type="image/png" href="../../assets/favicon/1.png">
+</head>
+
+<body>
+  <div class="custom-cursor">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 144 144" fill="none">
+      <path d="M72 0V144" stroke="white" stroke-width="12" />
+      <path d="M0 72L144 72" stroke="white" stroke-width="12" />
+    </svg>
+  </div>
+
+  <div id="nav-name">
+    <a href="../index.html" target="_self" style="text-decoration: none;">AG</a>
+  </div>
+
+  <div class="nav-info">
+    <div id="nav-home">
+      <a href="../index.html" target="_self" style="text-decoration: none;">HOME</a>
+    </div>
+    <div id="nav-project">
+      <a href="javascript:void(0);" onclick="toggleImageGallery()" style="text-decoration: none;">PROJECT</a>
+    </div>
+  </div>
+
+  <div id="image-gallery" class="project-list hidden">
+    <a href="../project/index.html?project=1" class="project-item" data-id="1" style="text-decoration: none;">
+      <span class="project-name">Massimo Vignelli</span>
+      <span class="project-info">Editorial - 2023</span>
+    </a>
+    <a href="../project/index.html?project=2" class="project-item" data-id="2" style="text-decoration: none;">
+      <span class="project-name">Kinetic Art</span>
+      <span class="project-info">Editorial - 2023</span>
+    </a>
+    <a href="../project/index.html?project=3" class="project-item" data-id="3" style="text-decoration: none;">
+      <span class="project-name">C0°RD’1N.A”TE</span>
+      <span class="project-info">Editorial - 2024</span>
+    </a>
+    <a href="../project/index.html?project=4" class="project-item" data-id="4" style="text-decoration: none;">
+      <span class="project-name">MK-97</span>
+      <span class="project-info">Typo - 2025</span>
+    </a>
+    <a href="../project/index.html?project=5" class="project-item" data-id="5" style="text-decoration: none;">
+      <span class="project-name">ГОША</span>
+      <span class="project-info">Co-Design AI - 2025</span>
+    </a>
+    <a href="../project/index.html?project=6" class="project-item" data-id="6" style="text-decoration: none;">
+      <span class="project-name">SYNC</span>
+      <span class="project-info">IxD - 2025</span>
+    </a>
+    <a href="../project/index.html?project=7" class="project-item" data-id="7" style="text-decoration: none;">
+      <span class="project-name">SENSE</span>
+      <span class="project-info">IxD - 2025</span>
+    </a>
+  </div>
+
+  <main></main>
+
+  <div id="bottom-cont">
+    <div class="cv">
+      <div class="button-cont">
+        <div id="description">
+          Hello &#58;&#41;<br><br>My name is Andrea Gizzi, I am an Italian-Swiss designer with a degree in Visual
+          Communication from SUPSI,
+          specializing in Interaction Design. I have worked as a UI/UX Designer at Hexagon Swiss and developed personal
+          and freelance projects that explore the intersection of design and technology.
+          <br><br>
+          My cross-media approach combines print and digital to create cohesive and impactful visual experiences, with a
+          particular focus on UI/UX, interaction design, and AI.
+          <br><br>
+          Passionate about precision, problem solving, and innovation, I draw inspiration from sports, music and
+          fashion,
+          always looking for new ways to push the boundaries of design and move toward the avant-garde.
+        </div><br><br>
+        <div class="studies">
+          <a href="https://www.instagram.com/andrea.gizziiii/" style="color: rgb(255, 98, 0);">instagram&nbsp;</a>
+          <a href="https://https://www.linkedin.com/in/andrea-gizzi-83b518297/"
+            style="color: rgb(255, 98, 0);">linkedin&nbsp;</a>
+          <a href="mailto:andreagizzi2003@gmail.com" style="color: rgb(255, 98, 0);">e-mail</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="bottom-cont-info">
+    <p>PROFILE</p>
+    <p class="context">Education & experience</p>
+    <br>
+    <div class="button-cont-info">
+      <div class="cv-cont">
+        <div class="studies">
+          <p class="school" style="opacity: 0.5;"><br>studies</p>
+          <p class="edu">
+            Setificio - Graphics and communication<br>
+            SUPSI - Visual Communication
+          </p>
+        </div>
+        <div class="dates">
+          <p class="period" style="opacity: 0.5;"><br>date</p>
+          <p class="date">2016 - 2021<br>2022 - 2025</p>
+        </div>
+      </div>
+      <div class="cv-cont">
+        <div class="studies">
+          <p class="school" style="opacity: 0.5;">experiences</p>
+          <p class="edu">
+            Designer Freelancer<br>
+            Hexagon Swiss - UI/UX Designer
+          </p>
+        </div>
+        <div class="dates">
+          <p class="period">&nbsp;</p>
+          <p class="date">2021 -<br>2023 -</p>
+        </div>
+      </div>
+      <div class="cv-cont">
+        <div class="studies">
+          <p class="school" style="opacity: 0.5;">exhibition</p>
+          <p class="edu">
+            Photo Schweiz<br>
+            Milano Design Week 2025
+          </p>
+        </div>
+        <div class="dates">
+          <p class="period">&nbsp;</p>
+          <p class="date">2025<br>2025</p>
+        </div>
+        <br>
+      </div>
+    </div>
+    <button id="description-button" class="toggleButton expand-button cv-button" aria-expanded="false"
+      aria-controls="description-content">
+      <span class="button-label">READ MORE</span>
+      <svg class="description-x" xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 144 144"
+        fill="none" aria-hidden="true">
+        <path d="M72 0V144" stroke="rgb(255, 98, 0)" stroke-width="20" />
+        <path d="M0 72L144 72" stroke="rgb(255, 98, 0)" stroke-width="20" />
+      </svg>
+    </button>
+  </div>
+
+  <footer class="credits">
+    designed and coded by andrea gizzi<br>
+    © 2025 - all content is mine, unless stated otherwise
+  </footer>
+
+  <div class="corner-values-info">
+    <div class="corner top-left">00</div>
+    <div class="corner top-right">00</div>
+    <div class="corner bottom-left">00</div>
+    <div class="corner bottom-right">00</div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
