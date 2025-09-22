@@ -820,16 +820,8 @@ body.home .vimeo-wrapper iframe {
   }
 }
 
-/* stile per dispositivi touch attivato via JS */
-body.is-touch .custom-cursor {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-
-/* SVG che vuoi mantenere invisibili sul mobile:
-   aggiungi la classe `hide-on-mobile` all'elemento SVG in HTML */
-body.is-touch svg.hide-on-mobile {
+html.is-touch .custom-cursor,
+html.is-touch svg.hide-on-mobile {
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;

@@ -191,29 +191,28 @@ document.addEventListener("DOMContentLoaded", () => {
    COORDINATE CURSOR
    ========================= */
 /* =========================
-   COORDINATE CURSOR (touch-aware)
+   COORDINATE CURSOR (robusto)
    ========================= */
 document.addEventListener("DOMContentLoaded", () => {
-  // detection più robusta per touch/mobile
+  const cursor = document.querySelector(".custom-cursor");
+
   const isTouchDevice = ('ontouchstart' in window) ||
                         (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
-                        window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+                        (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
 
   if (isTouchDevice) {
+    // mark html so CSS può forzare il nascondimento anche se JS prova a cambiare inline-style
     document.documentElement.classList.add('is-touch');
-    // opzionale: assicurati che il cursore sia nascosto subito
-    const cursor = document.querySelector(".custom-cursor");
     if (cursor) {
       cursor.style.opacity = '0';
       cursor.style.visibility = 'hidden';
       cursor.style.pointerEvents = 'none';
     }
-    // non attaccare listener per il cursore su touch -> esci qui
+    // non attaccare listener per cursore su touch -> exit
     return;
   }
 
-  // se non è touch, mantieni comportamento desktop
-  const cursor = document.querySelector(".custom-cursor");
+  // ---------- desktop / mouse/pen only ----------
   function moveCursor(x, y) {
     if (!cursor) return;
     cursor.style.left = `${x}px`;
@@ -222,25 +221,43 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCoordinates(x, y);
   }
 
-  let pointerHandler = null;
+  // handler che IGNORA pointer di tipo 'touch'
+  function onPointerMove(e) {
+    // se il browser non fornisce pointerType, consideralo come mouse (compatibilità)
+    if (e.pointerType && e.pointerType === 'touch') return;
+    moveCursor(e.clientX, e.clientY);
+  }
 
-  if (window.PointerEvent) {
-    pointerHandler = (e) => moveCursor(e.clientX, e.clientY);
-    document.addEventListener("pointermove", pointerHandler);
-  } else {
-    if ('ontouchstart' in window) {
-      pointerHandler = (e) => {
-        // non dovrebbe capitare visto che siamo in ramo non-touch, ma fallback
-        const touch = e.touches[0];
-        if (touch) moveCursor(touch.clientX, touch.clientY);
-      };
-      document.addEventListener("touchmove", pointerHandler, { passive: false });
-    } else {
-      pointerHandler = (e) => moveCursor(e.clientX, e.clientY);
-      document.addEventListener("mousemove", pointerHandler);
+  // pointerdown/up: evita che un tap mostri il cursore
+  function onPointerDown(e) {
+    if (e.pointerType && e.pointerType === 'touch') return;
+    // fai la tua animazione clic normale qui (se vuoi)
+    if (cursor) {
+      cursor.style.transition = "transform 0.3s ease";
+      cursor.style.transform = "translate(-50%, -50%) rotate(135deg)";
+    }
+  }
+  function onPointerUp(e) {
+    if (e.pointerType && e.pointerType === 'touch') return;
+    if (cursor) {
+      cursor.style.transition = "transform 0.3s ease";
+      cursor.style.transform = "translate(-50%, -50%) rotate(0deg)";
     }
   }
 
+  // registra i listener pointer (gestisce mouse + pen). Touch è già filtrato dal handler.
+  if (window.PointerEvent) {
+    document.addEventListener("pointermove", onPointerMove, { passive: true });
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("pointerup", onPointerUp);
+  } else {
+    // fallback per browser antichi
+    document.addEventListener("mousemove", (e) => moveCursor(e.clientX, e.clientY));
+    document.addEventListener("mousedown", onPointerDown);
+    document.addEventListener("mouseup", onPointerUp);
+  }
+
+  // hover su link/btn (desktop only)
   document.querySelectorAll("a, button").forEach(el => {
     el.addEventListener("mouseenter", () => {
       if (cursor) cursor.style.transform = "translate(-50%, -50%) rotate(135deg)";
@@ -249,23 +266,13 @@ document.addEventListener("DOMContentLoaded", () => {
       if (cursor) cursor.style.transform = "translate(-50%, -50%) rotate(0deg)";
     });
   });
-  document.addEventListener("mousedown", () => {
-    if (!cursor) return;
-    cursor.style.transition = "transform 0.3s ease";
-    cursor.style.transform = "translate(-50%, -50%) rotate(135deg)";
-  });
-  document.addEventListener("mouseup", () => {
-    if (!cursor) return;
-    cursor.style.transition = "transform 0.3s ease";
-    cursor.style.transform = "translate(-50%, -50%) rotate(0deg)";
-  });
 
-  // opzionale: se vuoi puoi pulire i listener on unload
+  // clean up (opzionale)
   window.addEventListener("beforeunload", () => {
-    if (pointerHandler) {
-      document.removeEventListener("pointermove", pointerHandler);
-      document.removeEventListener("mousemove", pointerHandler);
-      document.removeEventListener("touchmove", pointerHandler);
+    if (window.PointerEvent) {
+      document.removeEventListener("pointermove", onPointerMove);
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("pointerup", onPointerUp);
     }
   });
 });
