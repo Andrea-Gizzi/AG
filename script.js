@@ -188,34 +188,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =========================
-   COORDINATE CURSOR (touch-safe)
+   COORDINATE CURSOR
    ========================= */
 document.addEventListener("DOMContentLoaded", () => {
   const cursor = document.querySelector(".custom-cursor");
-
-  // Rilevazione dispositivo touch/mobile robusta
-  const isTouchDevice = (() => {
-    if (typeof window === "undefined") return false;
-    if (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) return true;
-    if ('ontouchstart' in window) return true;
-    try {
-      return window.matchMedia && window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-    } catch (e) {
-      return false;
-    }
-  })();
-
-  // se touch, nascondi il cursore (JS fallback oltre al CSS) e non aggiungere listeners
-  if (isTouchDevice) {
-    if (cursor) {
-      cursor.style.display = 'none';
-      cursor.style.opacity = '0';
-      cursor.style.pointerEvents = 'none';
-    }
-    return; // stop — niente listeners per il cursore su touch
-  }
-
-  // --- qui sotto codice per dispositivi NON touch ---
   function moveCursor(x, y) {
     if (!cursor) return;
     cursor.style.left = `${x}px`;
@@ -224,19 +200,20 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCoordinates(x, y);
   }
 
-  // preferiamo PointerEvent se disponibile (cattura mouse + pen)
   if (window.PointerEvent) {
-    document.addEventListener("pointermove", e => {
-      // opzionale: ignora pointerType == 'touch' se capita (safety)
-      if (e.pointerType === 'touch') return;
-      moveCursor(e.clientX, e.clientY);
-    });
+    document.addEventListener("pointermove", e => moveCursor(e.clientX, e.clientY));
   } else {
-    // fallback mouse-only (non touch devices arriveranno qui)
-    document.addEventListener("mousemove", e => moveCursor(e.clientX, e.clientY));
+    if ('ontouchstart' in window) {
+      document.addEventListener("touchmove", e => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        moveCursor(touch.clientX, touch.clientY);
+      }, { passive: false });
+    } else {
+      document.addEventListener("mousemove", e => moveCursor(e.clientX, e.clientY));
+    }
   }
 
-  // hover / click visual feedback sugli elementi interattivi
   document.querySelectorAll("a, button").forEach(el => {
     el.addEventListener("mouseenter", () => {
       if (cursor) cursor.style.transform = "translate(-50%, -50%) rotate(135deg)";
@@ -245,7 +222,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (cursor) cursor.style.transform = "translate(-50%, -50%) rotate(0deg)";
     });
   });
-
   document.addEventListener("mousedown", () => {
     if (!cursor) return;
     cursor.style.transition = "transform 0.3s ease";
@@ -257,7 +233,6 @@ document.addEventListener("DOMContentLoaded", () => {
     cursor.style.transform = "translate(-50%, -50%) rotate(0deg)";
   });
 });
-
 
 function updateCoordinates(x, y) {
   const w = window.innerWidth;

@@ -112,15 +112,6 @@ html {
   z-index: 10000;
 }
 
-@media (hover: none) and (pointer: coarse),
-       (pointer: coarse) {
-  .custom-cursor {
-    display: none !important;
-    pointer-events: none !important;
-    opacity: 0 !important;
-  }
-}
-
 /* ELEMENTI DI STATO */
 .project-active {
   color: var(--third-color);
