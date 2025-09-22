@@ -190,7 +190,29 @@ document.addEventListener("DOMContentLoaded", () => {
 /* =========================
    COORDINATE CURSOR
    ========================= */
+/* =========================
+   COORDINATE CURSOR (touch-aware)
+   ========================= */
 document.addEventListener("DOMContentLoaded", () => {
+  // detection più robusta per touch/mobile
+  const isTouchDevice = ('ontouchstart' in window) ||
+                        (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
+                        window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+
+  if (isTouchDevice) {
+    document.documentElement.classList.add('is-touch');
+    // opzionale: assicurati che il cursore sia nascosto subito
+    const cursor = document.querySelector(".custom-cursor");
+    if (cursor) {
+      cursor.style.opacity = '0';
+      cursor.style.visibility = 'hidden';
+      cursor.style.pointerEvents = 'none';
+    }
+    // non attaccare listener per il cursore su touch -> esci qui
+    return;
+  }
+
+  // se non è touch, mantieni comportamento desktop
   const cursor = document.querySelector(".custom-cursor");
   function moveCursor(x, y) {
     if (!cursor) return;
@@ -200,17 +222,22 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCoordinates(x, y);
   }
 
+  let pointerHandler = null;
+
   if (window.PointerEvent) {
-    document.addEventListener("pointermove", e => moveCursor(e.clientX, e.clientY));
+    pointerHandler = (e) => moveCursor(e.clientX, e.clientY);
+    document.addEventListener("pointermove", pointerHandler);
   } else {
     if ('ontouchstart' in window) {
-      document.addEventListener("touchmove", e => {
-        e.preventDefault();
+      pointerHandler = (e) => {
+        // non dovrebbe capitare visto che siamo in ramo non-touch, ma fallback
         const touch = e.touches[0];
-        moveCursor(touch.clientX, touch.clientY);
-      }, { passive: false });
+        if (touch) moveCursor(touch.clientX, touch.clientY);
+      };
+      document.addEventListener("touchmove", pointerHandler, { passive: false });
     } else {
-      document.addEventListener("mousemove", e => moveCursor(e.clientX, e.clientY));
+      pointerHandler = (e) => moveCursor(e.clientX, e.clientY);
+      document.addEventListener("mousemove", pointerHandler);
     }
   }
 
@@ -231,6 +258,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!cursor) return;
     cursor.style.transition = "transform 0.3s ease";
     cursor.style.transform = "translate(-50%, -50%) rotate(0deg)";
+  });
+
+  // opzionale: se vuoi puoi pulire i listener on unload
+  window.addEventListener("beforeunload", () => {
+    if (pointerHandler) {
+      document.removeEventListener("pointermove", pointerHandler);
+      document.removeEventListener("mousemove", pointerHandler);
+      document.removeEventListener("touchmove", pointerHandler);
+    }
   });
 });
 
