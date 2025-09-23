@@ -731,45 +731,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (cursor) cursor.style.transition = "transform 0.3s ease", cursor.style.transform = "translate(-50%, -50%) rotate(0deg)";
   }
 
-  // --- ADD: listeners specifici sullo scroll-container per garantire aggiornamento su mobile ---
-  const scrollContainer = document.querySelector('.scroll-container');
-  let _containerMoveHandler = null;
-  if (scrollContainer && !scrollContainer._cursorBound) {
-    _containerMoveHandler = (e) => {
-      let x = 0, y = 0;
-      if (e.touches && e.touches[0]) {
-        x = e.touches[0].clientX;
-        y = e.touches[0].clientY;
-      } else if (e.changedTouches && e.changedTouches[0]) {
-        x = e.changedTouches[0].clientX;
-        y = e.changedTouches[0].clientY;
-      } else if (typeof e.clientX === 'number') {
-        x = e.clientX;
-        y = e.clientY;
-      } else {
-        return;
-      }
-
-      latestX = x;
-      latestY = y;
-      scheduleUpdate();
-    };
-
-    // registra sia touch che pointer per coprire il maggior numero di dispositivi
-    scrollContainer.addEventListener('touchstart', _containerMoveHandler, { passive: true });
-    scrollContainer.addEventListener('touchmove',  _containerMoveHandler, { passive: true });
-    scrollContainer.addEventListener('touchend',   _containerMoveHandler, { passive: true });
-    // pointer events (se supportati)
-    scrollContainer.addEventListener('pointerdown', _containerMoveHandler, { passive: true });
-    scrollContainer.addEventListener('pointermove', _containerMoveHandler, { passive: true });
-
-    // aggiornamento anche durante lo scroll (utile per ricalcolare angoli)
-    scrollContainer.addEventListener('scroll', () => { scheduleUpdate(); }, { passive: true });
-
-    // flag per evitare doppio binding
-    scrollContainer._cursorBound = true;
-  }
-
   if (window.PointerEvent) {
     document.addEventListener("pointermove", handleMoveEvent, { passive: true });
     document.addEventListener("pointerdown", onPointerDown);
@@ -791,25 +752,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.removeEventListener("pointermove", handleMoveEvent);
       document.removeEventListener("pointerdown", onPointerDown);
       document.removeEventListener("pointerup", onPointerUp);
-    } else {
-      document.removeEventListener("mousemove", handleMoveEvent);
-      document.removeEventListener("touchmove", handleMoveEvent);
-      document.removeEventListener("mousedown", onPointerDown);
-      document.removeEventListener("mouseup", onPointerUp);
     }
-
-    // rimuovi listeners sullo scrollContainer se presenti
-    try {
-      if (scrollContainer && scrollContainer._cursorBound && _containerMoveHandler) {
-        scrollContainer.removeEventListener('touchstart', _containerMoveHandler, { passive: true });
-        scrollContainer.removeEventListener('touchmove',  _containerMoveHandler, { passive: true });
-        scrollContainer.removeEventListener('touchend',   _containerMoveHandler, { passive: true });
-        scrollContainer.removeEventListener('pointerdown', _containerMoveHandler, { passive: true });
-        scrollContainer.removeEventListener('pointermove', _containerMoveHandler, { passive: true });
-        scrollContainer.removeEventListener('scroll', scheduleUpdate, { passive: true });
-        delete scrollContainer._cursorBound;
-      }
-    } catch (e) { /* silent */ }
   });
 });
 
