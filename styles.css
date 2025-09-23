@@ -616,7 +616,8 @@ a:hover {
   .news {
     font-size: var(--responsive-text);
     position: fixed;
-    top: 50%;
+    top: 40%;
+    /* top: 50%; SI SOVRASCRIVE CON CLIK ANABLE AUDIO*/
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 2px 0;
@@ -818,13 +819,6 @@ body.home .vimeo-wrapper iframe {
     min-height: 100vh;
   }
 }
-
-/* html.is-touch .custom-cursor,
-html.is-touch svg.hide-on-mobile {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-} */
 
 /* fallback: nasconde custom cursor sui dispositivi touch */
 @media (hover: none) and (pointer: coarse) {
