@@ -188,10 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =========================
-   COORDINATE CURSOR
-   ========================= */
-/* =========================
-   COORDINATE CURSOR - minimal change
+   COORDINATE CURSOR - track sempre, mostra cursor solo su non-touch
    ========================= */
 document.addEventListener("DOMContentLoaded", () => {
   const cursor = document.querySelector(".custom-cursor");
@@ -205,39 +202,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // evita flicker: assicurati che il cursore parta nascosto
   if (cursor) {
-    cursor.style.opacity = '0';
-    cursor.style.visibility = 'hidden';
+    cursor.style.opacity = isTouchDevice ? '0' : '0'; // visibile solo via JS successivamente per desktop
+    cursor.style.visibility = isTouchDevice ? 'hidden' : 'hidden';
     cursor.style.pointerEvents = 'none';
   }
 
-  // Se è touch, non attaccare listener e mantieni il cursore nascosto
-  if (isTouchDevice) {
-    // opzionale: aggiungi una classe per il debug
-    document.documentElement.classList.add('detected-touch');
-    return;
-  }
-
-  // ---------- desktop / mouse/pen only ----------
+  // funzione che muove il cursore visibile (usata solo su non-touch)
   function moveCursor(x, y) {
     if (!cursor) return;
     cursor.style.left = `${x}px`;
     cursor.style.top = `${y}px`;
-
-    // solo se NON siamo su touch rendiamo visibile il cursore
-    // (questa è la linea che previene il problema su mobile)
     cursor.style.visibility = 'visible';
     cursor.style.opacity = '1';
-
-    updateCoordinates(x, y);
   }
 
-  function onPointerMove(e) {
-    if (e.pointerType && e.pointerType === 'touch') return;
-    moveCursor(e.clientX, e.clientY);
+  // funzione che aggiorna solo le coordinate (sempre chiamata)
+  // throttling con rAF per ottimizzare
+  let latestX = 0, latestY = 0, rafPending = false;
+  function scheduleUpdate() {
+    if (rafPending) return;
+    rafPending = true;
+    requestAnimationFrame(() => {
+      updateCoordinates(latestX, latestY);
+      // Se NON siamo su touch, sincronizziamo anche il cursore visibile
+      if (!isTouchDevice) moveCursor(latestX, latestY);
+      rafPending = false;
+    });
   }
 
+  // handler unico che prende coordinate da pointer o da touch fallback
+  function handleMoveEvent(e) {
+    // support pointer events (clientX/clientY)
+    let x = 0, y = 0;
+    if (typeof e.clientX === 'number' && typeof e.clientY === 'number') {
+      x = e.clientX;
+      y = e.clientY;
+    } else if (e.touches && e.touches[0]) {
+      // fallback touch event
+      x = e.touches[0].clientX;
+      y = e.touches[0].clientY;
+    } else {
+      return;
+    }
+
+    latestX = x;
+    latestY = y;
+    scheduleUpdate();
+  }
+
+  // pointerdown/up: animazioni del cursore visibile (solo non-touch)
   function onPointerDown(e) {
-    if (e.pointerType && e.pointerType === 'touch') return;
+    if (e.pointerType && e.pointerType === 'touch') return; // non animiamo per touch
     if (cursor) {
       cursor.style.transition = "transform 0.3s ease";
       cursor.style.transform = "translate(-50%, -50%) rotate(135deg)";
@@ -251,29 +266,34 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // registra i listener:
   if (window.PointerEvent) {
-    document.addEventListener("pointermove", onPointerMove, { passive: true });
+    // pointermove copre mouse/pen/touch — ma noi non filtriamo qui: usiamo handleMoveEvent sempre
+    document.addEventListener("pointermove", handleMoveEvent, { passive: true });
     document.addEventListener("pointerdown", onPointerDown);
     document.addEventListener("pointerup", onPointerUp);
   } else {
-    document.addEventListener("mousemove", (e) => moveCursor(e.clientX, e.clientY));
+    // fallback: mouse + touch
+    document.addEventListener("mousemove", handleMoveEvent, { passive: true });
     document.addEventListener("mousedown", onPointerDown);
     document.addEventListener("mouseup", onPointerUp);
+    document.addEventListener("touchmove", handleMoveEvent, { passive: true });
   }
 
+  // hover su link/btn: solo modifica visuale del cursore (in desktop)
   document.querySelectorAll("a, button").forEach(el => {
     el.addEventListener("mouseenter", () => {
-      if (cursor) cursor.style.transform = "translate(-50%, -50%) rotate(135deg)";
+      if (!isTouchDevice && cursor) cursor.style.transform = "translate(-50%, -50%) rotate(135deg)";
     });
     el.addEventListener("mouseleave", () => {
-      if (cursor) cursor.style.transform = "translate(-50%, -50%) rotate(0deg)";
+      if (!isTouchDevice && cursor) cursor.style.transform = "translate(-50%, -50%) rotate(0deg)";
     });
   });
 
   // cleanup
   window.addEventListener("beforeunload", () => {
     if (window.PointerEvent) {
-      document.removeEventListener("pointermove", onPointerMove);
+      document.removeEventListener("pointermove", handleMoveEvent);
       document.removeEventListener("pointerdown", onPointerDown);
       document.removeEventListener("pointerup", onPointerUp);
     }
