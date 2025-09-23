@@ -680,10 +680,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const isTouchDevice = document.documentElement.classList.contains('is-touch') ||
-                        ('ontouchstart' in window) ||
-                        (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
-                        (navigator.msMaxTouchPoints && navigator.msMaxTouchPoints > 0) ||
-                        (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+    ('ontouchstart' in window) ||
+    (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
+    (navigator.msMaxTouchPoints && navigator.msMaxTouchPoints > 0) ||
+    (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
 
   if (cursor) {
     cursor.style.opacity = '0';
