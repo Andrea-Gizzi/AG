@@ -226,13 +226,10 @@ const PROJECTS = {
 function extractVimeoId(str) {
   if (!str || typeof str !== 'string') return null;
   const s = str.trim();
-  // VIMEO:12345 or vimeo: 12345
   let m = s.match(/^vimeo:\s*(\d+)$/i);
   if (m) return m[1];
-  // plain ID (only digits)
   m = s.match(/^(\d{6,})$/);
   if (m) return m[1];
-  // URL like vimeo.com/12345 or vimeo.com/channels/.../12345
   m = s.match(/vimeo\.com\/(?:.*\/)?(\d+)/i);
   if (m) return m[1];
   return null;
