@@ -820,8 +820,26 @@ body.home .vimeo-wrapper iframe {
   }
 }
 
-html.is-touch .custom-cursor,
+/* html.is-touch .custom-cursor,
 html.is-touch svg.hide-on-mobile {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+} */
+
+/* fallback: nasconde custom cursor sui dispositivi touch */
+@media (hover: none) and (pointer: coarse) {
+  .custom-cursor {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}
+
+/* se hai aggiunto in head la classe html.is-touch */
+html.is-touch .custom-cursor {
+  display: none !important;
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;

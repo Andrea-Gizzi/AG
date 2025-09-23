@@ -191,24 +191,29 @@ document.addEventListener("DOMContentLoaded", () => {
    COORDINATE CURSOR
    ========================= */
 /* =========================
-   COORDINATE CURSOR (robusto)
+   COORDINATE CURSOR - minimal change
    ========================= */
 document.addEventListener("DOMContentLoaded", () => {
   const cursor = document.querySelector(".custom-cursor");
 
-  const isTouchDevice = ('ontouchstart' in window) ||
+  // determina una sola volta se siamo su dispositivo touch (fonte di verità)
+  const isTouchDevice = document.documentElement.classList.contains('is-touch') ||
+                        ('ontouchstart' in window) ||
                         (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
+                        (navigator.msMaxTouchPoints && navigator.msMaxTouchPoints > 0) ||
                         (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
 
+  // evita flicker: assicurati che il cursore parta nascosto
+  if (cursor) {
+    cursor.style.opacity = '0';
+    cursor.style.visibility = 'hidden';
+    cursor.style.pointerEvents = 'none';
+  }
+
+  // Se è touch, non attaccare listener e mantieni il cursore nascosto
   if (isTouchDevice) {
-    // mark html so CSS può forzare il nascondimento anche se JS prova a cambiare inline-style
-    document.documentElement.classList.add('is-touch');
-    if (cursor) {
-      cursor.style.opacity = '0';
-      cursor.style.visibility = 'hidden';
-      cursor.style.pointerEvents = 'none';
-    }
-    // non attaccare listener per cursore su touch -> exit
+    // opzionale: aggiungi una classe per il debug
+    document.documentElement.classList.add('detected-touch');
     return;
   }
 
@@ -217,21 +222,22 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!cursor) return;
     cursor.style.left = `${x}px`;
     cursor.style.top = `${y}px`;
-    cursor.style.opacity = "1";
+
+    // solo se NON siamo su touch rendiamo visibile il cursore
+    // (questa è la linea che previene il problema su mobile)
+    cursor.style.visibility = 'visible';
+    cursor.style.opacity = '1';
+
     updateCoordinates(x, y);
   }
 
-  // handler che IGNORA pointer di tipo 'touch'
   function onPointerMove(e) {
-    // se il browser non fornisce pointerType, consideralo come mouse (compatibilità)
     if (e.pointerType && e.pointerType === 'touch') return;
     moveCursor(e.clientX, e.clientY);
   }
 
-  // pointerdown/up: evita che un tap mostri il cursore
   function onPointerDown(e) {
     if (e.pointerType && e.pointerType === 'touch') return;
-    // fai la tua animazione clic normale qui (se vuoi)
     if (cursor) {
       cursor.style.transition = "transform 0.3s ease";
       cursor.style.transform = "translate(-50%, -50%) rotate(135deg)";
@@ -245,19 +251,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // registra i listener pointer (gestisce mouse + pen). Touch è già filtrato dal handler.
   if (window.PointerEvent) {
     document.addEventListener("pointermove", onPointerMove, { passive: true });
     document.addEventListener("pointerdown", onPointerDown);
     document.addEventListener("pointerup", onPointerUp);
   } else {
-    // fallback per browser antichi
     document.addEventListener("mousemove", (e) => moveCursor(e.clientX, e.clientY));
     document.addEventListener("mousedown", onPointerDown);
     document.addEventListener("mouseup", onPointerUp);
   }
 
-  // hover su link/btn (desktop only)
   document.querySelectorAll("a, button").forEach(el => {
     el.addEventListener("mouseenter", () => {
       if (cursor) cursor.style.transform = "translate(-50%, -50%) rotate(135deg)";
@@ -267,7 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // clean up (opzionale)
+  // cleanup
   window.addEventListener("beforeunload", () => {
     if (window.PointerEvent) {
       document.removeEventListener("pointermove", onPointerMove);
@@ -276,6 +279,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 function updateCoordinates(x, y) {
   const w = window.innerWidth;
