@@ -671,167 +671,165 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =========================
-   COORDINATE CURSOR - track sempre, mostra cursor solo su non-touch (project page)
+   COORDINATE CURSOR - Overlay touch-capture (Opzione A)
+   Sostituisce il blocco precedente: incolla QUI al posto del precedente DOMContentLoaded
    ========================= */
-/* =========================
-   TRACK TOUCH/PTR COORDS — gestione robusta per mobile + iframe
-   Sostituisci la tua sezione COORDINATE CURSOR con questa
-   ========================= */
-document.addEventListener("DOMContentLoaded", () => {
-  const cursor = document.querySelector(".custom-cursor");
-  const scrollContainer = document.querySelector('.scroll-container');
+(function () {
+  const SC_SELECTOR = '.scroll-container';
+  const scrollContainer = document.querySelector(SC_SELECTOR);
+  const cursor = document.querySelector('.custom-cursor');
 
-  const isTouchDevice = ('ontouchstart' in window) ||
-                        (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
-                        (navigator.msMaxTouchPoints && navigator.msMaxTouchPoints > 0);
+  if (!scrollContainer) return; // niente da fare senza container
 
-  if (cursor) {
-    cursor.style.opacity = '0';
-    cursor.style.visibility = 'hidden';
-    cursor.style.pointerEvents = 'none';
-  }
+  const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
 
-  let latestX = 0, latestY = 0;
-  let rafPending = false;
-  let touching = false;
-  // conserveremo gli iframe per riabilitarli
-  let iframeElems = [];
-
-  function scheduleUpdate() {
-    if (rafPending) return;
-    rafPending = true;
-    requestAnimationFrame(() => {
-      updateCoordinates(latestX, latestY);
-      if (!isTouchDevice && cursor) {
-        cursor.style.left = `${latestX}px`;
-        cursor.style.top = `${latestY}px`;
-        cursor.style.visibility = 'visible';
-        cursor.style.opacity = '1';
-      }
-      rafPending = false;
-    });
-  }
-
-  function handleTouchLikeEvent(clientX, clientY) {
-    latestX = Math.round(clientX);
-    latestY = Math.round(clientY);
-    scheduleUpdate();
-  }
-
-  function onTouchStart(e) {
-    touching = true;
-
-    // se ci sono iframe all'interno, disattiva temporaneamente pointer-events
-    iframeElems = Array.from(scrollContainer.querySelectorAll('iframe'));
-    iframeElems.forEach(ifr => {
-      // salva valore precedente (se ne hai bisogno puoi memorizzarlo in dataset)
-      ifr.dataset._prevPointerEvents = ifr.style.pointerEvents || '';
-      ifr.style.pointerEvents = 'none';
-    });
-
-    // leggi subito la posizione del primo tocco
-    if (e.touches && e.touches[0]) {
-      handleTouchLikeEvent(e.touches[0].clientX, e.touches[0].clientY);
-    } else if (e.clientX != null) {
-      handleTouchLikeEvent(e.clientX, e.clientY);
+  function applyCoords(x, y) {
+    if (typeof updateCoordinates === 'function') updateCoordinates(x, y);
+    if (!isTouch && cursor) {
+      cursor.style.left = `${x}px`;
+      cursor.style.top = `${y}px`;
+      cursor.style.visibility = 'visible';
+      cursor.style.opacity = '1';
     }
   }
 
-  function onTouchMove(e) {
-    // se è touch event
-    if (e.touches && e.touches[0]) {
-      handleTouchLikeEvent(e.touches[0].clientX, e.touches[0].clientY);
-    } else if (e.clientX != null) {
-      handleTouchLikeEvent(e.clientX, e.clientY);
-    }
-    // non chiamare preventDefault: vogliamo preservare lo scroll nativo
-  }
-
-  function onTouchEnd(e) {
-    touching = false;
-
-    // riabilita gli iframe che avevamo disabilitato
-    iframeElems.forEach(ifr => {
-      if (ifr && typeof ifr.dataset._prevPointerEvents !== 'undefined') {
-        ifr.style.pointerEvents = ifr.dataset._prevPointerEvents;
-        delete ifr.dataset._prevPointerEvents;
-      } else if (ifr) {
-        ifr.style.pointerEvents = '';
-      }
+  function createOverlay(rect) {
+    const ov = document.createElement('div');
+    ov.className = 'touch-overlay';
+    Object.assign(ov.style, {
+      position: 'fixed',
+      left: rect.left + 'px',
+      top: rect.top + 'px',
+      width: rect.width + 'px',
+      height: rect.height + 'px',
+      zIndex: 2147483647,
+      background: 'transparent',
+      touchAction: 'none',
+      WebkitTouchCallout: 'none',
     });
-    iframeElems = [];
+    return ov;
   }
 
-  // Se l'elemento scrollContainer non esiste, metti i listener sul document come fallback
-  const target = scrollContainer || document;
+  function startInertia(container, initialVelocityY) {
+    let v = initialVelocityY;
+    const friction = 0.95;
+    const threshold = 0.2;
+    let rafId = null;
+    function step() {
+      if (Math.abs(v) < threshold) { cancelAnimationFrame(rafId); return; }
+      container.scrollTop -= v;
+      v *= friction;
+      rafId = requestAnimationFrame(step);
+    }
+    rafId = requestAnimationFrame(step);
+  }
 
-  // Pointer events (quando disponibili)
-  if (window.PointerEvent) {
-    target.addEventListener('pointerdown', (ev) => {
-      // se pointer è touch, trattalo come touchstart
-      if (ev.pointerType === 'touch') {
-        onTouchStart(ev);
+  function bind() {
+    let overlay = null;
+    let lastY = 0, lastX = 0;
+    let lastTime = 0;
+    let velocityY = 0;
+
+    function onStart(clientX, clientY) {
+      const rect = scrollContainer.getBoundingClientRect();
+      overlay = createOverlay(rect);
+      document.body.appendChild(overlay);
+
+      lastY = clientY; lastX = clientX; lastTime = performance.now(); velocityY = 0;
+
+      applyCoords(clientX, clientY);
+
+      overlay.addEventListener('touchmove', onTouchMove, { passive: false });
+      overlay.addEventListener('touchend', onTouchEnd, { passive: true });
+      overlay.addEventListener('pointermove', onPointerMove, { passive: false });
+      overlay.addEventListener('pointerup', onPointerUp, { passive: true });
+      window.addEventListener('orientationchange', removeOverlayIfAny);
+      window.addEventListener('resize', removeOverlayIfAny);
+    }
+
+    function onMove(clientX, clientY, ev) {
+      if (ev && typeof ev.preventDefault === 'function') ev.preventDefault();
+      const now = performance.now();
+      const dt = Math.max(1, now - lastTime);
+      const dy = clientY - lastY;
+      velocityY = dy / dt * 16; // approx px/frame
+
+      scrollContainer.scrollTop -= dy;
+
+      lastX = clientX; lastY = clientY; lastTime = now;
+
+      applyCoords(clientX, clientY);
+    }
+
+    function onEnd() {
+      if (overlay) {
+        overlay.removeEventListener('touchmove', onTouchMove);
+        overlay.removeEventListener('touchend', onTouchEnd);
+        overlay.removeEventListener('pointermove', onPointerMove);
+        overlay.removeEventListener('pointerup', onPointerUp);
+        document.body.removeChild(overlay);
+        overlay = null;
+      }
+      if (Math.abs(velocityY) > 0.5) {
+        startInertia(scrollContainer, velocityY * 1.5);
+      }
+      window.removeEventListener('orientationchange', removeOverlayIfAny);
+      window.removeEventListener('resize', removeOverlayIfAny);
+    }
+
+    function removeOverlayIfAny() {
+      if (overlay && overlay.parentNode) {
+        overlay.removeEventListener('touchmove', onTouchMove);
+        overlay.removeEventListener('touchend', onTouchEnd);
+        overlay.removeEventListener('pointermove', onPointerMove);
+        overlay.removeEventListener('pointerup', onPointerUp);
+        overlay.parentNode.removeChild(overlay);
+        overlay = null;
+      }
+    }
+
+    function onTouchStartEv(e) {
+      if (!e.touches || !e.touches[0]) return;
+      onStart(e.touches[0].clientX, e.touches[0].clientY);
+    }
+    function onTouchMove(e) {
+      if (!e.touches || !e.touches[0]) return;
+      onMove(e.touches[0].clientX, e.touches[0].clientY, e);
+    }
+    function onTouchEnd(e) { onEnd(); }
+
+    function onPointerDown(e) {
+      if (e.pointerType === 'touch') {
+        onStart(e.clientX, e.clientY);
       } else {
-        // mouse / pen
-        handleTouchLikeEvent(ev.clientX, ev.clientY);
+        applyCoords(e.clientX, e.clientY);
         if (cursor) cursor.style.transition = "transform 0.25s ease", cursor.style.transform = "translate(-50%, -50%) rotate(135deg)";
       }
-    }, { passive: true });
-
-    target.addEventListener('pointermove', (ev) => {
-      if (ev.pointerType === 'touch') {
-        onTouchMove(ev);
-      } else {
-        handleTouchLikeEvent(ev.clientX, ev.clientY);
-      }
-    }, { passive: true });
-
-    target.addEventListener('pointerup', (ev) => {
-      if (ev.pointerType === 'touch') onTouchEnd(ev);
-      else if (cursor) cursor.style.transition = "transform 0.25s ease", cursor.style.transform = "translate(-50%, -50%) rotate(0deg)";
-    }, { passive: true });
-
-  } else {
-    // Touch / mouse fallback
-    target.addEventListener('touchstart', onTouchStart, { passive: true });
-    target.addEventListener('touchmove', onTouchMove, { passive: true });
-    target.addEventListener('touchend', onTouchEnd, { passive: true });
-    target.addEventListener('mousemove', (e) => handleTouchLikeEvent(e.clientX, e.clientY), { passive: true });
-  }
-
-  // Durante la fase di "momentum scroll" (quando il dito non è sul display),
-  // non esistono touchmove che rappresentano la posizione del dito. Usiamo scroll per stimare.
-  if (scrollContainer) {
-    scrollContainer.addEventListener('scroll', () => {
-      if (!touching) {
-        const r = scrollContainer.getBoundingClientRect();
-        // posizione sensata: centro X del container, Y leggermente sopra il centro (modifica se preferisci)
-        latestX = Math.round(r.left + r.width / 2);
-        latestY = Math.round(r.top + r.height * 0.15);
-        scheduleUpdate();
-      }
-    }, { passive: true });
-  }
-
-  // hover behavior per desktop (come prima)
-  document.querySelectorAll("a, button").forEach(el => {
-    el.addEventListener("mouseenter", () => { if (!isTouchDevice && cursor) cursor.style.transform = "translate(-50%, -50%) rotate(135deg)"; });
-    el.addEventListener("mouseleave", () => { if (!isTouchDevice && cursor) cursor.style.transform = "translate(-50%, -50%) rotate(0deg)"; });
-  });
-
-  // cleanup (se necessario)
-  window.addEventListener("beforeunload", () => {
-    if (window.PointerEvent) {
-      target.removeEventListener('pointerdown', onTouchStart);
-      target.removeEventListener('pointermove', onTouchMove);
-      target.removeEventListener('pointerup', onTouchEnd);
-    } else {
-      target.removeEventListener('touchstart', onTouchStart);
-      target.removeEventListener('touchmove', onTouchMove);
-      target.removeEventListener('touchend', onTouchEnd);
     }
-  });
-});
+    function onPointerMove(e) {
+      if (e.pointerType === 'touch') {
+        onMove(e.clientX, e.clientY, e);
+      } else {
+        applyCoords(e.clientX, e.clientY);
+      }
+    }
+    function onPointerUp(e) {
+      if (e.pointerType === 'touch') onEnd();
+      else if (cursor) cursor.style.transition = "transform 0.25s ease", cursor.style.transform = "translate(-50%, -50%) rotate(0deg)";
+    }
+
+    // attach initial starters to container
+    scrollContainer.addEventListener('touchstart', onTouchStartEv, { passive: true });
+    scrollContainer.addEventListener('pointerdown', onPointerDown, { passive: true });
+
+    // desktop mouse tracking (no overlay)
+    document.addEventListener('mousemove', e => {
+      applyCoords(e.clientX, e.clientY);
+    }, { passive: true });
+  }
+
+  bind();
+})();
 
 
 /* helper: aggiorna gli angoli (se non presente, aggiungi; altrimenti mantieni la tua versione) */
