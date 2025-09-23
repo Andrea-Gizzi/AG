@@ -134,14 +134,38 @@ html {
   transition: opacity var(--transition-slow) var(--transition-ease-in-out);
 }
 
+
+
 /* !!!!!!!!!!!!! PROVA MOBILE !!!!!!! */
 @media screen and (max-width: 769px) {
-.start-container {
-  top: 50%;
-  left: 50%;  
-  transform: translate(-50%, -50%);
+  .start-container {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .top-left {
+    top: 20%;
+    left: 20%;
+  }
+
+  .top-right {
+    top: 20%;
+    right: 20%;
+  }
+
+  .bottom-left {
+    bottom: 20%;
+    left: 20%;
+  }
+
+  .bottom-right {
+    bottom: 20%;
+    right: 20%;
+  }
 }
-}
+
+
 
 /* NEWS SECTION */
 .news {
