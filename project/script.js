@@ -670,32 +670,102 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-/* cursor, coords, description toggle, gallery toggle, popstate, drag prevention (mantengo) */
+/* =========================
+   COORDINATE CURSOR - track sempre, mostra cursor solo su non-touch (project page)
+   ========================= */
 document.addEventListener("DOMContentLoaded", () => {
   const cursor = document.querySelector(".custom-cursor");
-  if (!cursor) return;
-  document.addEventListener("mousemove", (e) => {
-    document.querySelector(".custom-cursor").style.opacity = "1";
-    cursor.style.left = `${e.clientX}px`;
-    cursor.style.top = `${e.clientY}px`;
+  if (!cursor) {
+    // continuiamo comunque a tracciare le coordinate se vuoi — ma senza cursore
+  }
+
+  const isTouchDevice = document.documentElement.classList.contains('is-touch') ||
+                        ('ontouchstart' in window) ||
+                        (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
+                        (navigator.msMaxTouchPoints && navigator.msMaxTouchPoints > 0) ||
+                        (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+
+  if (cursor) {
+    cursor.style.opacity = '0';
+    cursor.style.visibility = 'hidden';
+    cursor.style.pointerEvents = 'none';
+  }
+
+  function moveCursor(x, y) {
+    if (!cursor) return;
+    cursor.style.left = `${x}px`;
+    cursor.style.top = `${y}px`;
+    cursor.style.visibility = 'visible';
+    cursor.style.opacity = '1';
+  }
+
+  let latestX = 0, latestY = 0, rafPending = false;
+  function scheduleUpdate() {
+    if (rafPending) return;
+    rafPending = true;
+    requestAnimationFrame(() => {
+      updateCoordinates(latestX, latestY);
+      if (!isTouchDevice) moveCursor(latestX, latestY);
+      rafPending = false;
+    });
+  }
+
+  function handleMoveEvent(e) {
+    let x = 0, y = 0;
+    if (typeof e.clientX === 'number' && typeof e.clientY === 'number') {
+      x = e.clientX; y = e.clientY;
+    } else if (e.touches && e.touches[0]) {
+      x = e.touches[0].clientX; y = e.touches[0].clientY;
+    } else return;
+
+    latestX = x; latestY = y;
+    scheduleUpdate();
+  }
+
+  function onPointerDown(e) {
+    if (e.pointerType && e.pointerType === 'touch') return;
+    if (cursor) cursor.style.transition = "transform 0.3s ease", cursor.style.transform = "translate(-50%, -50%) rotate(135deg)";
+  }
+  function onPointerUp(e) {
+    if (e.pointerType && e.pointerType === 'touch') return;
+    if (cursor) cursor.style.transition = "transform 0.3s ease", cursor.style.transform = "translate(-50%, -50%) rotate(0deg)";
+  }
+
+  if (window.PointerEvent) {
+    document.addEventListener("pointermove", handleMoveEvent, { passive: true });
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("pointerup", onPointerUp);
+  } else {
+    document.addEventListener("mousemove", handleMoveEvent, { passive: true });
+    document.addEventListener("touchmove", handleMoveEvent, { passive: true });
+    document.addEventListener("mousedown", onPointerDown);
+    document.addEventListener("mouseup", onPointerUp);
+  }
+
+  document.querySelectorAll("a, button").forEach(el => {
+    el.addEventListener("mouseenter", () => { if (!isTouchDevice && cursor) cursor.style.transform = "translate(-50%, -50%) rotate(135deg)"; });
+    el.addEventListener("mouseleave", () => { if (!isTouchDevice && cursor) cursor.style.transform = "translate(-50%, -50%) rotate(0deg)"; });
   });
-  document.querySelectorAll("a, button").forEach((el) => {
-    el.addEventListener("mouseenter", () => { cursor.style.transform = "translate(-50%, -50%) rotate(135deg)"; });
-    el.addEventListener("mouseleave", () => { cursor.style.transform = "translate(-50%, -50%) rotate(0deg)"; });
+
+  window.addEventListener("beforeunload", () => {
+    if (window.PointerEvent) {
+      document.removeEventListener("pointermove", handleMoveEvent);
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("pointerup", onPointerUp);
+    }
   });
-  document.addEventListener("mousedown", () => { cursor.style.transition = "transform 0.3s ease"; cursor.style.transform = "translate(-50%, -50%) rotate(135deg)"; });
-  document.addEventListener("mouseup", () => { cursor.style.transition = "transform 0.3s ease"; cursor.style.transform = "translate(-50%, -50%) rotate(0deg)"; });
 });
 
-document.addEventListener("mousemove", (e) => {
-  const width = window.innerWidth, height = window.innerHeight;
+/* helper: aggiorna gli angoli (se non presente, aggiungi; altrimenti mantieni la tua versione) */
+function updateCoordinates(x, y) {
+  const w = window.innerWidth, h = window.innerHeight;
   const tl = document.querySelector(".top-left"), tr = document.querySelector(".top-right");
   const bl = document.querySelector(".bottom-left"), br = document.querySelector(".bottom-right");
-  if (tl) tl.textContent = String(Math.floor((e.clientX / width) * 99)).padStart(2, '0');
-  if (tr) tr.textContent = String(Math.floor((e.clientY / height) * 99)).padStart(2, '0');
-  if (bl) bl.textContent = String(Math.floor(((width - e.clientX) / width) * 99)).padStart(2, '0');
-  if (br) br.textContent = String(Math.floor(((height - e.clientY) / height) * 99)).padStart(2, '0');
-});
+  if (tl) tl.textContent = String(Math.floor((x / w) * 99)).padStart(2, '0');
+  if (tr) tr.textContent = String(Math.floor((y / h) * 99)).padStart(2, '0');
+  if (bl) bl.textContent = String(Math.floor(((w - x) / w) * 99)).padStart(2, '0');
+  if (br) br.textContent = String(Math.floor(((h - y) / h) * 99)).padStart(2, '0');
+}
 
 /* description toggle (preservato) */
 document.addEventListener("DOMContentLoaded", () => {
