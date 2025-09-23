@@ -195,10 +195,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // determina una sola volta se siamo su dispositivo touch (fonte di verità)
   const isTouchDevice = document.documentElement.classList.contains('is-touch') ||
-                        ('ontouchstart' in window) ||
-                        (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
-                        (navigator.msMaxTouchPoints && navigator.msMaxTouchPoints > 0) ||
-                        (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+    ('ontouchstart' in window) ||
+    (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
+    (navigator.msMaxTouchPoints && navigator.msMaxTouchPoints > 0) ||
+    (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
 
   // evita flicker: assicurati che il cursore parta nascosto
   if (cursor) {
