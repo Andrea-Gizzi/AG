@@ -134,6 +134,15 @@ html {
   transition: opacity var(--transition-slow) var(--transition-ease-in-out);
 }
 
+/* !!!!!!!!!!!!! PROVA MOBILE !!!!!!! */
+@media screen and (max-width: 769px) {
+.start-container {
+  top: 50%;
+  left: 50%;  
+  transform: translate(-50%, -50%);
+}
+}
+
 /* NEWS SECTION */
 .news {
   /* background-color: var(--primary-color); */

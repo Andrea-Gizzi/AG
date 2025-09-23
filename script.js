@@ -302,8 +302,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function updateCoordinates(x, y) {
+  // !!!!!!!!!! PROVA MOBILE !!!!!!!!
   // const w = window.innerWidth;
-  // const h = window.innerHeight;
+  // const h = window.innerHeight; 
   const w = (window.visualViewport && window.visualViewport.width) || window.innerWidth;
   const h = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
   const tl = document.querySelector(".top-left");
