@@ -302,8 +302,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function updateCoordinates(x, y) {
-  const w = window.innerWidth;
-  const h = window.innerHeight;
+  // const w = window.innerWidth;
+  // const h = window.innerHeight;
+  const w = (window.visualViewport && window.visualViewport.width) || window.innerWidth;
+  const h = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
   const tl = document.querySelector(".top-left");
   const tr = document.querySelector(".top-right");
   const bl = document.querySelector(".bottom-left");
