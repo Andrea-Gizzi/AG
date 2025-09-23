@@ -37,12 +37,12 @@ const PROJECTS = {
     extraInfo: ``,
     description: `
       <p class="context-2"><br>
-        The project involves the creation of an overcover dedicated to the life and work of Massimo
-        Vignelli. Through a meticulous subdivision of data, I highlighted the architect's career path, from his Italian
-        origins to the revolutionary innovations that made him a design icon. The inclusion of graphic elements, such as
-        railway lines and colour hierarchies, recalls Vignelli's creative genius, transforming information and facts
-        into an engaging visual narrative. Upon opening, the artist's face symbolically emerges, underlining his central
-        role and continued inspiration for new generations.</p>
+       The project features a cover dedicated to the life and work of Massimo Vignelli. Organised through a precise 
+       division of data, it traces his trajectory from his Italian origins to the innovations that established him as 
+       a design icon. Graphic elements such as railway lines, colour hierarchies and structural grids evoke his creative 
+       approach, transforming information into a compelling visual narrative. Once opened, a portrait of Vignelli 
+       emerges in the centre, a symbolic reminder of his lasting influence on generations of designers.
+      </p>
       <p class="context">Supervisor Fulvia Lepori and Michela Linder.</p>
       <br>
     `,
@@ -61,12 +61,11 @@ const PROJECTS = {
     extraInfo: ``,
     description: `
       <p class="context-2"><br>
-        Created for an exhibition at the Mendrisio Art Museum, this poster celebrates kinetic art, a
-        discipline that combines movement, light and form to stimulate perception. The design is inspired by the works
-        of artists such as Almir Mavignier and Peter Megert, translating the dynamic and innovative essence of the
-        discipline into images. The layout, studied down to the smallest detail, allows the viewer to immerse themselves
-        in a visual experience that fuses tradition and modernity, reflecting their creative and
-        innovative vision.</p>
+        Designed for the Mendrisio Art Museum, this poster celebrates kinetic art, a discipline merging light, 
+        form, and movement to sharpen perception. Inspired by artists such as Almir Mavignier and Peter Megert, 
+        it translates the dynamic essence of the movement into a meticulously composed visual experience. 
+        The layout bridges tradition and modernity, embodying the spirit of innovation central to kinetic art.
+      </p>
       <p class="context">Supervisor Marco Zürcher and Sidi Vanetti. <br>Co-author Simone Scardovi.</p>
       <br>
     `,
@@ -86,18 +85,15 @@ const PROJECTS = {
     `,
     description: `
       <p class="context-2"><br>
-        C0°RD'1N.A ’TE is an editorial product analysing monumental and dystopian expressions of
-        Brutalist architecture in the former Yugoslavia. Each structure is presented together with its metadata, in
-        particular geographical coordinates, to highlight its precise location. The project is divided into sections
-        dedicated to individual monuments, each characterised by an evocative cover, an incisive introduction,
-        historical and conceptual narratives, reference images supplemented with pictograms and a conclusion that
-        enhances the architectural forms. The visual and textual approach aims to engage a young audience, paying homage
-        to the expressive power of architecture.</p>
+        C0°RD'1N.A ’TE is an editorial project on monumental and dystopian Brutalist architecture in former Yugoslavia. 
+        Each building is documented with metadata, especially its coordinates, marking its exact location. Structured 
+        with striking covers, concise texts, analyses, images sourced online and pictograms, the publication balances 
+        clarity with atmosphere, engaging younger audiences while honoring architecture’s expressive power.
+      </p>
       <p class="context">Supervisor Roberto Schneeberger.</p>
       <br>
     `,
     images: [
-      // "../../../assets/video/coordinate/coordinate.mp4",
       "VIMEO:1072979549",
       "../assets/img/coordinate/1.jpg",
       "../assets/img/coordinate/2.jpg",
@@ -116,17 +112,16 @@ const PROJECTS = {
     extraInfo: ``,
     description: `
       <p class="context-2"><br>
-        MK-97 is a project to reinterpret an archival font, originally created in 1897 for the US
-        Government Printing Office. Through extensive research, digitisation and reworking, the forgotten typeface has
-        been given new life, merging its historical value with a contemporary graphic look. Accompanied by a printed
-        specimen, the layout emphasises the essential forms of the font, enriching it with silver textures and
-        low-resolution images that reinforce its visual and narrative story.</p>
+        MK-97 reinterprets an archival font designed in 1897 for the US Government Printing Office. Through research, 
+        digitisation, and redesign, the forgotten typeface acquires a renewed presence, fusing historical resonance 
+        with contemporary graphic expression. A printed specimen accompanies the project, highlighting the font’s 
+        essential forms and enhancing them with silver textures and low-resolution imagery that enrich its visual 
+        and narrative dimension.
+      </p>
       <p class="context">Supervisor Luca Pellegrini.</p>
       <br>
     `,
     images: [
-
-      // "../../../assets/video/mk-97/mk-97.mp4",
       "VIMEO:1072980576",
       "../assets/img/mk-97/1.jpg",
       "../assets/img/mk-97/2.jpg",
@@ -151,12 +146,12 @@ const PROJECTS = {
         identity of an imaginary fashion brand set in 2064. In a context marked by social and environmental crises, but
         also by rapid technological transformations, the AI-generated images combine minimalism and futurism. The result
         is a visual identity that addresses issues such as identity, resilience and the delicate balance between
-        humanity and technology, offering an innovative and coherent vision of the future of fashion.</p>
+        humanity and technology, offering an innovative and coherent vision of the future of fashion.
+      </p>
       <p class="context">Supervisor Leonardo Angelucci.</p>
       <br>
     `,
     images: [
-      // "../../../assets/video/rowa/rowa.mp4",
       "VIMEO:1072980885",
       "../assets/img/rowa/1.jpg",
       "../assets/img/rowa/2.jpg",
@@ -177,18 +172,16 @@ const PROJECTS = {
     House of Switzerland`,
     description: `
       <p class="context-2"><br>
-        SYNC is an interactive exploration of the intersection between body, technology, and visual
-        art. Inspired by Bauhaus dance principles, the project uses accelerometers to capture the performer's gestures,
-        transforming them into real-time audiovisual outputs. The digital interface organises the data in an immersive
-        environment, creating a synchronous experience that highlights the relationship between human and machine.
-        Dynamic lines and a soundtrack inspired by Ryoji Ikeda evolve in harmony with the movements, offering a
-        contemporary reinterpretation of Bauhaus canons through a visual and sound language in constant transformation.
+        SYNC is an interactive exploration of the intersection between body, technology, and visual art. 
+        Drawing from Bauhaus dance principles, the project employs accelerometers to capture performers’ 
+        gestures and translate them into real-time audiovisual compositions. An immersive interface synchronises 
+        movement, sound, and imagery, where dynamic lines and sound generated inspired by Ryoji Ikeda evolve in harmony, 
+        offering a contemporary reinterpretation of Bauhaus through a constantly shifting language.
       </p>
       <p class="context">Supervisor Leonardo Angelucci.</p>
       <br>
     `,
     images: [
-      // "../../../assets/video/sync/performance.mp4",
       "VIMEO:1072983962",
       "../assets/img/sync/1.jpg",
       "../assets/img/sync/2.jpg",
@@ -217,7 +210,6 @@ const PROJECTS = {
       <br>
     `,
     images: [
-      // "../../../assets/video/sense/sense.mp4",
       "VIMEO:1121218692",
       "../assets/img/sense/1.jpg",
       "../assets/img/sense/2.jpg",
