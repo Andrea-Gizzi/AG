@@ -1,12 +1,11 @@
-// ANIMAZIONI INIZIALI
+/* ---------- utility: animate text ---------- */
 function animateText(element, newText, duration, callback) {
   let currentText = element.textContent;
   const maxLength = Math.max(currentText.length, newText.length);
   currentText = currentText.padEnd(maxLength, " ");
   newText = newText.padEnd(maxLength, " ");
 
-  // const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?';
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+[]{}|;:,.<>?';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?';
   const intervalTime = 50;
   const totalSteps = Math.floor(duration / intervalTime);
   let step = 0;
@@ -81,9 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // COORDINATE
-/* =========================
-   COORDINATE CURSOR - track sempre, mostra cursor solo su non-touch (info page)
-   ========================= */
 document.addEventListener("DOMContentLoaded", () => {
   const cursor = document.querySelector(".custom-cursor");
 
@@ -93,7 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         (navigator.msMaxTouchPoints && navigator.msMaxTouchPoints > 0) ||
                         (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
 
-  // evita flicker: start hidden
   if (cursor) {
     cursor.style.opacity = '0';
     cursor.style.visibility = 'hidden';
@@ -108,7 +103,6 @@ document.addEventListener("DOMContentLoaded", () => {
     cursor.style.opacity = '1';
   }
 
-  // throttling con rAF
   let latestX = 0, latestY = 0, rafPending = false;
   function scheduleUpdate() {
     if (rafPending) return;
@@ -166,7 +160,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-/* helper: aggiorna gli angoli (se non presente nel file, aggiungi; altrimenti mantieni la tua versione) */
 function updateCoordinates(x, y) {
   const w = window.innerWidth;
   const h = window.innerHeight;
@@ -244,7 +237,6 @@ function toggleImageGallery(forceState) {
     projectLink.style.transform = "translateX(0)";
     animateText(projectLink, "PROJECT", ANIM_DURATION);
 
-    // comportamento speciale: se siamo nella pagina /project vogliamo mantenere il flag
     const isProjectPage = window.location.pathname.includes("/project");
 
     if (!isProjectPage) {
@@ -252,7 +244,6 @@ function toggleImageGallery(forceState) {
       gallery.classList.add("hidden");
       try { sessionStorage.removeItem('galleryOpen'); } catch (e) { /* silent */ }
     } else {
-      // se siamo su project, manteniamo il flag 'true' per preservare lo stato
       try { sessionStorage.setItem('galleryOpen', 'true'); } catch (e) { /* silent */ }
     }
   }
@@ -272,7 +263,6 @@ document.addEventListener('DOMContentLoaded', () => {
         projectLink.style.transform = isMobile ? 'translateX(-32vw)' : 'translateX(-16vw)';
         projectLink.textContent = 'CLOSE';
 
-        // Forza repaint e poi anima la chiusura verso lo stato normale
         requestAnimationFrame(() => {
           projectLink.style.transition = '';
           projectLink.style.transform = 'translateX(0)';
@@ -290,5 +280,4 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// drug and drop
 document.addEventListener('dragstart', e => e.preventDefault());

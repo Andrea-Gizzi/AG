@@ -43,13 +43,11 @@ function showAudioToast(text = "click to enable audio", { duration = 2000, color
 
 /* ---------- helper: rileva se il background è mutuato (supporta <video> e iframe Vimeo) ---------- */
 function isBgMutedState() {
-  // controlla prima un <video> nativo dentro #bg-video
   const nativeVideo = document.querySelector('#bg-video video, #bg-video > video');
   if (nativeVideo) {
     return !!nativeVideo.muted;
   }
 
-  // poi controlla iframe Vimeo: se l'iframe ha ?muted=1 nel src consideralo muted per sync visivo
   const iframe = document.getElementById('bg-video-iframe');
   if (iframe && iframe.src) {
     try {
@@ -59,20 +57,15 @@ function isBgMutedState() {
         return mutedParam === '1' || mutedParam === 'true';
       }
     } catch (e) {
-      // se non riusciamo a parse, fallback a true per sicurezza visiva
       return true;
     }
   }
 
-  // fallback: se non riusciamo a determinare, ritorna true (mostriamo il toast per invitare l'utente)
   return true;
 }
 
-/* =========================
-   DOM READY: NAV, START, NEWS
-   ========================= */
+/* DOM READY: NAV, START, NEWS */
 document.addEventListener("DOMContentLoaded", () => {
-  // Imposta sessionStorage quando clicchi sui progetti
   document.querySelectorAll('#image-gallery .project-item').forEach(link => {
     link.addEventListener('click', (ev) => {
       if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
@@ -110,13 +103,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Aggiorna posizione al resize
   window.addEventListener("resize", updateNavNamePosition);
 
-  // helper: mostra toast sincronizzato quando la nav compare (come in codice 0)
   function maybeShowMutedToastOnReveal() {
     const bgEl = document.getElementById('bg-video');
-    // se lo stato è muted (o non determinabile) mostriamo il toast
     if (isBgMutedState()) {
       showAudioToast("click to enable audio", { duration: 2000, color: 'white', mixBlendMode: 'difference' });
     }
@@ -140,7 +130,6 @@ document.addEventListener("DOMContentLoaded", () => {
           if (navName) navName.style.opacity = "1";
           updateNavNamePosition();
 
-          // --- sincronizza il toast con la comparsa della nav (stessa tempistica)
           maybeShowMutedToastOnReveal();
 
           setTimeout(() => {
@@ -177,37 +166,30 @@ document.addEventListener("DOMContentLoaded", () => {
     const navHomeLink = document.querySelector("#nav-home a");
     if (navHomeLink) animateText(navHomeLink, "ABOUT", 2000);
 
-    // --- sincronizza anche qui (caricamento diretto senza animazione)
     maybeShowMutedToastOnReveal();
   }
 
-  // DISABILITA CONTEXT MENU su immagini, video e iframe
   document.querySelectorAll('img, video, iframe').forEach(el => {
     el.addEventListener('contextmenu', (e) => e.preventDefault());
   });
 });
 
-/* =========================
-   COORDINATE CURSOR - track sempre, mostra cursor solo su non-touch
-   ========================= */
+/* COORDINATE CURSOR - track sempre, mostra cursor solo su non-touch */
 document.addEventListener("DOMContentLoaded", () => {
   const cursor = document.querySelector(".custom-cursor");
 
-  // determina una sola volta se siamo su dispositivo touch (fonte di verità)
   const isTouchDevice = document.documentElement.classList.contains('is-touch') ||
     ('ontouchstart' in window) ||
     (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
     (navigator.msMaxTouchPoints && navigator.msMaxTouchPoints > 0) ||
     (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
 
-  // evita flicker: assicurati che il cursore parta nascosto
   if (cursor) {
-    cursor.style.opacity = isTouchDevice ? '0' : '0'; // visibile solo via JS successivamente per desktop
+    cursor.style.opacity = isTouchDevice ? '0' : '0';
     cursor.style.visibility = isTouchDevice ? 'hidden' : 'hidden';
     cursor.style.pointerEvents = 'none';
   }
 
-  // funzione che muove il cursore visibile (usata solo su non-touch)
   function moveCursor(x, y) {
     if (!cursor) return;
     cursor.style.left = `${x}px`;
@@ -217,14 +199,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // funzione che aggiorna solo le coordinate (sempre chiamata)
-  // throttling con rAF per ottimizzare
   let latestX = 0, latestY = 0, rafPending = false;
   function scheduleUpdate() {
     if (rafPending) return;
     rafPending = true;
     requestAnimationFrame(() => {
       updateCoordinates(latestX, latestY);
-      // Se NON siamo su touch, sincronizziamo anche il cursore visibile
       if (!isTouchDevice) moveCursor(latestX, latestY);
       rafPending = false;
     });
@@ -232,13 +212,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // handler unico che prende coordinate da pointer o da touch fallback
   function handleMoveEvent(e) {
-    // support pointer events (clientX/clientY)
     let x = 0, y = 0;
     if (typeof e.clientX === 'number' && typeof e.clientY === 'number') {
       x = e.clientX;
       y = e.clientY;
     } else if (e.touches && e.touches[0]) {
-      // fallback touch event
       x = e.touches[0].clientX;
       y = e.touches[0].clientY;
     } else {
@@ -252,7 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // pointerdown/up: animazioni del cursore visibile (solo non-touch)
   function onPointerDown(e) {
-    if (e.pointerType && e.pointerType === 'touch') return; // non animiamo per touch
+    if (e.pointerType && e.pointerType === 'touch') return;
     if (cursor) {
       cursor.style.transition = "transform 0.3s ease";
       cursor.style.transform = "translate(-50%, -50%) rotate(135deg)";
@@ -268,12 +246,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // registra i listener:
   if (window.PointerEvent) {
-    // pointermove copre mouse/pen/touch — ma noi non filtriamo qui: usiamo handleMoveEvent sempre
     document.addEventListener("pointermove", handleMoveEvent, { passive: true });
     document.addEventListener("pointerdown", onPointerDown);
     document.addEventListener("pointerup", onPointerUp);
   } else {
-    // fallback: mouse + touch
     document.addEventListener("mousemove", handleMoveEvent, { passive: true });
     document.addEventListener("mousedown", onPointerDown);
     document.addEventListener("mouseup", onPointerUp);
@@ -290,7 +266,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // cleanup
   window.addEventListener("beforeunload", () => {
     if (window.PointerEvent) {
       document.removeEventListener("pointermove", handleMoveEvent);
@@ -317,9 +292,7 @@ function updateCoordinates(x, y) {
   if (br) br.textContent = String(Math.floor(((h - y) / h) * 99)).padStart(2, '0');
 }
 
-/* =========================
-   CLOSE NEWS AL CARICAMENTO + aggiorna nav-name
-   ========================= */
+/* CLOSE NEWS AL CARICAMENTO + aggiorna nav-name */
 document.addEventListener("DOMContentLoaded", () => {
   const newsSection = document.querySelector('.news');
   const navName = document.getElementById("nav-name");
@@ -330,7 +303,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   } catch (e) { /* silent */ }
 
-  // aggiorna posizione nav-name anche se la news è chiusa
   function updateNavNamePosition() {
     const isMobile = window.innerWidth <= 769;
     if (!isMobile) {
@@ -348,18 +320,13 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", updateNavNamePosition);
 });
 
-/* =========================
-   VIDEO BACKGROUND — singolo video o Vimeo (compatibile con vecchio comportamento)
-   ========================= */
+/* VIDEO BACKGROUND — singolo video o Vimeo (compatibile con vecchio comportamento) */
 document.addEventListener("DOMContentLoaded", () => {
   const videoElement = document.getElementById("bg-video");
   if (!videoElement) return;
 
   // se l'elemento è un elemento video HTML nativo — mantieni il comportamento esistente
   if (videoElement.tagName && videoElement.tagName.toLowerCase() === 'video') {
-    // --- codice esistente per <video>
-    const singleSource = "../assets/video/sense/sense.mp4";
-    videoElement.src = singleSource;
     videoElement.preload = "auto";
     videoElement.muted = true;
     videoElement.loop = true;
@@ -403,16 +370,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const audioStatus = document.getElementById("audio-status");
       if (audioStatus) {
         if (!videoElement.muted) {
-          // AUDIO ON
           showAudioToast("AUDIO ON", { duration: 2000, color: 'white', mixBlendMode: 'difference' });
         } else {
-          // AUDIO OFF
           showAudioToast("AUDIO OFF", { duration: 2000, color: 'red', mixBlendMode: 'normal' });
         }
       }
     });
 
-    return; // fine gestione video nativo
+    return;
   }
 
   // --- Se invece #bg-video è wrapper per Vimeo (div che contiene iframe: #bg-video-iframe)
@@ -424,7 +389,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Crea overlay per intercettare click (cliccare direttamente dentro l'iframe non genera eventi nel parent)
   const overlayId = 'vimeo-click-overlay';
-  // rimuovi overlay precedente se presente
   let existingOverlay = document.getElementById(overlayId);
   if (existingOverlay) existingOverlay.remove();
 
@@ -436,7 +400,6 @@ document.addEventListener("DOMContentLoaded", () => {
   overlay.style.pointerEvents = 'auto';
 
   try {
-    // assicurati che il wrapper (#bg-video) sia posizionato per contenere l'overlay
     videoElement.style.position = videoElement.style.position || 'relative';
     videoElement.appendChild(overlay);
   } catch (e) {
@@ -509,9 +472,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-/* =========================
-   IMAGE GALLERY TOGGLE
-   ========================= */
+/* IMAGE GALLERY TOGGLE */
 function toggleImageGallery(forceState) {
   const gallery = document.getElementById("image-gallery");
   const projectLink = document.querySelector("#nav-project a");
@@ -580,5 +541,4 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// DISABILITA DRAG & DROP
 document.addEventListener('dragstart', e => e.preventDefault());

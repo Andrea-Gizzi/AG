@@ -240,10 +240,8 @@ function createMediaSection(src, projectTitle, index) {
   const section = document.createElement('section');
   section.className = 'image-section';
 
-  // prova a estrarre id vimeo
   const vimeoId = extractVimeoId(src);
   if (vimeoId) {
-    // wrapper che usa le regole CSS fornite
     const wrapper = document.createElement('div');
     wrapper.className = 'vimeo-wrapper';
 
@@ -251,7 +249,6 @@ function createMediaSection(src, projectTitle, index) {
     iframe.className = 'vimeo-iframe';
     iframe.setAttribute('draggable', 'false');
 
-    // autoplay muted loop background per garantire autoplay in molti browser
     iframe.src = `https://player.vimeo.com/video/${vimeoId}?autoplay=1&muted=1&loop=1&background=1&title=0&byline=0&portrait=0&playsinline=1`;
     iframe.setAttribute('frameborder', '0');
     iframe.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture');
@@ -263,7 +260,6 @@ function createMediaSection(src, projectTitle, index) {
     return section;
   }
 
-  // fallback: immagine (se non è un vimeo id)
   const img = document.createElement('img');
   img.src = src;
   img.alt = projectTitle;
@@ -304,7 +300,6 @@ function initVimeoPlayers(scrollContainer) {
         muted: true
       });
 
-      // start muted playback attempt
       player.play().catch(() => { /* autoplay potrebbe essere bloccato ma dovrebbe partire se muted */ });
 
       window._vimeoPlayers.push(player);
@@ -319,7 +314,6 @@ function applyAudioStateToVideos() {
   const scrollContainer = document.querySelector('.scroll-container');
   if (!scrollContainer) return;
 
-  // Assicuriamo che tutti i players siano mutati inizialmente
   if (window._vimeoPlayers && window._vimeoPlayers.length) {
     window._vimeoPlayers.forEach(p => {
       try {
@@ -338,7 +332,6 @@ function applyAudioStateToVideos() {
     if (!played) return;
 
     if (window.audioMuted) {
-      // tutto rimane mutato (già impostato)
       if (window._vimeoPlayers && window._vimeoPlayers.length) {
         window._vimeoPlayers.forEach(p => {
           try {
@@ -348,7 +341,6 @@ function applyAudioStateToVideos() {
         });
       }
     } else {
-      // unmute only the first player, keep others muted
       window._vimeoPlayers.forEach((p, i) => {
         try {
           if (i === 0) {
@@ -366,20 +358,15 @@ function applyAudioStateToVideos() {
 }
 
 /* ---------- setup audio toggle (click globale) ---------- */
-// --- Inserisci questa funzione da qualche parte prima di setupAudioToggle ---
 function setAudioStateImmediate(muted) {
-  // aggiorna stato globale e sessionStorage (se vuoi persist)
   try { sessionStorage.setItem('audioMuted', muted ? 'true' : 'false'); } catch (e) { }
   window.audioMuted = muted;
 
-  // HTML <video> nella scroll-container: unmute only first when muted=false
   const htmlVideos = Array.from(document.querySelectorAll('.scroll-container video'));
   htmlVideos.forEach((v, i) => {
     try {
-      // se vogliamo audio, solo il primo video avrà audio; gli altri rimangono muted
       v.muted = muted ? true : (i === 0 ? false : true);
       if (!muted && i === 0) {
-        // prova a playare immediatamente col gesto utente
         try { v.play().catch(() => { }); } catch (e) { }
       }
     } catch (e) { }
@@ -390,7 +377,6 @@ function setAudioStateImmediate(muted) {
     window._vimeoPlayers.forEach((p, i) => {
       try {
         if (!muted && i === 0) {
-          // sblocca audio per il primo player
           if (typeof p.setVolume === 'function') {
             p.setVolume(1).catch(() => { });
           } else if (typeof p.setMuted === 'function') {
@@ -398,7 +384,6 @@ function setAudioStateImmediate(muted) {
           }
           if (typeof p.play === 'function') p.play().catch(() => { });
         } else {
-          // mantieni gli altri muted
           if (typeof p.setVolume === 'function') {
             p.setVolume(0).catch(() => { });
           } else if (typeof p.setMuted === 'function') {
@@ -410,24 +395,19 @@ function setAudioStateImmediate(muted) {
   }
 }
 
-// --- Sostituisci la vecchia setupAudioToggle con QUESTO ---
 function setupAudioToggle() {
-  // inizializza stato (autoplay/muted) come prima
   applyAudioStateToVideos();
 
   if (window._audioClickBound) return;
   const audioStatus = document.getElementById('audio-status');
 
   document.addEventListener('click', (ev) => {
-    // non intercettare click su link, bottoni, form o sulla gallery
     if (ev.target.closest('a, button, input, textarea, select, #image-gallery')) return;
 
-    // NEW: esegui l'aggiornamento dello stato IMMEDIATAMENTE nel click handler
     const newState = !window.audioMuted;
-    setAudioStateImmediate(newState);      // imposta i players subito (user gesture)
-    setAudioMuted(newState);               // aggiorna la variabile / sessionStorage (se vuoi duplicare)
+    setAudioStateImmediate(newState);
+    setAudioMuted(newState);
 
-    // aggiorna l'UI del toast
     if (audioStatus) {
       audioStatus.textContent = window.audioMuted ? 'AUDIO OFF' : 'AUDIO ON';
       audioStatus.style.color = window.audioMuted ? 'red' : 'white';
@@ -436,8 +416,6 @@ function setupAudioToggle() {
       setTimeout(() => { audioStatus.style.opacity = '0'; }, 2000);
     }
 
-    // Non chiamare applyAudioStateToVideos() qui: quello può effettuare operazioni asincrone
-    // che sovrascrivono lo stato appena impostato. applyAudioStateToVideos resta utile al loadProject.
   });
 
   window._audioClickBound = true;
@@ -463,20 +441,16 @@ function loadProject(projectId) {
   if (extraEl) extraEl.innerHTML = project.extraInfo || '';
   if (descEl) descEl.innerHTML = project.description || '';
 
-  // destroy existing Vimeo players to avoid sovrapposizioni
   destroyVimeoPlayers();
 
-  // svuota container e ricrea media (solo vimeo o immagini)
   scrollContainer.innerHTML = '';
   project.images.forEach((src, idx) => {
     const section = createMediaSection(src, project.title, idx);
     scrollContainer.appendChild(section);
   });
 
-  // init players su iframes appena aggiunti
   initVimeoPlayers(scrollContainer);
 
-  // reset indice / class active
   if (typeof window.currentImageIndex !== 'undefined') window.currentImageIndex = 0;
   const sections = scrollContainer.querySelectorAll('.image-section');
   if (sections.length) {
@@ -486,10 +460,8 @@ function loadProject(projectId) {
 
   const prevAudioState = sessionStorage.getItem("audioMuted");
 
-  // applica stato audio di base (muted forzato per autoplay)
   applyAudioStateToVideos();
 
-  // --- avviso downgrade ---
   const hasVimeo = project.images.some(src => !!extractVimeoId(src));
   if (hasVimeo && prevAudioState === "false") {
     const audioStatus = document.getElementById("audio-status");
@@ -502,7 +474,6 @@ function loadProject(projectId) {
     }
   }
 
-  // scroll to top of container
   requestAnimationFrame(() => {
     if (typeof scrollContainer.scrollTo === 'function') {
       scrollContainer.scrollTo({ left: 0, top: 0, behavior: 'auto' });
@@ -511,7 +482,6 @@ function loadProject(projectId) {
     }
   });
 
-  // update gallery active class
   const gallery = document.getElementById('image-gallery');
   if (gallery) {
     gallery.querySelectorAll('.project-item').forEach(a => {
@@ -613,7 +583,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   setupAudioToggle();
 
-  // NAV/GALLERY state (preserved)
   const gallery = document.getElementById("image-gallery");
   const projectLink = document.querySelector("#nav-project a");
   const isMobile = window.innerWidth <= 769;
@@ -653,19 +622,15 @@ document.addEventListener("DOMContentLoaded", () => {
     try { document.querySelector(".project-description").style.opacity = "1"; } catch (e) { }
   }, 500);
 
-  // disabilita context menu su media (aggiunto iframe)
   document.querySelectorAll('img, iframe').forEach(el => {
     el.addEventListener('contextmenu', (e) => e.preventDefault());
   });
 });
 
-/* =========================
-   COORDINATE CURSOR - track sempre, mostra cursor solo su non-touch (project page)
-   ========================= */
+/* COORDINATE CURSOR - track sempre, mostra cursor solo su non-touch (project page) */
 document.addEventListener("DOMContentLoaded", () => {
   const cursor = document.querySelector(".custom-cursor");
   if (!cursor) {
-    // continuiamo comunque a tracciare le coordinate se vuoi — ma senza cursore
   }
 
   const isTouchDevice = document.documentElement.classList.contains('is-touch') ||

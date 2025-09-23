@@ -36,7 +36,6 @@
 body,
 html {
   overflow: hidden;
-  /* height: 100vh; */
   min-height: 100vh;
   overflow-x: hidden;
   font-family: "neue-haas-grotesk-text", sans-serif;
@@ -97,7 +96,6 @@ html {
   right: 20vw;
 }
 
-/* CUSTOM CURSOR */
 .custom-cursor {
   opacity: 0;
   transform-origin: center;
@@ -111,13 +109,11 @@ html {
   z-index: 10000;
 }
 
-/* ELEMENTI DI STATO */
 .project-active {
   color: var(--third-color);
   font-style: normal;
 }
 
-/* START SCREEN */
 .start-container {
   position: fixed;
   top: 50vh;
@@ -134,42 +130,7 @@ html {
   transition: opacity var(--transition-slow) var(--transition-ease-in-out);
 }
 
-
-
-/* !!!!!!!!!!!!! PROVA MOBILE !!!!!!! */
-@media screen and (max-width: 769px) {
-  .start-container {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .top-left {
-    top: 20%;
-    left: 20%;
-  }
-
-  .top-right {
-    top: 20%;
-    right: 20%;
-  }
-
-  .bottom-left {
-    bottom: 20%;
-    left: 20%;
-  }
-
-  .bottom-right {
-    bottom: 20%;
-    right: 20%;
-  }
-}
-
-
-
-/* NEWS SECTION */
 .news {
-  /* background-color: var(--primary-color); */
   background-color: var(--third-color);
   position: fixed;
   padding: 4px 0;
@@ -211,7 +172,6 @@ html {
   opacity: 0.5;
 }
 
-/* NAVIGATION */
 .nav,
 .nav-project,
 .nav-info {
@@ -293,7 +253,6 @@ a:hover {
   opacity: 0.5;
 }
 
-/* AUDIO STATUS */
 #audio-status {
   position: fixed;
   text-align: center;
@@ -308,7 +267,6 @@ a:hover {
   mix-blend-mode: normal;
 }
 
-/* CREDITS */
 .credits {
   position: fixed;
   bottom: 10px;
@@ -320,7 +278,6 @@ a:hover {
   font-size: 8px;
 }
 
-/* IMAGE GALLERY */
 #image-gallery {
   position: fixed;
   top: 50vh;
@@ -373,7 +330,6 @@ a:hover {
   display: none;
 }
 
-/* CV SECTION */
 .button-cont {
   grid-template-rows: repeat(7, auto);
   width: 50vw;
@@ -519,8 +475,6 @@ a:hover {
   stroke-width: 16;
 }
 
-
-/* SCROLL CONTAINER & IMAGE SECTIONS */
 .scroll-container {
   height: 100vh;
   overflow-y: scroll;
@@ -573,13 +527,11 @@ a:hover {
   left: var(--lateral-padding);
   top: var(--lateral-padding);
   z-index: 9999;
-  /* color: var(--third-color); */
   text-transform: uppercase;
   opacity: 0;
   transition: max-height var(--transition-slow) var(--transition-ease-in-out), opacity var(--transition-slow) var(--transition-ease-in-out);
 }
 
-/* VIDEO BACKGROUND */
 .video-background {
   opacity: 0;
   position: fixed;
@@ -600,14 +552,74 @@ a:hover {
   object-fit: cover;
 }
 
-/* #bg-video-iframe {
+body.project .vimeo-wrapper {
+  width: 50vw;
+  height: 50vh;
+  max-width: 50vw;
+  max-height: 50vh;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+body.project .vimeo-wrapper .vimeo-iframe {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;  
-  height: 100%; 
-  object-fit: cover;
-} */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  border: 0;
+  display: block;
+  pointer-events: none;
+}
+
+body.home .video-background {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 0;
+  display: block;
+  opacity: 0;
+}
+
+body.home .vimeo-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body.home #bg-video-iframe,
+body.home .vimeo-wrapper iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: calc(100vw * 9 / 16);
+  min-height: 100vh;
+  min-width: calc(100vh * 16 / 9);
+  max-width: none;
+  max-height: none;
+  border: 0;
+  display: block;
+  pointer-events: none;
+  background: transparent;
+}
+
+html.is-touch .custom-cursor {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 
 
 
@@ -650,7 +662,6 @@ a:hover {
     font-size: var(--responsive-text);
     position: fixed;
     top: 40%;
-    /* top: 50%; SI SOVRASCRIVE CON CLIK ANABLE AUDIO*/
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 2px 0;
@@ -747,8 +758,6 @@ a:hover {
     margin-top: 0;
   }
 
-  /*  */
-
   .project-list {
     font-size: var(--responsive-text);
     gap: 10px;
@@ -758,91 +767,13 @@ a:hover {
     color: var(--primary-color);
     font-size: var(--responsive-text);
   }
-}
 
-/* ---------- Vimeo wrapper: dimensioni come i video locali + cover behaviour ---------- */
-body.project .vimeo-wrapper {
-  width: 50vw;
-  height: 50vh;
-  max-width: 50vw;
-  max-height: 50vh;
-  display: block;
-  position: relative;
-  overflow: hidden;
-}
-
-body.project .vimeo-wrapper .vimeo-iframe {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  border: 0;
-  display: block;
-  pointer-events: none;
-}
-
-/* mobile */
-@media screen and (max-width: 769px) {
   body.project .vimeo-wrapper {
     width: 100vw;
     height: 50vh;
     max-width: 100vw;
     max-height: 50vh;
   }
-}
-
-/* ----- HOME: fullscreen Vimeo cover ----- */
-body.home .video-background {
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  z-index: 0;
-  display: block;
-  opacity: 0;
-}
-
-/* body.home .video-background.ready {
-  opacity: 1;
-} */
-
-body.home .vimeo-wrapper {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-/* iframe centrato e in cover — usa min-width/min-height per "ritagliare" (cover) */
-body.home #bg-video-iframe,
-body.home .vimeo-wrapper iframe {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  /* base: usa larghezza della viewport, ma obbliga a coprire anche in altezza */
-  width: 100vw;
-  height: calc(100vw * 9 / 16);
-  /* 16:9 base */
-  min-height: 100vh;
-  min-width: calc(100vh * 16 / 9);
-  max-width: none;
-  max-height: none;
-  border: 0;
-  display: block;
-  pointer-events: none;
-  /* lasciare se usi overlay per il toggle audio */
-  background: transparent;
-}
-
-/* Mobile: preferisce altezza 100vh per schermi stretti */
-@media (max-width: 600px) {
 
   body.home #bg-video-iframe,
   body.home .vimeo-wrapper iframe {
@@ -851,9 +782,38 @@ body.home .vimeo-wrapper iframe {
     min-width: 100vw;
     min-height: 100vh;
   }
+
+  /* !!!!!!!!!!!!! PROVA MOBILE !!!!!!! */
+  .start-container {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .top-left {
+    top: 20%;
+    left: 20%;
+  }
+
+  .top-right {
+    top: 20%;
+    right: 20%;
+  }
+
+  .bottom-left {
+    bottom: 20%;
+    left: 20%;
+  }
+
+  .bottom-right {
+    bottom: 20%;
+    right: 20%;
+  }
 }
 
-/* fallback: nasconde custom cursor sui dispositivi touch */
+
+
+
 @media (hover: none) and (pointer: coarse) {
   .custom-cursor {
     display: none !important;
@@ -861,12 +821,4 @@ body.home .vimeo-wrapper iframe {
     visibility: hidden !important;
     pointer-events: none !important;
   }
-}
-
-/* se hai aggiunto in head la classe html.is-touch */
-html.is-touch .custom-cursor {
-  display: none !important;
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
 }
