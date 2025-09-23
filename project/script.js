@@ -675,31 +675,33 @@ document.addEventListener("DOMContentLoaded", () => {
    ========================= */
 document.addEventListener("DOMContentLoaded", () => {
   const cursor = document.querySelector(".custom-cursor");
-  if (!cursor) {
-    // continuiamo comunque a tracciare le coordinate se vuoi — ma senza cursore
-  }
+  const scrollContainer = document.querySelector(".scroll-container");
 
-  const isTouchDevice = document.documentElement.classList.contains('is-touch') ||
-                        ('ontouchstart' in window) ||
-                        (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
-                        (navigator.msMaxTouchPoints && navigator.msMaxTouchPoints > 0) ||
-                        (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+  const isTouchDevice =
+    document.documentElement.classList.contains("is-touch") ||
+    "ontouchstart" in window ||
+    (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
+    (navigator.msMaxTouchPoints && navigator.msMaxTouchPoints > 0) ||
+    (window.matchMedia &&
+      window.matchMedia("(pointer: coarse)").matches);
 
   if (cursor) {
-    cursor.style.opacity = '0';
-    cursor.style.visibility = 'hidden';
-    cursor.style.pointerEvents = 'none';
+    cursor.style.opacity = "0";
+    cursor.style.visibility = "hidden";
+    cursor.style.pointerEvents = "none";
   }
 
   function moveCursor(x, y) {
     if (!cursor) return;
     cursor.style.left = `${x}px`;
     cursor.style.top = `${y}px`;
-    cursor.style.visibility = 'visible';
-    cursor.style.opacity = '1';
+    cursor.style.visibility = "visible";
+    cursor.style.opacity = "1";
   }
 
-  let latestX = 0, latestY = 0, rafPending = false;
+  let latestX = 0,
+    latestY = 0,
+    rafPending = false;
   function scheduleUpdate() {
     if (rafPending) return;
     rafPending = true;
@@ -711,40 +713,94 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function handleMoveEvent(e) {
-    let x = 0, y = 0;
-    if (typeof e.clientX === 'number' && typeof e.clientY === 'number') {
-      x = e.clientX; y = e.clientY;
+    let x = 0,
+      y = 0;
+    if (typeof e.clientX === "number" && typeof e.clientY === "number") {
+      x = e.clientX;
+      y = e.clientY;
     } else if (e.touches && e.touches[0]) {
-      x = e.touches[0].clientX; y = e.touches[0].clientY;
+      x = e.touches[0].clientX;
+      y = e.touches[0].clientY;
     } else return;
 
-    latestX = x; latestY = y;
+    latestX = x;
+    latestY = y;
     scheduleUpdate();
   }
 
   function onPointerDown(e) {
-    if (e.pointerType && e.pointerType === 'touch') return;
-    if (cursor) cursor.style.transition = "transform 0.3s ease", cursor.style.transform = "translate(-50%, -50%) rotate(135deg)";
+    if (e.pointerType && e.pointerType === "touch") return;
+    if (cursor) {
+      cursor.style.transition = "transform 0.3s ease";
+      cursor.style.transform =
+        "translate(-50%, -50%) rotate(135deg)";
+    }
   }
   function onPointerUp(e) {
-    if (e.pointerType && e.pointerType === 'touch') return;
-    if (cursor) cursor.style.transition = "transform 0.3s ease", cursor.style.transform = "translate(-50%, -50%) rotate(0deg)";
+    if (e.pointerType && e.pointerType === "touch") return;
+    if (cursor) {
+      cursor.style.transition = "transform 0.3s ease";
+      cursor.style.transform =
+        "translate(-50%, -50%) rotate(0deg)";
+    }
   }
 
   if (window.PointerEvent) {
-    document.addEventListener("pointermove", handleMoveEvent, { passive: true });
+    document.addEventListener("pointermove", handleMoveEvent, {
+      passive: true,
+    });
     document.addEventListener("pointerdown", onPointerDown);
     document.addEventListener("pointerup", onPointerUp);
   } else {
-    document.addEventListener("mousemove", handleMoveEvent, { passive: true });
-    document.addEventListener("touchmove", handleMoveEvent, { passive: true });
+    document.addEventListener("mousemove", handleMoveEvent, {
+      passive: true,
+    });
+    document.addEventListener("touchmove", handleMoveEvent, {
+      passive: true,
+    });
     document.addEventListener("mousedown", onPointerDown);
     document.addEventListener("mouseup", onPointerUp);
   }
 
-  document.querySelectorAll("a, button").forEach(el => {
-    el.addEventListener("mouseenter", () => { if (!isTouchDevice && cursor) cursor.style.transform = "translate(-50%, -50%) rotate(135deg)"; });
-    el.addEventListener("mouseleave", () => { if (!isTouchDevice && cursor) cursor.style.transform = "translate(-50%, -50%) rotate(0deg)"; });
+  // --- NOVITÀ: aggiorna anche durante scroll della scroll-container
+  if (scrollContainer) {
+    scrollContainer.addEventListener(
+      "scroll",
+      () => {
+        const rect = scrollContainer.getBoundingClientRect();
+        // centro visibile del container
+        latestX = rect.left + rect.width / 2;
+        latestY = rect.top + rect.height / 2;
+        scheduleUpdate();
+      },
+      { passive: true }
+    );
+
+    // opzionale: anche touchmove dentro container
+    scrollContainer.addEventListener(
+      "touchmove",
+      (e) => {
+        if (e.touches && e.touches[0]) {
+          latestX = e.touches[0].clientX;
+          latestY = e.touches[0].clientY;
+          scheduleUpdate();
+        }
+      },
+      { passive: true }
+    );
+  }
+
+  document.querySelectorAll("a, button").forEach((el) => {
+    el.addEventListener("mouseenter", () => {
+      if (!isTouchDevice && cursor)
+        cursor.style.transform =
+          "translate(-50%, -50%) rotate(135deg)";
+    });
+    el.addEventListener("mouseleave", () => {
+      if (!isTouchDevice && cursor)
+        cursor.style.transform =
+          "translate(-50%, -50%) rotate(0deg)";
+    });
   });
 
   window.addEventListener("beforeunload", () => {
@@ -755,6 +811,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 /* helper: aggiorna gli angoli (se non presente, aggiungi; altrimenti mantieni la tua versione) */
 function updateCoordinates(x, y) {
