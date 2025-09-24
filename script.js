@@ -313,6 +313,31 @@ document.addEventListener("DOMContentLoaded", () => {
   const videoElement = document.getElementById("bg-video");
   if (!videoElement) return;
 
+  const VIMEO_IDS = [
+    1121345311,
+    1121344903,
+    1072980885,
+    1072983962,
+    1121218692,
+  ];
+
+  function getOrPickIndex() {
+    try {
+      let saved = sessionStorage.getItem('bgVideoIndex');
+      if (saved !== null && !isNaN(parseInt(saved, 10))) {
+        return parseInt(saved, 10);
+      }
+    } catch (e) { }
+
+    const idx = Math.floor(Math.random() * VIMEO_IDS.length);
+    try { sessionStorage.setItem('bgVideoIndex', String(idx)); } catch (e) { }
+    return idx;
+  }
+
+  function vimeoSrcFor(id) {
+    return `https://player.vimeo.com/video/${id}?background=1&muted=1&autoplay=1`;
+  }
+
   if (videoElement.tagName && videoElement.tagName.toLowerCase() === 'video') {
     videoElement.preload = "auto";
     videoElement.muted = true;
@@ -373,6 +398,11 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  const currentIndex = getOrPickIndex();
+  const currentId = VIMEO_IDS[currentIndex];
+
+  iframe.src = vimeoSrcFor(currentId);
+
   const overlayId = 'vimeo-click-overlay';
   let existingOverlay = document.getElementById(overlayId);
   if (existingOverlay) existingOverlay.remove();
@@ -383,28 +413,25 @@ document.addEventListener("DOMContentLoaded", () => {
   overlay.style.inset = '0';
   overlay.style.cursor = 'pointer';
   overlay.style.pointerEvents = 'auto';
-
-  try {
-    videoElement.style.position = videoElement.style.position || 'relative';
-    videoElement.appendChild(overlay);
-  } catch (e) {
-  }
+  try { videoElement.style.position = videoElement.style.position || 'relative'; videoElement.appendChild(overlay); } catch (e) {}
 
   const player = new Vimeo.Player(iframe);
 
   player.setVolume(0).catch(() => { });
-  player.setLoop(true).catch(() => { });
+  try { player.setLoop(false).catch(() => {}); } catch(e){ }
 
-  const savedTime = parseFloat(sessionStorage.getItem('bgVideoTimeVimeo') || sessionStorage.getItem('bgVideoTime'));
-  if (!isNaN(savedTime) && savedTime > 0) {
-    player.ready().then(() => {
-      player.getDuration().then((duration) => {
-        if (savedTime < duration) {
-          player.setCurrentTime(savedTime).catch(() => { });
-        }
-      }).catch(() => { });
-    }).catch(() => { });
-  }
+  try {
+    const savedTimePer = parseFloat(sessionStorage.getItem('bgVideoTimeVimeo_' + currentIndex));
+    if (!isNaN(savedTimePer) && savedTimePer > 0) {
+      player.ready().then(() => {
+        player.getDuration().then((duration) => {
+          if (savedTimePer < duration) {
+            player.setCurrentTime(savedTimePer).catch(() => {});
+          }
+        }).catch(() => {});
+      }).catch(() => {});
+    }
+  } catch (e) { }
 
   player.play().then(() => {
     if (sessionStorage.getItem('fromHome') === 'true') {
@@ -424,11 +451,33 @@ document.addEventListener("DOMContentLoaded", () => {
     player.getPaused().then(paused => {
       if (!paused) {
         player.getCurrentTime().then(time => {
-          try { sessionStorage.setItem('bgVideoTimeVimeo', time); } catch (e) { }
+          try {
+            const idx = parseInt(sessionStorage.getItem('bgVideoIndex') || currentIndex, 10);
+            sessionStorage.setItem('bgVideoTimeVimeo_' + idx, time);
+          } catch (e) { }
         }).catch(() => { });
       }
     }).catch(() => { });
   }, 1000);
+
+  player.on('ended', () => {
+    try {
+      let idx = parseInt(sessionStorage.getItem('bgVideoIndex') || currentIndex, 10);
+      idx = (idx + 1) % VIMEO_IDS.length;
+      sessionStorage.setItem('bgVideoIndex', String(idx));
+      try { sessionStorage.removeItem('bgVideoTimeVimeo_' + idx); } catch (e) { }
+      const nextId = VIMEO_IDS[idx];
+      player.loadVideo(nextId).then(() => {
+        player.setCurrentTime(0).catch(()=>{});
+        player.play().catch(()=>{});
+      }).catch((e) => {
+        console.warn("loadVideo fallito, fallback impostando src:", e);
+        iframe.src = vimeoSrcFor(nextId);
+      });
+    } catch (e) {
+      console.error("Errore durante lo swap al video successivo:", e);
+    }
+  });
 
   overlay.addEventListener("click", (ev) => {
     player.getVolume().then((vol) => {
@@ -449,6 +498,7 @@ document.addEventListener("DOMContentLoaded", () => {
     clearInterval(saveInterval);
   });
 });
+
 
 /* ---------- IMAGE GALLERY TOGGLE ---------- */
 function toggleImageGallery(forceState) {

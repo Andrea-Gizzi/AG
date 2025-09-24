@@ -420,7 +420,6 @@ function setupAudioToggle() {
   window._audioClickBound = true;
 }
 
-
 /* ---------- LOAD PROJECT (IMAGES + VIMEO) ---------- */
 function loadProject(projectId) {
   const project = PROJECTS[String(projectId)] || PROJECTS["1"];
@@ -457,21 +456,32 @@ function loadProject(projectId) {
     sections[0].classList.add('active');
   }
 
-  const prevAudioState = sessionStorage.getItem("audioMuted");
+  const prevAudioState = (typeof window._audioMutedFromHome !== 'undefined' && window._audioMutedFromHome !== null)
+    ? window._audioMutedFromHome
+    : (function () { try { return sessionStorage.getItem('audioMuted'); } catch (e) { return null; } })();
 
   applyAudioStateToVideos();
 
   const hasVimeo = project.images.some(src => !!extractVimeoId(src));
-  if (hasVimeo && prevAudioState === "false") {
-    const audioStatus = document.getElementById("audio-status");
-    if (audioStatus) {
-      audioStatus.textContent = "AUDIO OFF";
-      audioStatus.style.color = "red";
-      audioStatus.style.mixBlendMode = "normal";
-      audioStatus.style.opacity = "1";
-      setTimeout(() => { audioStatus.style.opacity = "0"; }, 2000);
+
+  try {
+    const arrivedFromHome = sessionStorage.getItem('fromHome') === 'true';
+    const homeAudioWasOn = sessionStorage.getItem('audioMuted') === 'false';
+
+    if (arrivedFromHome && homeAudioWasOn && hasVimeo) {
+      const audioStatus = document.getElementById('audio-status');
+      if (audioStatus) {
+        audioStatus.textContent = 'AUDIO OFF';
+        audioStatus.style.color = 'red';
+        audioStatus.style.mixBlendMode = 'normal';
+        audioStatus.style.opacity = '1';
+        setTimeout(() => { audioStatus.style.opacity = '0'; }, 2000);
+      } else {
+      }
     }
-  }
+  } catch (e) { }
+
+  try { sessionStorage.removeItem('fromHome'); } catch (e) { }
 
   requestAnimationFrame(() => {
     if (typeof scrollContainer.scrollTo === 'function') {
@@ -574,7 +584,11 @@ function animateText(element, newText, duration, callback) {
 
 /* ---------- DOMContentLoaded: GENERAL INIT ---------- */
 document.addEventListener("DOMContentLoaded", () => {
-  window.audioMuted = getAudioMuted();
+  let prev = null;
+  try { prev = sessionStorage.getItem('audioMuted'); } catch (e) { prev = null; }
+  window._audioMutedFromHome = prev;
+
+  window.audioMuted = true;
 
   wireProjectListLinks();
   initProjectFromUrlOrSession();
