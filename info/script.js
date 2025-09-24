@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const coords = document.querySelector('.corner-values-info') || document.querySelector('.corner-values');
-    if (coords) {
+    if (isMobile && coords) {
       if (willOpen) {
         coords.style.transition = 'filter 0.25s ease';
         coords.style.webkitFilter = 'blur(4px) brightness(0.6)';
