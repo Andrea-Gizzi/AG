@@ -467,7 +467,7 @@ function loadProject(projectId) {
   const audioStatus = document.getElementById('audio-status');
   if (audioStatus) {
     if (hasVimeo) {
-      audioStatus.style.display = 'block';  // o '' se era inline-block
+      audioStatus.style.display = 'block';
     } else {
       audioStatus.style.display = 'none';
     }
