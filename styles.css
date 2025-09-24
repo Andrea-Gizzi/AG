@@ -96,25 +96,25 @@ html {
   right: 20vw;
 } */
 
- .top-left {
-    top: 20%;
-    left: 20%;
-  }
+.top-left {
+  top: 20%;
+  left: 20%;
+}
 
-  .top-right {
-    top: 20%;
-    right: 20%;
-  }
+.top-right {
+  top: 20%;
+  right: 20%;
+}
 
-  .bottom-left {
-    bottom: 20%;
-    left: 20%;
-  }
+.bottom-left {
+  bottom: 20%;
+  left: 20%;
+}
 
-  .bottom-right {
-    bottom: 20%;
-    right: 20%;
-  }
+.bottom-right {
+  bottom: 20%;
+  right: 20%;
+}
 
 .custom-cursor {
   opacity: 0;
@@ -496,8 +496,9 @@ a:hover {
 }
 
 .scroll-container {
-  height: 100vh;
+  overflow: hidden;
   overflow-y: scroll;
+  height: 100vh;
   scroll-snap-type: y mandatory;
   opacity: 0;
   transition: max-height var(--transition-slow) var(--transition-ease-in-out), opacity var(--transition-slow) var(--transition-ease-in-out);
