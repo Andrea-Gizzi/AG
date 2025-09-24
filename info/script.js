@@ -224,7 +224,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// /PROJECT
 function toggleImageGallery(forceState) {
   const gallery = document.getElementById("image-gallery");
   const projectLink = document.querySelector("#nav-project a");
