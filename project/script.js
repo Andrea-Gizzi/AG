@@ -160,7 +160,8 @@ const PROJECTS = {
       "../assets/img/rowa/5.jpg",
       "../assets/img/rowa/6.jpg",
       "../assets/img/rowa/7.jpg",
-      "../assets/img/rowa/8.jpg"
+      "../assets/img/rowa/8.jpg",
+      "../assets/img/rowa/9.jpg"
     ]
   },
   "6": {
