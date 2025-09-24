@@ -413,12 +413,12 @@ document.addEventListener("DOMContentLoaded", () => {
   overlay.style.inset = '0';
   overlay.style.cursor = 'pointer';
   overlay.style.pointerEvents = 'auto';
-  try { videoElement.style.position = videoElement.style.position || 'relative'; videoElement.appendChild(overlay); } catch (e) {}
+  try { videoElement.style.position = videoElement.style.position || 'relative'; videoElement.appendChild(overlay); } catch (e) { }
 
   const player = new Vimeo.Player(iframe);
 
   player.setVolume(0).catch(() => { });
-  try { player.setLoop(false).catch(() => {}); } catch(e){ }
+  try { player.setLoop(false).catch(() => { }); } catch (e) { }
 
   try {
     const savedTimePer = parseFloat(sessionStorage.getItem('bgVideoTimeVimeo_' + currentIndex));
@@ -426,10 +426,10 @@ document.addEventListener("DOMContentLoaded", () => {
       player.ready().then(() => {
         player.getDuration().then((duration) => {
           if (savedTimePer < duration) {
-            player.setCurrentTime(savedTimePer).catch(() => {});
+            player.setCurrentTime(savedTimePer).catch(() => { });
           }
-        }).catch(() => {});
-      }).catch(() => {});
+        }).catch(() => { });
+      }).catch(() => { });
     }
   } catch (e) { }
 
@@ -468,8 +468,8 @@ document.addEventListener("DOMContentLoaded", () => {
       try { sessionStorage.removeItem('bgVideoTimeVimeo_' + idx); } catch (e) { }
       const nextId = VIMEO_IDS[idx];
       player.loadVideo(nextId).then(() => {
-        player.setCurrentTime(0).catch(()=>{});
-        player.play().catch(()=>{});
+        player.setCurrentTime(0).catch(() => { });
+        player.play().catch(() => { });
       }).catch((e) => {
         console.warn("loadVideo fallito, fallback impostando src:", e);
         iframe.src = vimeoSrcFor(nextId);
