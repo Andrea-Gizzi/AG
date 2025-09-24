@@ -1,4 +1,4 @@
-/* ---------- AUDIO ---------- */
+/* ---------- AUDIO MANAGEMENT ---------- */
 function getAudioMuted() {
   try {
     return sessionStorage.getItem("audioMuted") === "true";
@@ -14,7 +14,7 @@ function setAudioMuted(state) {
   window.audioMuted = state;
 }
 
-/* ---------- utility: tryPlay (works for Vimeo.Player too) ---------- */
+/* ---------- UTILITY: tryPlay ---------- */
 function tryPlay(playerLike) {
   return new Promise((resolve) => {
     if (!playerLike || typeof playerLike.play !== 'function') return resolve(false);
@@ -28,7 +28,7 @@ function tryPlay(playerLike) {
   });
 }
 
-/* ---------- DATA ---------- */
+/* ---------- PROJECT DATA ---------- */
 const PROJECTS = {
   "1": {
     id: "1",
@@ -223,7 +223,7 @@ const PROJECTS = {
   }
 };
 
-/* ---------- helper: crea sezione immagine/video/vimeo e la aggiunge allo scroll-container ---------- */
+/* ---------- HELPER: Extract Vimeo ID ---------- */
 function extractVimeoId(str) {
   if (!str || typeof str !== 'string') return null;
   const s = str.trim();
@@ -236,7 +236,7 @@ function extractVimeoId(str) {
   return null;
 }
 
-/* ---------- helper: crea sezione (Vimeo iframe) o immagine ---------- */
+/* ---------- HELPER: Create Media Section ---------- */
 function createMediaSection(src, projectTitle, index) {
   const section = document.createElement('section');
   section.className = 'image-section';
@@ -269,7 +269,7 @@ function createMediaSection(src, projectTitle, index) {
   return section;
 }
 
-/* ---------- Vimeo players management ---------- */
+/* ---------- VIMEO PLAYERS MANAGEMENT ---------- */
 window._vimeoPlayers = window._vimeoPlayers || [];
 
 function destroyVimeoPlayers() {
@@ -301,7 +301,7 @@ function initVimeoPlayers(scrollContainer) {
         muted: true
       });
 
-      player.play().catch(() => { /* autoplay potrebbe essere bloccato ma dovrebbe partire se muted */ });
+      player.play().catch(() => { });
 
       window._vimeoPlayers.push(player);
     } catch (e) {
@@ -310,7 +310,7 @@ function initVimeoPlayers(scrollContainer) {
   });
 }
 
-/* ---------- applica stato audio (solo Vimeo in questa versione) ---------- */
+/* ---------- APPLY AUDIO STATE ---------- */
 function applyAudioStateToVideos() {
   const scrollContainer = document.querySelector('.scroll-container');
   if (!scrollContainer) return;
@@ -325,7 +325,6 @@ function applyAudioStateToVideos() {
     });
   }
 
-  // scegli il primo player (se presente)
   const firstPlayer = (window._vimeoPlayers && window._vimeoPlayers.length) ? window._vimeoPlayers[0] : null;
   if (!firstPlayer) return;
 
@@ -358,7 +357,7 @@ function applyAudioStateToVideos() {
   }).catch(() => { });
 }
 
-/* ---------- setup audio toggle (click globale) ---------- */
+/* ---------- AUDIO TOGGLE SETUP ---------- */
 function setAudioStateImmediate(muted) {
   try { sessionStorage.setItem('audioMuted', muted ? 'true' : 'false'); } catch (e) { }
   window.audioMuted = muted;
@@ -373,7 +372,6 @@ function setAudioStateImmediate(muted) {
     } catch (e) { }
   });
 
-  // Vimeo players: setVolume / setMuted immediatamente (devono essere chiamati dentro il click)
   if (window._vimeoPlayers && window._vimeoPlayers.length) {
     window._vimeoPlayers.forEach((p, i) => {
       try {
@@ -423,7 +421,7 @@ function setupAudioToggle() {
 }
 
 
-/* ---------- loadProject (solo Vimeo + immagini) ---------- */
+/* ---------- LOAD PROJECT (IMAGES + VIMEO) ---------- */
 function loadProject(projectId) {
   const project = PROJECTS[String(projectId)] || PROJECTS["1"];
 
@@ -504,7 +502,6 @@ function loadProject(projectId) {
   applyAudioStateToVideos();
   setupAudioToggle();
 
-  // description handling (come prima)
   if (descButton && descButton.classList.contains('open')) {
     descEl.style.maxHeight = descEl.scrollHeight + 'px';
     descButton.setAttribute('aria-expanded', 'true');
@@ -519,7 +516,7 @@ function loadProject(projectId) {
   }
 }
 
-/* ---------- wire project links, init, animations e UI (preservati) ---------- */
+/* ---------- PROJECT LINKS & INIT ---------- */
 function wireProjectListLinks() {
   const gallery = document.getElementById('image-gallery');
   if (!gallery) return;
@@ -544,14 +541,14 @@ function initProjectFromUrlOrSession() {
   loadProject(start);
 }
 
-/* animateText, toggles, cursor, description toggle etc. (mantengo come prima) */
+/* ---------- UI HELPERS ---------- */
 function animateText(element, newText, duration, callback) {
   let currentText = element.textContent;
   const maxLength = Math.max(currentText.length, newText.length);
   currentText = currentText.padEnd(maxLength, " ");
   newText = newText.padEnd(maxLength, " ");
 
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+[]{}|;:,.<>?';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?';
   const intervalTime = 50;
   const totalSteps = Math.floor(duration / intervalTime);
   let step = 0;
@@ -575,7 +572,7 @@ function animateText(element, newText, duration, callback) {
   }, intervalTime);
 }
 
-/* ---------- DOMContentLoaded: init generale ---------- */
+/* ---------- DOMContentLoaded: GENERAL INIT ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   window.audioMuted = getAudioMuted();
 
@@ -628,7 +625,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-/* COORDINATE CURSOR - track sempre, mostra cursor solo su non-touch (project page) */
+/* ---------- CURSOR & COORDINATES ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   const cursor = document.querySelector(".custom-cursor");
   if (!cursor) {
@@ -711,7 +708,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-/* helper: aggiorna gli angoli (se non presente, aggiungi; altrimenti mantieni la tua versione) */
 function updateCoordinates(x, y) {
   const w = window.innerWidth, h = window.innerHeight;
   const tl = document.querySelector(".top-left"), tr = document.querySelector(".top-right");
@@ -722,7 +718,7 @@ function updateCoordinates(x, y) {
   if (br) br.textContent = String(Math.floor(((h - y) / h) * 99)).padStart(2, '0');
 }
 
-/* description toggle (preservato) */
+/* ---------- DESCRIPTION TOGGLE ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   const button = document.getElementById("description-button");
   if (!button) return;
@@ -773,6 +769,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+/* ---------- IMAGE GALLERY TOGGLE ---------- */
 function toggleImageGallery(forceState) {
   const gallery = document.getElementById("image-gallery");
   const projectLink = document.querySelector("#nav-project a");
@@ -795,6 +792,7 @@ function toggleImageGallery(forceState) {
   }
 }
 
+/* ---------- POPSTATE HANDLER ---------- */
 window.addEventListener('popstate', function () {
   const params = new URLSearchParams(window.location.search);
   const proj = params.get('project') || sessionStorage.getItem('lastProject') || "1";

@@ -1,4 +1,4 @@
-/* ---------- utility: animate text ---------- */
+/* ---------- UI HELPERS ---------- */
 function animateText(element, finalText, duration, callback) {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?';
   const intervalTime = 50;
@@ -26,7 +26,7 @@ function animateText(element, finalText, duration, callback) {
   }, intervalTime);
 }
 
-/* ---------- audio toast (ora con opzioni colore / mixBlendMode) ---------- */
+/* ---------- UI HELPERS: Show temporary audio status toast ---------- */
 function showAudioToast(text = "click to enable audio", { duration = 2000, color = 'white', mixBlendMode = 'difference' } = {}) {
   const audioStatus = document.getElementById('audio-status');
   if (!audioStatus) return;
@@ -41,7 +41,7 @@ function showAudioToast(text = "click to enable audio", { duration = 2000, color
   }, duration);
 }
 
-/* ---------- helper: rileva se il background è mutuato (supporta <video> e iframe Vimeo) ---------- */
+/* ---------- UI HELPERS: Check if background video/iframe is muted ---------- */
 function isBgMutedState() {
   const nativeVideo = document.querySelector('#bg-video video, #bg-video > video');
   if (nativeVideo) {
@@ -64,7 +64,7 @@ function isBgMutedState() {
   return true;
 }
 
-/* DOM READY: NAV, START, NEWS */
+/* ---------- UI INIT ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll('#image-gallery .project-item').forEach(link => {
     link.addEventListener('click', (ev) => {
@@ -77,7 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const hasReferrer = document.referrer && document.referrer !== "";
   const isInternal = hasReferrer && document.referrer.includes(window.location.hostname);
 
-  // NAV-NAME POSITION UNIFICATA (responsive inclusa)
   const navName = document.getElementById("nav-name");
   const newsEl = document.querySelector(".news");
   function updateNavNamePosition() {
@@ -93,7 +92,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Funzione per chiudere la news e aggiornare nav-name
   const closeButton = document.querySelector('.news-close');
   if (closeButton) {
     closeButton.addEventListener('click', () => {
@@ -112,7 +110,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // GESTIONE ANIMAZIONE INIZIALE O DIRETTA
   if ((navEntries.length > 0 && navEntries[0].type === "reload") || !hasReferrer || !isInternal) {
     const textElement = document.getElementById('text');
     animateText(textElement, 'AG', 2000, () => {
@@ -174,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-/* COORDINATE CURSOR - track sempre, mostra cursor solo su non-touch */
+/* ---------- CURSOR & COORDINATES ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   const cursor = document.querySelector(".custom-cursor");
 
@@ -198,7 +195,6 @@ document.addEventListener("DOMContentLoaded", () => {
     cursor.style.opacity = '1';
   }
 
-  // funzione che aggiorna solo le coordinate (sempre chiamata)
   let latestX = 0, latestY = 0, rafPending = false;
   function scheduleUpdate() {
     if (rafPending) return;
@@ -210,7 +206,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // handler unico che prende coordinate da pointer o da touch fallback
   function handleMoveEvent(e) {
     let x = 0, y = 0;
     if (typeof e.clientX === 'number' && typeof e.clientY === 'number') {
@@ -228,7 +223,6 @@ document.addEventListener("DOMContentLoaded", () => {
     scheduleUpdate();
   }
 
-  // pointerdown/up: animazioni del cursore visibile (solo non-touch)
   function onPointerDown(e) {
     if (e.pointerType && e.pointerType === 'touch') return;
     if (cursor) {
@@ -244,7 +238,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // registra i listener:
   if (window.PointerEvent) {
     document.addEventListener("pointermove", handleMoveEvent, { passive: true });
     document.addEventListener("pointerdown", onPointerDown);
@@ -256,7 +249,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("touchmove", handleMoveEvent, { passive: true });
   }
 
-  // hover su link/btn: solo modifica visuale del cursore (in desktop)
   document.querySelectorAll("a, button").forEach(el => {
     el.addEventListener("mouseenter", () => {
       if (!isTouchDevice && cursor) cursor.style.transform = "translate(-50%, -50%) rotate(135deg)";
@@ -275,11 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
 function updateCoordinates(x, y) {
-  // !!!!!!!!!! PROVA MOBILE !!!!!!!!
-  // const w = window.innerWidth;
-  // const h = window.innerHeight; 
   const w = (window.visualViewport && window.visualViewport.width) || window.innerWidth;
   const h = (window.visualViewport && window.visualViewport.height) || window.innerHeight;
   const tl = document.querySelector(".top-left");
@@ -292,7 +280,7 @@ function updateCoordinates(x, y) {
   if (br) br.textContent = String(Math.floor(((h - y) / h) * 99)).padStart(2, '0');
 }
 
-/* CLOSE NEWS AL CARICAMENTO + aggiorna nav-name */
+/* ---------- UI INIT: Close news on load ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   const newsSection = document.querySelector('.news');
   const navName = document.getElementById("nav-name");
@@ -301,7 +289,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (sessionStorage.getItem("newsClosed") === "true") {
       if (newsSection) newsSection.style.display = 'none';
     }
-  } catch (e) { /* silent */ }
+  } catch (e) { }
 
   function updateNavNamePosition() {
     const isMobile = window.innerWidth <= 769;
@@ -320,12 +308,11 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", updateNavNamePosition);
 });
 
-/* VIDEO BACKGROUND — singolo video o Vimeo (compatibile con vecchio comportamento) */
+/* ---------- VIDEO BACKGROUND ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   const videoElement = document.getElementById("bg-video");
   if (!videoElement) return;
 
-  // se l'elemento è un elemento video HTML nativo — mantieni il comportamento esistente
   if (videoElement.tagName && videoElement.tagName.toLowerCase() === 'video') {
     videoElement.preload = "auto";
     videoElement.muted = true;
@@ -335,7 +322,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const savedTime = parseFloat(sessionStorage.getItem('bgVideoTime'));
     videoElement.addEventListener("loadedmetadata", () => {
       if (!isNaN(savedTime) && savedTime > 0 && savedTime < videoElement.duration) {
-        try { videoElement.currentTime = savedTime; } catch (e) { /* silent */ }
+        try { videoElement.currentTime = savedTime; } catch (e) { }
       }
 
       const playPromise = videoElement.play();
@@ -380,14 +367,12 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // --- Se invece #bg-video è wrapper per Vimeo (div che contiene iframe: #bg-video-iframe)
   const iframe = document.getElementById("bg-video-iframe");
   if (!iframe || (typeof Vimeo === 'undefined' && typeof window.Vimeo === 'undefined')) {
     console.warn("Vimeo Player API non trovata o iframe mancante. Assicurati di includere https://player.vimeo.com/api/player.js e di avere l'iframe con id 'bg-video-iframe'.");
     return;
   }
 
-  // Crea overlay per intercettare click (cliccare direttamente dentro l'iframe non genera eventi nel parent)
   const overlayId = 'vimeo-click-overlay';
   let existingOverlay = document.getElementById(overlayId);
   if (existingOverlay) existingOverlay.remove();
@@ -407,23 +392,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const player = new Vimeo.Player(iframe);
 
-  // inizializza: volume 0 (muted)
-  player.setVolume(0).catch(() => { /* ignora errori */ });
-  player.setLoop(true).catch(() => { /* ignora */ });
+  player.setVolume(0).catch(() => { });
+  player.setLoop(true).catch(() => { });
 
-  // ripristina saved time se presente
   const savedTime = parseFloat(sessionStorage.getItem('bgVideoTimeVimeo') || sessionStorage.getItem('bgVideoTime'));
   if (!isNaN(savedTime) && savedTime > 0) {
     player.ready().then(() => {
       player.getDuration().then((duration) => {
         if (savedTime < duration) {
-          player.setCurrentTime(savedTime).catch(() => { /* silent */ });
+          player.setCurrentTime(savedTime).catch(() => { });
         }
       }).catch(() => { });
     }).catch(() => { });
   }
 
-  // play & gestione Promise (autoplay potrebbe essere bloccato dai browser)
   player.play().then(() => {
     if (sessionStorage.getItem('fromHome') === 'true') {
       player.getVolume().then((vol) => {
@@ -438,7 +420,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // salva timecode ogni secondo (ottimizzato su getCurrentTime)
   const saveInterval = setInterval(() => {
     player.getPaused().then(paused => {
       if (!paused) {
@@ -449,10 +430,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }).catch(() => { });
   }, 1000);
 
-  // overlay click: toggle mute tramite volume (Vimeo non espone "muted" boolean)
   overlay.addEventListener("click", (ev) => {
     player.getVolume().then((vol) => {
-      const newVol = vol > 0 ? 0 : 1; // toggle 0/1
+      const newVol = vol > 0 ? 0 : 1;
       player.setVolume(newVol).then(() => {
         if (newVol > 0) {
           showAudioToast("AUDIO ON", { duration: 2000, color: 'white', mixBlendMode: 'difference' });
@@ -463,16 +443,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }).catch(() => { });
   });
 
-  // evita che il menu contestuale appaia sull'overlay
   overlay.addEventListener('contextmenu', e => e.preventDefault());
 
-  // pulizia
   window.addEventListener("beforeunload", () => {
     clearInterval(saveInterval);
   });
 });
 
-/* IMAGE GALLERY TOGGLE */
+/* ---------- IMAGE GALLERY TOGGLE ---------- */
 function toggleImageGallery(forceState) {
   const gallery = document.getElementById("image-gallery");
   const projectLink = document.querySelector("#nav-project a");
@@ -485,7 +463,7 @@ function toggleImageGallery(forceState) {
   const willOpen = (typeof forceState === 'boolean') ? forceState : !visible;
 
   if (willOpen) {
-    try { sessionStorage.setItem('galleryOpen', 'true'); } catch (e) { /* silent */ }
+    try { sessionStorage.setItem('galleryOpen', 'true'); } catch (e) { }
 
     projectLink.style.transform = isMobile ? "translateX(-32vw)" : "translateX(-16vw)";
     animateText(projectLink, "CLOSE", ANIM_DURATION);
@@ -503,14 +481,14 @@ function toggleImageGallery(forceState) {
     if (!isProjectPage) {
       gallery.classList.remove("visible");
       gallery.classList.add("hidden");
-      try { sessionStorage.removeItem('galleryOpen'); } catch (e) { /* silent */ }
+      try { sessionStorage.removeItem('galleryOpen'); } catch (e) { }
     } else {
-      try { sessionStorage.setItem('galleryOpen', 'true'); } catch (e) { /* silent */ }
+      try { sessionStorage.setItem('galleryOpen', 'true'); } catch (e) { }
     }
   }
 }
 
-/* ---------- se arrivo da PROJECT con gallery aperta: anima la chiusura ---------- */
+/* ---------- UI INIT: Close gallery if arriving from project page ---------- */
 document.addEventListener('DOMContentLoaded', () => {
   const ANIM_DURATION = 2000;
 

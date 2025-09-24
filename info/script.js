@@ -1,4 +1,4 @@
-/* ---------- utility: animate text ---------- */
+/* ---------- UI HELPERS ---------- */
 function animateText(element, newText, duration, callback) {
   let currentText = element.textContent;
   const maxLength = Math.max(currentText.length, newText.length);
@@ -29,6 +29,7 @@ function animateText(element, newText, duration, callback) {
   }, intervalTime);
 }
 
+/* ---------- UI INIT ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   const navName = document.getElementById("nav-name");
   if (navName) {
@@ -74,12 +75,12 @@ document.addEventListener("DOMContentLoaded", () => {
       if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
       try {
         sessionStorage.setItem('galleryOpen', 'true');
-      } catch (e) { /* silent */ }
+      } catch (e) { }
     });
   });
 });
 
-// COORDINATE
+/* ---------- CURSOR & COORDINATES ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   const cursor = document.querySelector(".custom-cursor");
 
@@ -173,7 +174,7 @@ function updateCoordinates(x, y) {
   if (br) br.textContent = String(Math.floor(((h - y) / h) * 99)).padStart(2, '0');
 }
 
-// FIND MORE
+/* ---------- DESCRIPTION TOGGLE ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   const button = document.getElementById("description-button");
   if (!button) return;
@@ -224,6 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+/* ---------- IMAGE GALLERY TOGGLE ---------- */
 function toggleImageGallery(forceState) {
   const gallery = document.getElementById("image-gallery");
   const projectLink = document.querySelector("#nav-project a");
@@ -237,7 +239,7 @@ function toggleImageGallery(forceState) {
 
   if (willOpen) {
 
-    try { sessionStorage.setItem('galleryOpen', 'true'); } catch (e) { /* silent */ }
+    try { sessionStorage.setItem('galleryOpen', 'true'); } catch (e) { }
 
     projectLink.style.transform = isMobile ? "translateX(-32vw)" : "translateX(-16vw)";
     animateText(projectLink, "CLOSE", ANIM_DURATION);
@@ -255,14 +257,14 @@ function toggleImageGallery(forceState) {
     if (!isProjectPage) {
       gallery.classList.remove("visible");
       gallery.classList.add("hidden");
-      try { sessionStorage.removeItem('galleryOpen'); } catch (e) { /* silent */ }
+      try { sessionStorage.removeItem('galleryOpen'); } catch (e) { }
     } else {
-      try { sessionStorage.setItem('galleryOpen', 'true'); } catch (e) { /* silent */ }
+      try { sessionStorage.setItem('galleryOpen', 'true'); } catch (e) { }
     }
   }
 }
 
-/* ---------- se arrivo da PROJECT con gallery aperta: anima la chiusura ---------- */
+/* ---------- UI INIT: Close gallery if arriving from project page ---------- */
 document.addEventListener('DOMContentLoaded', () => {
   const ANIM_DURATION = 2000;
 
