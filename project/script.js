@@ -739,6 +739,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const willOpen = !button.classList.contains("open");
     button.classList.toggle("open", willOpen);
     button.setAttribute("aria-expanded", String(willOpen));
+
+    const isMobile = window.innerWidth <= 769;
+    const sc = document.querySelector('.scroll-container');
+
+    if (isMobile && sc) {
+      sc.classList.toggle('dimmed', willOpen);
+    }
+
+    const coords = document.querySelector('.corner-values-info') || document.querySelector('.corner-values');
+    if (isMobile && coords) {
+      if (willOpen) {
+        coords.style.transition = 'filter 0.25s ease';
+        coords.style.webkitFilter = 'blur(4px) brightness(0.6)';
+        coords.style.filter = 'blur(4px) brightness(0.6)';
+      } else {
+        coords.style.filter = '';
+        coords.style.webkitFilter = '';
+      }
+    }
+
     if (willOpen) {
       animateText(buttonLabel, "CLOSE", 600);
       requestAnimationFrame(() => { content.style.maxHeight = content.scrollHeight + "px"; });

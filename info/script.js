@@ -84,10 +84,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const cursor = document.querySelector(".custom-cursor");
 
   const isTouchDevice = document.documentElement.classList.contains('is-touch') ||
-                        ('ontouchstart' in window) ||
-                        (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
-                        (navigator.msMaxTouchPoints && navigator.msMaxTouchPoints > 0) ||
-                        (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+    ('ontouchstart' in window) ||
+    (navigator.maxTouchPoints && navigator.maxTouchPoints > 0) ||
+    (navigator.msMaxTouchPoints && navigator.msMaxTouchPoints > 0) ||
+    (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
 
   if (cursor) {
     cursor.style.opacity = '0';
@@ -188,25 +188,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
   button.addEventListener("click", () => {
     const willOpen = !button.classList.contains("open");
-
     button.classList.toggle("open", willOpen);
     button.setAttribute("aria-expanded", String(willOpen));
 
+    const isMobile = window.innerWidth <= 769;
+    const sc = document.querySelector('.cv');
+
+    if (isMobile && sc) {
+      sc.classList.toggle('dimmed', willOpen);
+    }
+
+    const coords = document.querySelector('.corner-values-info') || document.querySelector('.corner-values');
+    if (coords) {
+      if (willOpen) {
+        coords.style.transition = 'filter 0.25s ease';
+        coords.style.webkitFilter = 'blur(4px) brightness(0.6)';
+        coords.style.filter = 'blur(4px) brightness(0.6)';
+      } else {
+        coords.style.filter = '';
+        coords.style.webkitFilter = '';
+      }
+    }
+
     if (willOpen) {
       animateText(buttonLabel, "CLOSE", 600);
-      requestAnimationFrame(() => {
-        content.style.maxHeight = content.scrollHeight + "px";
-      });
+      requestAnimationFrame(() => { content.style.maxHeight = content.scrollHeight + "px"; });
     } else {
-      animateText(buttonLabel, "READ MORE", 600);
+      animateText(buttonLabel, "DESCRIPTION", 600);
       content.style.maxHeight = "0px";
     }
   });
 
   window.addEventListener("resize", () => {
-    if (button.classList.contains("open")) {
-      content.style.maxHeight = content.scrollHeight + "px";
-    }
+    if (button.classList.contains("open")) content.style.maxHeight = content.scrollHeight + "px";
   });
 });
 

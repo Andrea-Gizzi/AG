@@ -809,6 +809,29 @@ html.is-touch .custom-cursor {
     bottom: 20%;
     right: 20%;
   }
+
+  .scroll-container,
+  .cv {
+    position: relative;
+  }
+
+  .scroll-container.dimmed,
+  .cv.dimmed {
+    -webkit-filter: blur(4px) brightness(0.6);
+    filter: blur(4px) brightness(0.6);
+    transition: filter 0.25s ease;
+  }
+
+  .scroll-container.dimmed::after,
+  .cv.dimmed::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.28);
+    pointer-events: none;
+    z-index: 2;
+  }
+
 }
 
 
