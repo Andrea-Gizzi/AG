@@ -464,6 +464,15 @@ function loadProject(projectId) {
 
   const hasVimeo = project.images.some(src => !!extractVimeoId(src));
 
+  const audioStatus = document.getElementById('audio-status');
+  if (audioStatus) {
+    if (hasVimeo) {
+      audioStatus.style.display = 'block';  // o '' se era inline-block
+    } else {
+      audioStatus.style.display = 'none';
+    }
+  }
+
   try {
     const arrivedFromHome = sessionStorage.getItem('fromHome') === 'true';
     const homeAudioWasOn = sessionStorage.getItem('audioMuted') === 'false';
