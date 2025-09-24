@@ -76,7 +76,7 @@ html {
   opacity: 0.5;
 }
 
-.top-left {
+/* .top-left {
   top: 20vh;
   left: 20vw;
 }
@@ -94,7 +94,27 @@ html {
 .bottom-right {
   bottom: 20vh;
   right: 20vw;
-}
+} */
+
+ .top-left {
+    top: 20%;
+    left: 20%;
+  }
+
+  .top-right {
+    top: 20%;
+    right: 20%;
+  }
+
+  .bottom-left {
+    bottom: 20%;
+    left: 20%;
+  }
+
+  .bottom-right {
+    bottom: 20%;
+    right: 20%;
+  }
 
 .custom-cursor {
   opacity: 0;
