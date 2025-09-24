@@ -43,7 +43,7 @@ const PROJECTS = {
        approach, transforming information into a compelling visual narrative. Once opened, a portrait of Vignelli 
        emerges in the centre, a symbolic reminder of his lasting influence on generations of designers.
       </p>
-      <p class="context">Supervisor Fulvia Lepori and Michela Linder.</p>
+      <p class="context">Supervisor Fulvia Lepori and Michela Linder</p>
       <br>
     `,
     images: [
@@ -66,7 +66,7 @@ const PROJECTS = {
         it translates the dynamic essence of the movement into a meticulously composed visual experience. 
         The layout bridges tradition and modernity, embodying the spirit of innovation central to kinetic art.
       </p>
-      <p class="context">Supervisor Marco Zürcher and Sidi Vanetti. <br>Co-author Simone Scardovi.</p>
+      <p class="context">Supervisor Marco Zürcher and Sidi Vanetti <br> Co-author Simone Scardovi</p>
       <br>
     `,
     images: [
@@ -90,7 +90,7 @@ const PROJECTS = {
         with striking covers, concise texts, analyses, images sourced online and pictograms, the publication balances 
         clarity with atmosphere, engaging younger audiences while honoring architecture’s expressive power.
       </p>
-      <p class="context">Supervisor Roberto Schneeberger.</p>
+      <p class="context"> Supervisor Roberto Schneeberger <br><br> Clip Alex Bokov <br> Audio Hildur Guðnadóttir </p>
       <br>
     `,
     images: [
@@ -118,7 +118,7 @@ const PROJECTS = {
         essential forms and enhancing them with silver textures and low-resolution imagery that enrich its visual 
         and narrative dimension.
       </p>
-      <p class="context">Supervisor Luca Pellegrini.</p>
+      <p class="context">Supervisor Luca Pellegrini <br><br> Audio Haxan Cloak</p>
       <br>
     `,
     images: [
@@ -148,7 +148,7 @@ const PROJECTS = {
         is a visual identity that addresses issues such as identity, resilience and the delicate balance between
         humanity and technology, offering an innovative and coherent vision of the future of fashion.
       </p>
-      <p class="context">Supervisor Leonardo Angelucci.</p>
+      <p class="context">Supervisor Leonardo Angelucci <br><br> Audio BFRND, Ufo361 & Sonus030 </p>
       <br>
     `,
     images: [
@@ -179,7 +179,7 @@ const PROJECTS = {
         movement, sound, and imagery, where dynamic lines and sound generated inspired by Ryoji Ikeda evolve in harmony, 
         offering a contemporary reinterpretation of Bauhaus through a constantly shifting language.
       </p>
-      <p class="context">Supervisor Leonardo Angelucci.</p>
+      <p class="context">Supervisor Leonardo Angelucci</p>
       <br>
     `,
     images: [
@@ -207,7 +207,7 @@ const PROJECTS = {
         systems. It combines a shared visual grammar of typographic and pictographic communication with a multicultural
         dataset and ML validation. The manual and a variable typeface make the system adaptable to urban, extra-urban
         and logistical contexts, enhancing safety and human-machine cooperation.</p>
-      <p class="context">Supervisor Michael Zehnder.</p>
+      <p class="context">Supervisor Michael Zehnder <br><br> Audio emptyset </p>
       <br>
     `,
     images: [
