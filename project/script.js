@@ -51,7 +51,7 @@ const PROJECTS = {
       "../assets/img/vignelli/2.jpg",
       "../assets/img/vignelli/3.jpg",
       "../assets/img/vignelli/4.jpg"
-      // "../assets/img/vignelli/5.jpg"
+      // "../assets/img/vignelli/5.jpg" // SFONDO GRIGIO E NON NERO
     ]
   },
   "2": {
