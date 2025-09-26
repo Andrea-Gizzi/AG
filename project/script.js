@@ -50,8 +50,8 @@ const PROJECTS = {
       "../assets/img/vignelli/1.jpg",
       "../assets/img/vignelli/2.jpg",
       "../assets/img/vignelli/3.jpg",
-      "../assets/img/vignelli/4.jpg",
-      "../assets/img/vignelli/5.jpg"
+      "../assets/img/vignelli/4.jpg"
+      // "../assets/img/vignelli/5.jpg"
     ]
   },
   "2": {
