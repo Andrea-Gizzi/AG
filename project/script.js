@@ -81,7 +81,8 @@ const PROJECTS = {
     title: "C0°RD’1N.A”TE",
     year: "Editorial 2024",
     extraInfo: `<br>
-     Selected for Where Flowers Bloom Magazine 2025
+      Selected for WFB 7 — Space × Time 2025<br>
+      Where Flowers Bloom (Magazine)
     `,
     description: `
       <p class="context-2"><br>
@@ -198,7 +199,7 @@ const PROJECTS = {
     title: "SENSE<br>Visual sistem for smart roads",
     year: "IxD · Type · Editorial 2025",
     extraInfo: `<br>
-    Talent Award 2025<br>
+      Talent Award 2025<br>
       SUPSI Visual Comunication
     `,
     description: `
