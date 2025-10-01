@@ -174,11 +174,12 @@ const PROJECTS = {
     House of Switzerland`,
     description: `
       <p class="context-2"><br>
-        SYNC is an interactive exploration of the intersection between body, technology, and visual art. 
-        Drawing from Bauhaus dance principles, the project employs accelerometers to capture performers’ 
-        gestures and translate them into real-time audiovisual compositions. An immersive interface synchronises 
-        movement, sound, and imagery, where dynamic lines and sound generated inspired by Ryoji Ikeda evolve in harmony, 
-        offering a contemporary reinterpretation of Bauhaus through a constantly shifting language.
+        SYNC is an interactive exploration of the intersection of body, technology and visual art. 
+        Drawing from Bauhaus dance principles, the project uses wearable accelerometers as inputs to 
+        capture performers’ gestures and transmits the data to a central server, which translates it 
+        in real time into audiovisual compositions. An immersive interface synchronises movement, sound and imagery 
+        so that dynamically generated lines and sonic textures evolve in harmony, offering a contemporary reinterpretation 
+        of Bauhaus through a constantly shifting performative language.
       </p>
       <p class="context">Supervisor Leonardo Angelucci</p>
       <br>
