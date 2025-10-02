@@ -50,7 +50,6 @@ const PROJECTS = {
       "../assets/img/vignelli/2.jpg",
       "../assets/img/vignelli/3.jpg",
       "../assets/img/vignelli/4.jpg"
-      // "../assets/img/vignelli/5.jpg" // SFONDO GRIGIO E NON NERO
     ]
   },
   "2": {
@@ -119,7 +118,7 @@ const PROJECTS = {
       <p class="context margin-bottom">Supervisor Luca Pellegrini<br>Audio Haxan Cloak</p>
     `,
     images: [
-      "VIMEO:1121344903",
+      "VIMEO:1124034790",
       "../assets/img/mk-97/1.jpg",
       "../assets/img/mk-97/2.jpg",
       "../assets/img/mk-97/3.jpg",
