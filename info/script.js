@@ -215,7 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
       animateText(buttonLabel, "CLOSE", 600);
       requestAnimationFrame(() => { content.style.maxHeight = content.scrollHeight + "px"; });
     } else {
-      animateText(buttonLabel, "DESCRIPTION", 600);
+      animateText(buttonLabel, "READ MORE", 600);
       content.style.maxHeight = "0px";
     }
   });
