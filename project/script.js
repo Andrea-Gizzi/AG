@@ -42,9 +42,8 @@ const PROJECTS = {
        a design icon. Graphic elements such as railway lines, colour hierarchies and structural grids evoke his creative 
        approach, transforming information into a compelling visual narrative. Once opened, a portrait of Vignelli 
        emerges in the centre, a symbolic reminder of his lasting influence on generations of designers.
-      </p>
-      <p class="context">Supervisor Fulvia Lepori and Michela Linder</p>
-      <br>
+      </p><br>
+      <p class="context margin-bottom">Supervisor Fulvia Lepori and Michela Linder</p>
     `,
     images: [
       "../assets/img/vignelli/1.jpg",
@@ -65,9 +64,8 @@ const PROJECTS = {
         form, and movement to sharpen perception. Inspired by artists such as Almir Mavignier and Peter Megert, 
         it translates the dynamic essence of the movement into a meticulously composed visual experience. 
         The layout bridges tradition and modernity, embodying the spirit of innovation central to kinetic art.
-      </p>
-      <p class="context">Supervisor Marco Zürcher and Sidi Vanetti <br> Co-author Simone Scardovi</p>
-      <br>
+      </p><br>
+      <p class="context margin-bottom">Supervisor Marco Zürcher and Sidi Vanetti<br>Co-author Simone Scardovi</p>
     `,
     images: [
       "../assets/img/kinetic_art/1.jpg",
@@ -90,9 +88,8 @@ const PROJECTS = {
         Each building is documented with metadata, especially its coordinates, marking its exact location. Structured 
         with striking covers, concise texts, analyses, images sourced online and pictograms, the publication balances 
         clarity with atmosphere, engaging younger audiences while honoring architecture’s expressive power.
-      </p>
-      <p class="context"> Supervisor Roberto Schneeberger <br><br> Clip Alex Bokov <br> Audio Hildur Guðnadóttir </p>
-      <br>
+      </p><br>
+      <p class="context margin-bottom">Supervisor Roberto Schneeberger<br>Audio Hildur Guðnadóttir<br>Clip Alex Bokov</p>
     `,
     images: [
       "VIMEO:1121345311",
@@ -118,9 +115,8 @@ const PROJECTS = {
         with contemporary graphic expression. A printed specimen accompanies the project, highlighting the font’s 
         essential forms and enhancing them with silver textures and low-resolution imagery that enrich its visual 
         and narrative dimension.
-      </p>
-      <p class="context">Supervisor Luca Pellegrini <br><br> Audio Haxan Cloak</p>
-      <br>
+      </p><br>
+      <p class="context margin-bottom">Supervisor Luca Pellegrini<br>Audio Haxan Cloak</p>
     `,
     images: [
       "VIMEO:1121344903",
@@ -148,9 +144,8 @@ const PROJECTS = {
         also by rapid technological transformations, the AI-generated images combine minimalism and futurism. The result
         is a visual identity that addresses issues such as identity, resilience and the delicate balance between
         humanity and technology, offering an innovative and coherent vision of the future of fashion.
-      </p>
-      <p class="context">Supervisor Leonardo Angelucci <br><br> Audio BFRND, Ufo361 & Sonus030 </p>
-      <br>
+      </p><br>
+      <p class="context margin-bottom">Supervisor Leonardo Angelucci<br>Audio BFRND, Ufo361 & Sonus030</p>
     `,
     images: [
       "VIMEO:1072980885",
@@ -180,9 +175,8 @@ const PROJECTS = {
         in real time into audiovisual compositions. An immersive interface synchronises movement, sound and imagery 
         so that dynamically generated lines and sonic textures evolve in harmony, offering a contemporary reinterpretation 
         of Bauhaus through a constantly shifting performative language.
-      </p>
-      <p class="context">Supervisor Leonardo Angelucci</p>
-      <br>
+      </p><br>
+      <p class="context margin-bottom">Supervisor Leonardo Angelucci</p>
     `,
     images: [
       "VIMEO:1072983962",
@@ -208,9 +202,9 @@ const PROJECTS = {
         SENSE is a road signage system for bidirectional reading: readable and interpretable by humans and automated
         systems. It combines a shared visual grammar of typographic and pictographic communication with a multicultural
         dataset and ML validation. The manual and a variable typeface make the system adaptable to urban, extra-urban
-        and logistical contexts, enhancing safety and human-machine cooperation.</p>
-      <p class="context">Supervisor Michael Zehnder <br><br> Audio emptyset </p>
-      <br>
+        and logistical contexts, enhancing safety and human-machine cooperation.
+      </p><br>
+      <p class="context margin-bottom">Supervisor Michael Zehnder<br>Audio emptyset</p>
     `,
     images: [
       "VIMEO:1121218692",
@@ -438,7 +432,24 @@ function loadProject(projectId) {
 
   titleEl.innerHTML = project.title.replace(/\n/g, '<br>');
   yearEl.textContent = project.year;
-  if (extraEl) extraEl.innerHTML = project.extraInfo || '';
+  if (extraEl) {
+    extraEl.innerHTML = project.extraInfo || '';
+
+    const ctx = document.querySelector('.project-description .context');
+
+    if (ctx) ctx.classList.remove('margin-bottom');
+    extraEl.classList.remove('margin-bottom');
+
+    const extraText = (extraEl.textContent || '').replace(/\u00A0/g, '').trim();
+    const hasExtra = extraText !== '';
+
+    if (hasExtra) {
+      extraEl.classList.add('margin-bottom');
+    } else if (ctx) {
+      ctx.classList.add('margin-bottom');
+    }
+  }
+
   if (descEl) descEl.innerHTML = project.description || '';
 
   destroyVimeoPlayers();
@@ -601,6 +612,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.audioMuted = true;
 
+  let arrivedFromHomeFlag = false;
+  try { arrivedFromHomeFlag = sessionStorage.getItem('fromHome') === 'true'; } catch (e) { arrivedFromHomeFlag = false; }
+
   wireProjectListLinks();
   initProjectFromUrlOrSession();
 
@@ -625,7 +639,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const navContainer = document.querySelector('.nav-info');
   const navHomeLink = navContainer ? navContainer.querySelector('#nav-home a') : null;
   if (navContainer && navHomeLink) {
-    if (sessionStorage.getItem("fromHome") === "true") {
+    if (arrivedFromHomeFlag) {
       animateText(navHomeLink, "HOME", 2000, () => {
         setTimeout(() => {
           const bottomCont = document.querySelector("#bottom-cont");
@@ -633,7 +647,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (bottomCont) { bottomCont.style.opacity = "1"; bottomContInfo.style.opacity = "1"; }
         }, 500);
       });
-      sessionStorage.removeItem("fromHome");
+      try { sessionStorage.removeItem("fromHome"); } catch (e) { }
     } else {
       navHomeLink.textContent = "HOME";
       navContainer.style.opacity = "1";
