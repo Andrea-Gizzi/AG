@@ -263,6 +263,11 @@ document.addEventListener("DOMContentLoaded", () => {
       document.removeEventListener("pointermove", handleMoveEvent);
       document.removeEventListener("pointerdown", onPointerDown);
       document.removeEventListener("pointerup", onPointerUp);
+    } else {
+      document.removeEventListener("mousemove", handleMoveEvent);
+      document.removeEventListener("touchmove", handleMoveEvent);
+      document.removeEventListener("mousedown", onPointerDown);
+      document.removeEventListener("mouseup", onPointerUp);
     }
   });
 });
