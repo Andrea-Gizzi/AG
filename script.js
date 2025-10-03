@@ -69,7 +69,14 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll('#image-gallery .project-item').forEach(link => {
     link.addEventListener('click', (ev) => {
       if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
-      sessionStorage.setItem('fromHome', 'true');
+      try { sessionStorage.setItem('fromHome', 'true'); } catch (e) { }
+    });
+  });
+
+  document.querySelectorAll('.news a[href*="project"]').forEach(newsLink => {
+    newsLink.addEventListener('click', (ev) => {
+      if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+      try { sessionStorage.setItem('fromHome', 'true'); } catch (e) { }
     });
   });
 
@@ -324,7 +331,7 @@ document.addEventListener("DOMContentLoaded", () => {
     1072983962, // sync
     // 1124034790, // mk-97
     // 1121218692, // sense
-    
+
   ];
 
   function getOrPickIndex() {
