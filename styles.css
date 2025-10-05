@@ -766,6 +766,15 @@ html.is-touch .custom-cursor {
     margin-bottom: 14px;
   }
 
+
+  .cv-cont dt {
+    margin-top: 2px;
+  }
+
+  .cv-cont dd {
+    margin-top: 2px;
+  }
+
   .margin-bottom {
     margin-bottom: 14px;
   }
