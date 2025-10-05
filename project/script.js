@@ -138,12 +138,10 @@ const PROJECTS = {
       Zurich`,
     description: `
       <p class="context-2"><br>
-        This project explores the use of artificial intelligence and machine learning to create the
-        identity of an avant-garde fashion brand set in 2064. In a context marked by social and environmental crises, but
-        also by rapid technological transformations, the AI-generated images combine minimalism and futurism. The result
-        is a visual identity that addresses issues such as identity, resilience and the delicate balance between
-        humanity and technology, presented through a website and an atmospheric video that conveys the mood and essence of the brand, 
-        offering an innovative and coherent vision of the future of fashion.
+        ROWA is a avant-garde fashion brand set in 2064. In a future marked by social and environmental crises and rapid technological 
+        change, the entire visual identity is generated using AI and ML. The essential, futuristic 
+        images give life to a recognisable visual language that explores identity, resilience and the subtle balance between humans 
+        and technology. The project takes the form of a website and an atmospheric video that encapsulate the brand's mood, philosophy and vision.
       </p><br>
       <p class="context margin-bottom">Supervisor Leonardo Angelucci<br>Audio BFRND, Ufo361 & Sonus030</p>
     `,
