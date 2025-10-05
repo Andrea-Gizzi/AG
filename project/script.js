@@ -198,19 +198,14 @@ const PROJECTS = {
     `,
     description: `
       <p class="context-2"><br>
-        SENSE is a road signage system for bidirectional reading readable and interpretable by humans and automated systems.
-        It combines a shared visual grammar of typographic and pictographic communication with a multicultural
-        dataset and ML validation. The manual and a variable typeface make the system adaptable to urban, extra-urban
-        and logistical contexts, enhancing safety and human-machine cooperation.
-
-        SENSE is a road signage system for bidirectional reading readable and interpretable by humans and automated systems.
-        A custom variable typeface including typographic and pictographic elements serves as the communication support and is drawn 
-        and tested with OCR readers to improve automatic segmentation and human legibility. The typeface and visual grammar produce 
-        road signs validated with a multicultural annotated dataset and ML models.A practical manual contains the type specimen 
-        the dataset and implementation guidelines and makes the system adaptable to urban extra urban and logistical contexts 
-        supporting safer human machine cooperation.
+        SENSE is a road-signage system readable by both humans and automated systems. 
+        A custom variable typeface combining typographic and pictographic elements was created and iteratively tested with OCR 
+        to improve automatic segmentation while preserving human legibility. 
+        The typeface and its visual grammar generate signs validated on a multicultural annotated dataset and ML models. 
+        A printed manual illustrates the structure of the entire system and supports deployment in urban and logistical contexts, 
+        promoting safer cooperation between humans and machines.
       </p><br>
-      <p class="context margin-bottom">Supervisor Michael Zehnder<br>Audio emptyset</p>
+      <p class="context margin-bottom">Supervisor Michael Zehnder</p>
     `,
     images: [
       "VIMEO:1121218692",
