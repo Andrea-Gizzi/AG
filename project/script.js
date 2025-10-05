@@ -1,3 +1,22 @@
+function preventOrphansSimple(rootEl, maxLen = 3) {
+  if (!rootEl) return;
+  const charClass = "A-Za-zÀ-ÖØ-öø-ÿ0-9";
+  const regex = new RegExp(`\\b([${charClass}]{1,${maxLen}})\\s+(?=[${charClass}])`, 'g');
+
+  const walker = document.createTreeWalker(rootEl, NodeFilter.SHOW_TEXT, null, false);
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+
+  nodes.forEach(node => {
+    const parentTag = node.parentNode && node.parentNode.nodeName && node.parentNode.nodeName.toLowerCase();
+    if (['script', 'style', 'code', 'pre', 'textarea'].includes(parentTag)) return;
+    const text = node.nodeValue;
+    if (!text) return;
+    const newText = text.replace(regex, '$1\u00A0');
+    if (newText !== text) node.nodeValue = newText;
+  });
+}
+
 /* ---------- AUDIO MANAGEMENT ---------- */
 function getAudioMuted() {
   try {
@@ -450,7 +469,10 @@ function loadProject(projectId) {
     }
   }
 
-  if (descEl) descEl.innerHTML = project.description || '';
+  if (descEl) {
+    descEl.innerHTML = project.description || '';
+    preventOrphansSimple(descEl, 3);
+  }
 
   destroyVimeoPlayers();
 
