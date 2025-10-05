@@ -1,3 +1,4 @@
+/* ---------- PREVENT TEXT ORPHANS ---------- */
 function preventOrphansSimple(rootEl, maxLen = 3) {
   if (!rootEl) return;
   const charClass = "A-Za-zÀ-ÖØ-öø-ÿ0-9";
