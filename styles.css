@@ -754,6 +754,7 @@ html.is-touch .custom-cursor {
   }
 
   .description-content {
+    max-width: 54ch;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.6s var(--transition-ease-in-out), opacity var(--transition-fast) var(--transition-ease-in-out);
