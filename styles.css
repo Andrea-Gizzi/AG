@@ -35,6 +35,9 @@
 
 body,
 html {
+  -webkit-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+  text-size-adjust: none;
   overflow: hidden;
   min-height: 100vh;
   overflow-x: hidden;
@@ -50,7 +53,7 @@ html {
   color: white;
 }
 
-html,
+/* html,
 body,
 .credits,
 .project-title,
@@ -60,7 +63,7 @@ body,
   -webkit-text-size-adjust: none !important;
   -ms-text-size-adjust: none !important;
   text-size-adjust: none !important;
-}
+} */
 
 .corner-values,
 .corner-values-info {
