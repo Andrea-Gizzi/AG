@@ -50,7 +50,13 @@ html {
   color: white;
 }
 
-html, body, .credits, .project-title, .project-year, .project-extra, .project-item {
+html,
+body,
+.credits,
+.project-title,
+.project-year,
+.project-extra,
+.project-item {
   -webkit-text-size-adjust: none !important;
   -ms-text-size-adjust: none !important;
   text-size-adjust: none !important;
@@ -674,7 +680,8 @@ html.is-touch .custom-cursor {
 
 
 
-@media (max-width: 769px), (orientation: landscape) and (max-height: 769px){
+@media (max-width: 769px),
+(orientation: landscape) and (max-height: 769px) {
   body {
     font-size: var(--responsive-text);
   }
@@ -752,6 +759,7 @@ html.is-touch .custom-cursor {
 
   .project-description {
     width: 90vw;
+    left: var(--lateral-padding-mobile);
   }
 
   .credits {
