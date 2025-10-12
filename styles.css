@@ -35,6 +35,10 @@
 
 body,
 html {
+  /* disattiva il ridimensionamento automatico del font sui browser mobili */
+  -webkit-text-size-adjust: none; /* Safari, Chrome su iOS */
+  -ms-text-size-adjust: none;     /* IE/Edge legacy */
+  text-size-adjust: none;         /* standard */
   overflow: hidden;
   min-height: 100vh;
   overflow-x: hidden;
@@ -668,7 +672,7 @@ html.is-touch .custom-cursor {
 
 
 
-@media screen and (max-width: 769px), screen and (orientation: landscape) and (max-height: 769px){
+@media (max-width: 769px), (orientation: landscape) and (max-height: 769px){
   body {
     font-size: var(--responsive-text);
   }
