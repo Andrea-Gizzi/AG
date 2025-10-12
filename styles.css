@@ -35,10 +35,6 @@
 
 body,
 html {
-  /* disattiva il ridimensionamento automatico del font sui browser mobili */
-  -webkit-text-size-adjust: none; /* Safari, Chrome su iOS */
-  -ms-text-size-adjust: none;     /* IE/Edge legacy */
-  text-size-adjust: none;         /* standard */
   overflow: hidden;
   min-height: 100vh;
   overflow-x: hidden;
@@ -52,6 +48,12 @@ html {
   -ms-overflow-style: none;
   background-color: var(--secondary-color);
   color: white;
+}
+
+html, body, .credits, .project-title, .project-year, .project-extra, .project-item {
+  -webkit-text-size-adjust: none !important;
+  -ms-text-size-adjust: none !important;
+  text-size-adjust: none !important;
 }
 
 .corner-values,
