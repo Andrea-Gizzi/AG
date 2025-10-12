@@ -668,7 +668,7 @@ html.is-touch .custom-cursor {
 
 
 
-@media screen and (max-width: 769px) {
+@media screen and (max-width: 769px), screen and (orientation: landscape) and (max-height: 769px){
   body {
     font-size: var(--responsive-text);
   }
