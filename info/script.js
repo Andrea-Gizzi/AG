@@ -97,9 +97,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function moveCursor(x, y) {
-    if (!cursor) return;
-    cursor.style.left = `${x}px`;
-    cursor.style.top = `${y}px`;
+    const vv = window.visualViewport;
+    const offsetX = vv && typeof vv.offsetLeft === 'number' ? vv.offsetLeft : 0;
+    const offsetY = vv && typeof vv.offsetTop === 'number' ? vv.offsetTop : 0;
+
+    const posLeft = Math.round(x + offsetX);
+    const posTop = Math.round(y + offsetY);
+
+    cursor.style.left = `${posLeft}px`;
+    cursor.style.top = `${posTop}px`;
     cursor.style.visibility = 'visible';
     cursor.style.opacity = '1';
   }
