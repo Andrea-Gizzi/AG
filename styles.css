@@ -908,7 +908,6 @@ html.is-touch .custom-cursor {
 
 
 
-
 @media (hover: none) and (pointer: coarse) {
   .custom-cursor {
     display: none !important;
