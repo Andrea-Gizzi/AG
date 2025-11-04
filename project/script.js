@@ -95,6 +95,35 @@ const PROJECTS = {
   },
   "3": {
     id: "3",
+    title: "24h",
+    year: "Photography 2023",
+    extraInfo: ``,
+    description: `
+      <p class="context-2"><br>
+        24h is a photographic reportage that recounts a typical day in the life of an acquaintance. 
+        Through chronological sequences and intimate details, the project investigates daily habits, gestures and spaces, 
+        highlighting the ordinary moments that construct a person's identity. 
+        The images favour a visual narrative that alternates frames of action with small symbolic details.
+      </p><br>
+         <p class="context margin-bottom">Supervisor Marco Beltrametti</p>
+    `,
+    images: [
+      "../assets/img/24h/1.jpg",
+      "../assets/img/24h/2.jpg",
+      "../assets/img/24h/3.jpg",
+      "../assets/img/24h/4.jpg",
+      "../assets/img/24h/5.jpg",
+      "../assets/img/24h/6.jpg",
+      "../assets/img/24h/7.jpg",
+      "../assets/img/24h/8.jpg",
+      "../assets/img/24h/9.jpg",
+      "../assets/img/24h/10.jpg",
+      "../assets/img/24h/11.jpg",
+      "../assets/img/24h/12.jpg"
+    ]
+  },
+  "4": {
+    id: "4",
     title: "C0°RD’1N.A”TE",
     year: "Editorial 2024",
     extraInfo: `<br>
@@ -122,8 +151,8 @@ const PROJECTS = {
       "../assets/img/coordinate/8.jpg"
     ]
   },
-  "4": {
-    id: "4",
+  "5": {
+    id: "5",
     title: "MK-97",
     year: "Type Design 2025",
     extraInfo: ``,
@@ -149,8 +178,8 @@ const PROJECTS = {
       "../assets/img/mk-97/8.jpg"
     ]
   },
-  "5": {
-    id: "5",
+  "6": {
+    id: "6",
     title: "ГОША",
     year: "Co-Design AI - 2025",
     extraInfo: `<br>
@@ -178,8 +207,8 @@ const PROJECTS = {
       "VIMEO:1124633479"
     ]
   },
-  "6": {
-    id: "6",
+  "7": {
+    id: "7",
     title: "SYNC",
     year: "IxD - 2025",
     extraInfo: `<br>
@@ -207,8 +236,8 @@ const PROJECTS = {
       "../assets/img/sync/7.jpg"
     ]
   },
-  "7": {
-    id: "7",
+  "8": {
+    id: "8",
     title: "SENSE<br>Visual sistem for smart roads",
     year: "IxD · Type · Editorial 2025",
     extraInfo: `<br>
