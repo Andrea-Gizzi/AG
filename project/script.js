@@ -50,26 +50,55 @@ function tryPlay(playerLike) {
 
 /* ---------- PROJECT DATA ---------- */
 const PROJECTS = {
+  // "1": {
+  //   id: "1",
+  //   title: "MASSIMO VIGNELLI",
+  //   year: "Editorial 2023",
+  //   extraInfo: ``,
+  //   description: `
+  //     <p class="context-2"><br>
+  //      The project features a cover dedicated to the life and work of Massimo Vignelli. Organised through a precise 
+  //      division of data, it traces his trajectory from his Italian origins to the innovations that established him as 
+  //      a design icon. Graphic elements such as railway lines, colour hierarchies and structural grids evoke his creative 
+  //      approach, transforming information into a compelling visual narrative. Once opened, a portrait of Vignelli 
+  //      emerges in the centre, a symbolic reminder of his lasting influence on generations of designers.
+  //     </p><br>
+  //     <p class="context margin-bottom">Supervisor Fulvia Lepori and Michela Linder</p>
+  //   `,
+  //   images: [
+  //     "../assets/img/16esimo/1.jpg",
+  //     "../assets/img/16esimo/2.jpg",
+  //     "../assets/img/16esimo/3.jpg",
+  //     "../assets/img/16esimo/4.jpg",
+  //     "../assets/img/16esimo/5.jpg",
+  //     "../assets/img/16esimo/6.jpg",
+  //     "../assets/img/16esimo/7.jpg",
+  //     "../assets/img/16esimo/8.jpg"
+  //   ]
+  // },
   "1": {
     id: "1",
-    title: "MASSIMO VIGNELLI",
-    year: "Editorial 2023",
+    title: "16ESIMO",
+    year: "Editorial 2022",
     extraInfo: ``,
     description: `
       <p class="context-2"><br>
-       The project features a cover dedicated to the life and work of Massimo Vignelli. Organised through a precise 
-       division of data, it traces his trajectory from his Italian origins to the innovations that established him as 
-       a design icon. Graphic elements such as railway lines, colour hierarchies and structural grids evoke his creative 
-       approach, transforming information into a compelling visual narrative. Once opened, a portrait of Vignelli 
-       emerges in the centre, a symbolic reminder of his lasting influence on generations of designers.
+        16esimo is an exploration of typography and layout as visual structure. 
+        The project moves from individual letters to words and complete texts, examining how rhythm, 
+        proportion and hierarchy shape readability and expression. Through experiments in scale, spacing 
+        and composition, it reflects on typography as both a system of communication and a space for visual interpretation.
       </p><br>
-      <p class="context margin-bottom">Supervisor Fulvia Lepori and Michela Linder</p>
+      <p class="context margin-bottom">Supervisor Alessandra Dal Ben and Andrea Bocci</p>
     `,
     images: [
-      "../assets/img/vignelli/1.jpg",
-      "../assets/img/vignelli/2.jpg",
-      "../assets/img/vignelli/3.jpg",
-      "../assets/img/vignelli/4.jpg"
+      "../assets/img/16esimo/1.jpg",
+      "../assets/img/16esimo/2.jpg",
+      "../assets/img/16esimo/3.jpg",
+      "../assets/img/16esimo/4.jpg",
+      "../assets/img/16esimo/5.jpg",
+      "../assets/img/16esimo/6.jpg",
+      "../assets/img/16esimo/7.jpg",
+      "../assets/img/16esimo/8.jpg"
     ]
   },
   "2": {
