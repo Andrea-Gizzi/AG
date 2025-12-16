@@ -332,7 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!videoElement) return;
 
   const VIMEO_IDS = [
-    1121673426, // coordinate home
+    1146955569, // coordinate home
     1072980885, // rowa
     1072983962, // sync
     // 1124034790, // mk-97
