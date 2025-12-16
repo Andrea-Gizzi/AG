@@ -587,6 +587,7 @@ a:hover {
 }
 
 .video-background {
+  filter: grayscale(100%) contrast(1.05);
   opacity: 0;
   position: fixed;
   top: 0;
