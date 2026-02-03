@@ -295,6 +295,30 @@ const PROJECTS = {
       "../assets/img/sense/7.jpg"
     ]
   }
+  //   "9": {
+  //   id: "9",
+  //   title: "ON ICE",
+  //   year: "Photography 2025",
+  //   extraInfo: ``,
+  //   description: `
+  //     <p class="context-2"><br>
+  //   ON ICE examines the formal and physical dynamics of ice hockey. 
+  //   The series focuses on movement, material, and contact, 
+  //   capturing bodies, equipment, and surface in isolation and relation. 
+  //   Images alternate between action and detail, emphasizing structure, tension, and rhythm 
+  //   over narrative, revealing the sport as a study of force, form, and interaction.
+  //     </p><br>
+  //   `,
+  //   images: [
+  //     "../assets/img/onice/1.jpg",
+  //     "../assets/img/onice/2.jpg",
+  //     "../assets/img/onice/3.jpg",
+  //     "../assets/img/onice/4.jpg",
+  //     "../assets/img/onice/5.jpg",
+  //     "../assets/img/onice/6.jpg",
+  //     "../assets/img/onice/7.jpg"
+  //   ]
+  // }
 };
 
 /* ---------- HELPER: Extract Vimeo ID ---------- */
