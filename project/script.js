@@ -122,37 +122,37 @@ const PROJECTS = {
       "../assets/img/kinetic_art/4.jpg"
     ]
   },
+  // "3": {
+  //   id: "3",
+  //   title: "24h",
+  //   year: "Photography 2023",
+  //   extraInfo: ``,
+  //   description: `
+  //     <p class="context-2"><br>
+  //       24h is a photographic reportage that recounts a typical day in the life of an acquaintance. 
+  //       Through chronological sequences and intimate details, the project investigates daily habits, gestures and spaces, 
+  //       highlighting the ordinary moments that construct a person's identity. 
+  //       The images favour a visual narrative that alternates frames of action with small symbolic details.
+  //     </p><br>
+  //        <p class="context margin-bottom">Supervisor Marco Beltrametti</p>
+  //   `,
+  //   images: [
+  //     "../assets/img/24h/1.jpg",
+  //     "../assets/img/24h/2.jpg",
+  //     "../assets/img/24h/3.jpg",
+  //     "../assets/img/24h/4.jpg",
+  //     "../assets/img/24h/5.jpg",
+  //     "../assets/img/24h/6.jpg",
+  //     "../assets/img/24h/7.jpg",
+  //     "../assets/img/24h/8.jpg",
+  //     "../assets/img/24h/9.jpg",
+  //     "../assets/img/24h/10.jpg",
+  //     "../assets/img/24h/11.jpg",
+  //     "../assets/img/24h/12.jpg"
+  //   ]
+  // },
   "3": {
     id: "3",
-    title: "24h",
-    year: "Photography 2023",
-    extraInfo: ``,
-    description: `
-      <p class="context-2"><br>
-        24h is a photographic reportage that recounts a typical day in the life of an acquaintance. 
-        Through chronological sequences and intimate details, the project investigates daily habits, gestures and spaces, 
-        highlighting the ordinary moments that construct a person's identity. 
-        The images favour a visual narrative that alternates frames of action with small symbolic details.
-      </p><br>
-         <p class="context margin-bottom">Supervisor Marco Beltrametti</p>
-    `,
-    images: [
-      "../assets/img/24h/1.jpg",
-      "../assets/img/24h/2.jpg",
-      "../assets/img/24h/3.jpg",
-      "../assets/img/24h/4.jpg",
-      "../assets/img/24h/5.jpg",
-      "../assets/img/24h/6.jpg",
-      "../assets/img/24h/7.jpg",
-      "../assets/img/24h/8.jpg",
-      "../assets/img/24h/9.jpg",
-      "../assets/img/24h/10.jpg",
-      "../assets/img/24h/11.jpg",
-      "../assets/img/24h/12.jpg"
-    ]
-  },
-  "4": {
-    id: "4",
     title: "C0°RD’1N.A”TE",
     year: "Editorial 2024",
     extraInfo: `<br>
@@ -180,8 +180,8 @@ const PROJECTS = {
       "../assets/img/coordinate/8.jpg"
     ]
   },
-  "5": {
-    id: "5",
+  "4": {
+    id: "4",
     title: "MK-97",
     year: "Type Design 2025",
     extraInfo: ``,
@@ -207,8 +207,8 @@ const PROJECTS = {
       "../assets/img/mk-97/8.jpg"
     ]
   },
-  "6": {
-    id: "6",
+  "5": {
+    id: "5",
     title: "ГОША",
     year: "Co-Design AI - 2025",
     extraInfo: `<br>
@@ -236,8 +236,8 @@ const PROJECTS = {
       "VIMEO:1124633479"
     ]
   },
-  "7": {
-    id: "7",
+  "6": {
+    id: "6",
     title: "SYNC",
     year: "IxD - 2025",
     extraInfo: `<br>
@@ -265,8 +265,8 @@ const PROJECTS = {
       "../assets/img/sync/7.jpg"
     ]
   },
-  "8": {
-    id: "8",
+  "7": {
+    id: "7",
     title: "SENSE<br>Visual sistem for smart roads",
     year: "IxD · Type · Editorial 2025",
     extraInfo: `<br>
@@ -294,31 +294,39 @@ const PROJECTS = {
       "../assets/img/sense/6.jpg",
       "../assets/img/sense/7.jpg"
     ]
+  },
+  "8": {
+    id: "8",
+    title: "ON ICE",
+    year: "Photography 2026",
+    extraInfo: ``,
+    description: `
+      <p class="context-2"><br>
+        ON ICE examines the formal and physical dynamics of ice hockey. 
+        The series focuses on movement, material, and contact, 
+        capturing bodies, equipment, and surface in isolation and relation. 
+        Images alternate between action and detail, emphasizing structure, tension, and rhythm 
+        over narrative, revealing the sport as a study of force, form, and interaction.
+      </p><br>
+    `,
+    images: [
+      "../assets/img/onice/1.jpg",
+      "../assets/img/onice/2.jpg",
+      "../assets/img/onice/3.jpg",
+      "../assets/img/onice/4.jpg",
+      "../assets/img/onice/5.jpg",
+      "../assets/img/onice/6.jpg",
+      "../assets/img/onice/7.jpg",
+      "../assets/img/onice/8.jpg",
+      "../assets/img/onice/9.jpg",
+      "../assets/img/onice/10.jpg",
+      "../assets/img/onice/11.jpg",
+      "../assets/img/onice/12.jpg",
+      "../assets/img/onice/13.jpg",
+      "../assets/img/onice/15.jpg",
+      "../assets/img/onice/14.jpg"
+    ]
   }
-  //   "9": {
-  //   id: "9",
-  //   title: "ON ICE",
-  //   year: "Photography 2025",
-  //   extraInfo: ``,
-  //   description: `
-  //     <p class="context-2"><br>
-  //   ON ICE examines the formal and physical dynamics of ice hockey. 
-  //   The series focuses on movement, material, and contact, 
-  //   capturing bodies, equipment, and surface in isolation and relation. 
-  //   Images alternate between action and detail, emphasizing structure, tension, and rhythm 
-  //   over narrative, revealing the sport as a study of force, form, and interaction.
-  //     </p><br>
-  //   `,
-  //   images: [
-  //     "../assets/img/onice/1.jpg",
-  //     "../assets/img/onice/2.jpg",
-  //     "../assets/img/onice/3.jpg",
-  //     "../assets/img/onice/4.jpg",
-  //     "../assets/img/onice/5.jpg",
-  //     "../assets/img/onice/6.jpg",
-  //     "../assets/img/onice/7.jpg"
-  //   ]
-  // }
 };
 
 /* ---------- HELPER: Extract Vimeo ID ---------- */
