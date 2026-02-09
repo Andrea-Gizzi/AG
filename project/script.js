@@ -270,7 +270,7 @@ const PROJECTS = {
     title: "SENSE<br>Visual sistem for smart roads",
     year: "IxD · Type · Editorial 2025",
     extraInfo: `<br>
-      Talent Award 2025<br>
+      TalenThesis Award 2025<br>
       SUPSI Visual Comunication
     `,
     description: `
