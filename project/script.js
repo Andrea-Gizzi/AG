@@ -324,8 +324,7 @@ const PROJECTS = {
       "../assets/img/onice/12.jpg",
       "../assets/img/onice/13.jpg",
       "../assets/img/onice/15.jpg",
-      "../assets/img/onice/14.jpg",
-      "../assets/img/onice/16.jpg"
+      "../assets/img/onice/14.jpg"
     ]
   }
 };
