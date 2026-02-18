@@ -285,7 +285,7 @@ const PROJECTS = {
       <p class="context margin-bottom">Supervisor Michael Zehnder</p>
     `,
     images: [
-      "VIMEO:1121218692",
+      // "VIMEO:1121218692",
       "../assets/img/sense/1.jpg",
       "../assets/img/sense/2.jpg",
       "../assets/img/sense/3.jpg",
