@@ -292,7 +292,11 @@ const PROJECTS = {
       "../assets/img/sense/4.jpg",
       "../assets/img/sense/5.jpg",
       "../assets/img/sense/6.jpg",
-      "../assets/img/sense/7.jpg"
+      "../assets/img/sense/7.jpg",
+      "../assets/img/sense/8.jpg",
+      "../assets/img/sense/9.jpg",
+      "../assets/img/sense/10.jpg",
+      "../assets/img/sense/11.jpg"
     ]
   },
   "8": {
