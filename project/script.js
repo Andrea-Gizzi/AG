@@ -156,8 +156,8 @@ const PROJECTS = {
     title: "C0°RD’1N.A”TE",
     year: "Editorial 2024",
     extraInfo: `<br>
-      Selected for WFB 7 — Space × Time 2025<br>
-      Where Flowers Bloom (Magazine)
+      WFB 7 — Space × Time 2025<br>
+      Selected for Where Flowers Bloom
     `,
     description: `
       <p class="context-2"><br>
@@ -213,7 +213,7 @@ const PROJECTS = {
     year: "Co-Design AI - 2025",
     extraInfo: `<br>
     Photo Schweiz 2025<br>
-      Zurich`,
+    AI Photography`,
     description: `
       <p class="context-2"><br>
         ROWA is a avant-garde fashion brand set in 2064. In a future marked by social and environmental crises and rapid technological 
@@ -267,11 +267,14 @@ const PROJECTS = {
   },
   "7": {
     id: "7",
-    title: "SENSE<br>Visual sistem for smart roads",
+    title: "SENSE<br>Visual system for smart roads",
     year: "IxD · Type · Editorial 2025",
     extraInfo: `<br>
-      TalenThesis Award 2025<br>
-      SUPSI Visual Comunication
+      Swiss Design Awards 2026<br>
+      Selected for Design Research
+      <br><br>
+      SUPSI TalenThesis Award 2025<br>
+      Visual Communication
     `,
     description: `
       <p class="context-2"><br>
