@@ -156,7 +156,7 @@ const PROJECTS = {
     title: "C0°RD’1N.A”TE",
     year: "Editorial 2024",
     extraInfo: `<br>
-      WFB 7 — Space × Time 2025<br>
+     — WFB 7 Space × Time 2025<br>
       Selected for Where Flowers Bloom
     `,
     description: `
@@ -212,7 +212,7 @@ const PROJECTS = {
     title: "ГОША",
     year: "Co-Design AI - 2025",
     extraInfo: `<br>
-    Photo Schweiz 2025<br>
+    — Photo Schweiz 2025<br>
     AI Photography`,
     description: `
       <p class="context-2"><br>
@@ -241,7 +241,7 @@ const PROJECTS = {
     title: "SYNC",
     year: "IxD - 2025",
     extraInfo: `<br>
-    Milano Design Week 2025<br> 
+    — Milano Design Week 2025<br> 
     House of Switzerland`,
     description: `
       <p class="context-2"><br>
@@ -270,10 +270,10 @@ const PROJECTS = {
     title: "SENSE<br>Visual system for smart roads",
     year: "IxD · Type · Editorial 2025",
     extraInfo: `<br>
-      Swiss Design Awards 2026<br>
-      Selected for Design Research
+      — Swiss Design Awards 2026<br>
+        Selected for Design Research
       <br><br>
-      SUPSI TalenThesis Award 2025<br>
+      — SUPSI TalenThesis Award 2025<br>
       Visual Communication
     `,
     description: `
