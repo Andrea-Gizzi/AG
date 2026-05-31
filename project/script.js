@@ -274,7 +274,7 @@ const PROJECTS = {
       Visual Communication
       <br><br>
       — Swiss Design Awards 2026<br>
-      Selected for Design Research
+      Design Research Finalist
     `,
     description: `
       <p class="context-2"><br>
