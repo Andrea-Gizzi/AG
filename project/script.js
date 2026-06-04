@@ -212,7 +212,7 @@ const PROJECTS = {
     title: "ГОША",
     year: "Co-Design AI - 2025",
     extraInfo: `<br>
-    — Photo Schweiz 2025<br>
+    — PHOTO SCHWEIZ 2025<br>
     AI Photography`,
     description: `
       <p class="context-2"><br>
@@ -273,7 +273,7 @@ const PROJECTS = {
       — SUPSI TalenThesis Award 2025<br>
       Visual Communication
       <br><br>
-      — Swiss Design Awards 2026<br>
+      — SWISS DESIGN AWARDS 2026<br>
       Design Research Finalist
     `,
     description: `
