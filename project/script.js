@@ -188,8 +188,9 @@ const PROJECTS = {
     title: "C0°RD’1N.A”TE",
     year: "Editorial Design - 2024",
     extraInfo: `<br>
-     — WFB 7 Space × Time 2025<br>
-      Selected for Where Flowers Bloom
+      <a class="award-link" href="https://wfb-issue.ch/" target="_blank" rel="noopener noreferrer">
+      — WFB 7 Space × Time 2025</a><br> 
+      Featured in Where Flowers Bloom
     `,
     description: `
       <p class="context-2"><br>
@@ -246,7 +247,7 @@ const PROJECTS = {
     extraInfo: `<br>
     <a class="award-link" href="https://www.photointernational.com/projects/pch25---andrea-gizzi" target="_blank" rel="noopener noreferrer">
     — PHOTO SCHWEIZ 2025</a><br> 
-    AI Photography`,
+    Featured project`,
     description: `
       <p class="context-2"><br>
         ROWA is a avant-garde fashion brand set in 2064. In a future marked by social and environmental crises and rapid technological 
@@ -276,7 +277,7 @@ const PROJECTS = {
     extraInfo: `<br>
     <a class="award-link" href="https://www.design.swiss/2025/semester-magazine.html" target="_blank" rel="noopener noreferrer">
     — Milano Design Week 2025</a><br> 
-    House of Switzerland`,
+     Presented by House of Switzerland`,
     description: `
       <p class="context-2"><br>
         SYNC is an interactive exploration of the intersection of body, technology and visual art. 
@@ -284,7 +285,7 @@ const PROJECTS = {
         capture performers’ gestures and transmits the data to a central server, which translates it 
         in real time into audiovisual compositions. An immersive interface synchronises movement, sound and imagery 
         so that dynamically generated lines and sonic textures evolve in harmony, offering a contemporary reinterpretation 
-        of Bauhaus through a constantly shifting performative language.
+        of Bauhaus through a constantly shifting performative language. Developed for Semester Magazine 2025.
       </p><br>
       <p class="context margin-bottom">Supervisor Leonardo Angelucci</p>
     `,
