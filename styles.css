@@ -767,7 +767,7 @@ html.is-touch .custom-cursor {
   }
 
   .project-description {
-    width: 90vw;
+    width: 72vw;
     left: var(--lateral-padding-mobile);
   }
 
