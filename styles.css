@@ -919,6 +919,16 @@ html.is-touch .custom-cursor {
 }
 
 
+@media (hover: none) {
+  .project-item:hover .project-name {
+    display: block !important;
+  }
+
+  .project-item:hover .project-info {
+    display: none !important;
+  }
+}
+
 
 @media (hover: none) and (pointer: coarse) {
   .custom-cursor {
