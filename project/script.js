@@ -302,11 +302,11 @@ const PROJECTS = {
     title: "SENSE<br>Visual system for smart roads",
     year: "Visual System - 2025",
     extraInfo: `<br>
-      — SUPSI TalenThesis Award 2025<br>
-      Visual Communication
-      <br><br>
       — SWISS DESIGN AWARDS 2026<br>
       Design Research Finalist
+      <br><br>
+      — SUPSI TalenThesis Award 2025<br>
+      Visual Communication
     `,
     description: `
       <p class="context-2"><br>
