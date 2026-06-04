@@ -101,29 +101,8 @@ const PROJECTS = {
   //     "../assets/img/16esimo/8.jpg"
   //   ]
   // },
-  "2": {
-    id: "2",
-    title: "KINETIC ART",
-    year: "Poster Design - 2023",
-    extraInfo: ``,
-    description: `
-      <p class="context-2"><br>
-        Designed for the Mendrisio Art Museum, this poster celebrates kinetic art, a discipline merging light, 
-        form, and movement to sharpen perception. Inspired by artists such as Almir Mavignier and Peter Megert, 
-        it translates the dynamic essence of the movement into a meticulously composed visual experience. 
-        The layout bridges tradition and modernity, embodying the spirit of innovation central to kinetic art.
-      </p><br>
-      <p class="context margin-bottom">Supervisor Marco Zürcher and Sidi Vanetti<br>Co-author Simone Scardovi</p>
-    `,
-    images: [
-      "../assets/img/kinetic_art/1.jpg",
-      "../assets/img/kinetic_art/2.jpg",
-      "../assets/img/kinetic_art/3.jpg",
-      "../assets/img/kinetic_art/4.jpg"
-    ]
-  },
-  // "3": {
-  //   id: "3",
+  // "1": {
+  //   id: "1",
   //   title: "24h",
   //   year: "Photography 2023",
   //   extraInfo: ``,
@@ -151,8 +130,61 @@ const PROJECTS = {
   //     "../assets/img/24h/12.jpg"
   //   ]
   // },
-  "3": {
-    id: "3",
+  // "1": {
+  //   id: "1",
+  //   title: "ON ICE",
+  //   year: "Photography 2026",
+  //   extraInfo: ``,
+  //   description: `
+  //     <p class="context-2"><br>
+  //       ON ICE examines the formal and physical dynamics of ice hockey. 
+  //       The series focuses on movement, material, and contact, 
+  //       capturing bodies, equipment, and surface in isolation and relation. 
+  //       Images alternate between action and detail, emphasizing structure, tension, and rhythm 
+  //       over narrative, revealing the sport as a study of force, form, and interaction.
+  //     </p><br>
+  //   `,
+  //   images: [
+  //     "../assets/img/onice/1.jpg",
+  //     "../assets/img/onice/2.jpg",
+  //     "../assets/img/onice/3.jpg",
+  //     "../assets/img/onice/4.jpg",
+  //     "../assets/img/onice/5.jpg",
+  //     "../assets/img/onice/6.jpg",
+  //     "../assets/img/onice/7.jpg",
+  //     "../assets/img/onice/8.jpg",
+  //     "../assets/img/onice/9.jpg",
+  //     "../assets/img/onice/10.jpg",
+  //     "../assets/img/onice/11.jpg",
+  //     "../assets/img/onice/12.jpg",
+  //     "../assets/img/onice/13.jpg",
+  //     "../assets/img/onice/15.jpg",
+  //     "../assets/img/onice/14.jpg"
+  //   ]
+  // }
+  "1": {
+    id: "1",
+    title: "KINETIC ART",
+    year: "Poster Design - 2023",
+    extraInfo: ``,
+    description: `
+      <p class="context-2"><br>
+        Designed for the Mendrisio Art Museum, this poster celebrates kinetic art, a discipline merging light, 
+        form, and movement to sharpen perception. Inspired by artists such as Almir Mavignier and Peter Megert, 
+        it translates the dynamic essence of the movement into a meticulously composed visual experience. 
+        The layout bridges tradition and modernity, embodying the spirit of innovation central to kinetic art.
+      </p><br>
+      <p class="context margin-bottom">Supervisor Marco Zürcher and Sidi Vanetti<br>Co-author Simone Scardovi</p>
+    `,
+    images: [
+      "../assets/img/kinetic_art/1.jpg",
+      "../assets/img/kinetic_art/2.jpg",
+      "../assets/img/kinetic_art/3.jpg",
+      "../assets/img/kinetic_art/4.jpg"
+    ]
+  },
+  "2": {
+    id: "2",
     title: "C0°RD’1N.A”TE",
     year: "Editorial Design - 2024",
     extraInfo: `<br>
@@ -180,8 +212,8 @@ const PROJECTS = {
       "../assets/img/coordinate/8.jpg"
     ]
   },
-  "4": {
-    id: "4",
+  "3": {
+    id: "3",
     title: "MK-97",
     year: "Type Design - 2025",
     extraInfo: ``,
@@ -207,8 +239,8 @@ const PROJECTS = {
       "../assets/img/mk-97/8.jpg"
     ]
   },
-  "5": {
-    id: "5",
+  "4": {
+    id: "4",
     title: "ГОША",
     year: "Co-Design AI - 2025",
     extraInfo: `<br>
@@ -236,8 +268,8 @@ const PROJECTS = {
       "VIMEO:1124633479"
     ]
   },
-  "6": {
-    id: "6",
+  "5": {
+    id: "5",
     title: "SYNC",
     year: "Interaction Design - 2025",
     extraInfo: `<br>
@@ -265,8 +297,8 @@ const PROJECTS = {
       "../assets/img/sync/7.jpg"
     ]
   },
-  "7": {
-    id: "7",
+  "6": {
+    id: "6",
     title: "SENSE<br>Visual system for smart roads",
     year: "Visual System - 2025",
     extraInfo: `<br>
@@ -302,38 +334,6 @@ const PROJECTS = {
       "../assets/img/sense/10.jpg"
     ]
   }
-  // "8": {
-  //   id: "8",
-  //   title: "ON ICE",
-  //   year: "Photography 2026",
-  //   extraInfo: ``,
-  //   description: `
-  //     <p class="context-2"><br>
-  //       ON ICE examines the formal and physical dynamics of ice hockey. 
-  //       The series focuses on movement, material, and contact, 
-  //       capturing bodies, equipment, and surface in isolation and relation. 
-  //       Images alternate between action and detail, emphasizing structure, tension, and rhythm 
-  //       over narrative, revealing the sport as a study of force, form, and interaction.
-  //     </p><br>
-  //   `,
-  //   images: [
-  //     "../assets/img/onice/1.jpg",
-  //     "../assets/img/onice/2.jpg",
-  //     "../assets/img/onice/3.jpg",
-  //     "../assets/img/onice/4.jpg",
-  //     "../assets/img/onice/5.jpg",
-  //     "../assets/img/onice/6.jpg",
-  //     "../assets/img/onice/7.jpg",
-  //     "../assets/img/onice/8.jpg",
-  //     "../assets/img/onice/9.jpg",
-  //     "../assets/img/onice/10.jpg",
-  //     "../assets/img/onice/11.jpg",
-  //     "../assets/img/onice/12.jpg",
-  //     "../assets/img/onice/13.jpg",
-  //     "../assets/img/onice/15.jpg",
-  //     "../assets/img/onice/14.jpg"
-  //   ]
-  // }
 };
 
 /* ---------- HELPER: Extract Vimeo ID ---------- */
