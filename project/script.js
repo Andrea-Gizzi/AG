@@ -276,7 +276,7 @@ const PROJECTS = {
     year: "Interaction Design - 2025",
     extraInfo: `<br>
     <a class="award-link" href="https://www.design.swiss/2025/semester-magazine.html" target="_blank" rel="noopener noreferrer">
-    — Milano Design Week 2025</a><br> 
+    — MILANO DESIGN WEEK 2025</a><br> 
      Presented by House of Switzerland`,
     description: `
       <p class="context-2"><br>
@@ -306,11 +306,10 @@ const PROJECTS = {
     year: "Visual System - 2025",
     extraInfo: `<br>
       <a class="award-link" href="https://swissdesignawards.ch/en/andrea-gizzi" target="_blank" rel="noopener noreferrer">
-      — SWISS DESIGN AWARDS 2026</a>
-      <br>
+      — SWISS DESIGN AWARDS 2026</a><br>
       Design Research Finalist
       <br><br>
-      — SUPSI TalenThesis Award 2025<br>
+      — SUPSI TALENTHESIS AWARD 2025<br>
       Visual Communication
     `,
     description: `
