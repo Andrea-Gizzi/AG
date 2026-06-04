@@ -104,7 +104,7 @@ const PROJECTS = {
   "2": {
     id: "2",
     title: "KINETIC ART",
-    year: "Editorial 2023",
+    year: "Poster Design - 2023",
     extraInfo: ``,
     description: `
       <p class="context-2"><br>
@@ -154,7 +154,7 @@ const PROJECTS = {
   "3": {
     id: "3",
     title: "C0°RD’1N.A”TE",
-    year: "Editorial 2024",
+    year: "Editorial Design - 2024",
     extraInfo: `<br>
      — WFB 7 Space × Time 2025<br>
       Selected for Where Flowers Bloom
@@ -183,7 +183,7 @@ const PROJECTS = {
   "4": {
     id: "4",
     title: "MK-97",
-    year: "Type Design 2025",
+    year: "Type Design - 2025",
     extraInfo: ``,
     description: `
       <p class="context-2"><br>
@@ -239,7 +239,7 @@ const PROJECTS = {
   "6": {
     id: "6",
     title: "SYNC",
-    year: "IxD - 2025",
+    year: "Interaction Design - 2025",
     extraInfo: `<br>
     — Milano Design Week 2025<br> 
     House of Switzerland`,
@@ -268,7 +268,7 @@ const PROJECTS = {
   "7": {
     id: "7",
     title: "SENSE<br>Visual system for smart roads",
-    year: "IxD · Type · Editorial 2025",
+    year: "Visual System - 2025",
     extraInfo: `<br>
       — SUPSI TalenThesis Award 2025<br>
       Visual Communication
