@@ -244,7 +244,8 @@ const PROJECTS = {
     title: "ГОША",
     year: "Co-Design AI - 2025",
     extraInfo: `<br>
-    — PHOTO SCHWEIZ 2025<br>
+    <a class="award-link" href="https://www.photointernational.com/projects/pch25---andrea-gizzi" target="_blank" rel="noopener noreferrer">
+    — PHOTO SCHWEIZ 2025</a><br> 
     AI Photography`,
     description: `
       <p class="context-2"><br>
@@ -273,7 +274,8 @@ const PROJECTS = {
     title: "SYNC",
     year: "Interaction Design - 2025",
     extraInfo: `<br>
-    — Milano Design Week 2025<br> 
+    <a class="award-link" href="https://www.design.swiss/2025/semester-magazine.html" target="_blank" rel="noopener noreferrer">
+    — Milano Design Week 2025</a><br> 
     House of Switzerland`,
     description: `
       <p class="context-2"><br>
@@ -302,7 +304,9 @@ const PROJECTS = {
     title: "SENSE<br>Visual system for smart roads",
     year: "Visual System - 2025",
     extraInfo: `<br>
-      — SWISS DESIGN AWARDS 2026<br>
+      <a class="award-link" href="https://swissdesignawards.ch/en/andrea-gizzi" target="_blank" rel="noopener noreferrer">
+      — SWISS DESIGN AWARDS 2026</a>
+      <br>
       Design Research Finalist
       <br><br>
       — SUPSI TalenThesis Award 2025<br>

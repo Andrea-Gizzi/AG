@@ -283,6 +283,16 @@ a:hover {
   /* font-weight: 600; */
 }
 
+.award-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color var(--transition-fast) var(--transition-ease-in-out), transform var(--transition-fast) ease;
+}
+
+.award-link:hover {
+  opacity: 0.5;
+}
+
 #audio-status {
   position: fixed;
   text-align: center;
@@ -336,7 +346,7 @@ a:hover {
   display: block;
   font-size: var(--grey-text);
   text-transform: uppercase;
-  text-decoration: underline dotted;
+  /* text-decoration: underline dotted; */
   color: var(--primary-color);
   margin-bottom: 10px;
   margin-top: 10px;
