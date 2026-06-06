@@ -165,16 +165,16 @@ const PROJECTS = {
   "1": {
     id: "1",
     title: "KINETIC ART",
-    year: "Poster Design - 2023",
+    year: "poster design - 2023",
     extraInfo: ``,
     description: `
       <p class="context-2"><br>
-        Designed for the Mendrisio Art Museum, this poster celebrates kinetic art, a discipline merging light, 
-        form, and movement to sharpen perception. Inspired by artists such as Almir Mavignier and Peter Megert, 
-        it translates the dynamic essence of the movement into a meticulously composed visual experience. 
-        The layout bridges tradition and modernity, embodying the spirit of innovation central to kinetic art.
+        designed for the Mendrisio Art Museum, this poster celebrates kinetic art, a discipline merging light,
+        form and movement to sharpen perception. inspired by artists such as Almir Mavignier and Peter Megert,
+        it translates the dynamic essence of the movement into a meticulously composed visual experience.
+        the layout bridges tradition and modernity, embodying the spirit of innovation central to kinetic art.
       </p><br>
-      <p class="context margin-bottom">Supervisor Marco Zürcher and Sidi Vanetti<br>Co-author Simone Scardovi</p>
+      <p class="context margin-bottom">supervisor Marco Zürcher and Sidi Vanetti<br>co-author Simone Scardovi</p>
     `,
     images: [
       "../assets/img/kinetic_art/1.jpg",
@@ -186,20 +186,20 @@ const PROJECTS = {
   "2": {
     id: "2",
     title: "C0°RD’1N.A”TE",
-    year: "Editorial Design - 2024",
+    year: "editorial design - 2024",
     extraInfo: `<br>
       <a class="award-link" href="https://wfb-issue.ch/" target="_blank" rel="noopener noreferrer">
       — WFB 7 Space × Time 2025</a><br> 
-      Featured in Where Flowers Bloom
+      featured in Where Flowers Bloom
     `,
     description: `
       <p class="context-2"><br>
-        C0°RD'1N.A ’TE is an editorial project on monumental and dystopian Brutalist architecture in former Yugoslavia. 
-        Each building is documented with metadata, especially its coordinates, marking its exact location. Structured 
-        with striking covers, concise texts, analyses, images sourced online and pictograms, the publication balances 
-        clarity with atmosphere, engaging younger audiences while honoring architecture’s expressive power.
+        C0°RD'1N.A ’TE is an editorial project on monumental and dystopian brutalist architecture in former Yugoslavia.
+        each building is documented with metadata, especially its coordinates, marking its exact location. structured
+        with striking covers, concise texts, analyses, images sourced online and pictograms, the publication balances
+        clarity with atmosphere, engaging younger audiences while honouring architecture’s expressive power.
       </p><br>
-      <p class="context margin-bottom">Supervisor Roberto Schneeberger<br>Audio Hildur Guðnadóttir<br>Clip Alex Bokov</p>
+      <p class="context margin-bottom">supervisor Roberto Schneeberger<br>audio Hildur Guðnadóttir<br>clip Alex Bokov</p>
     `,
     images: [
       "VIMEO:1121345311",
@@ -216,17 +216,17 @@ const PROJECTS = {
   "3": {
     id: "3",
     title: "MK-97",
-    year: "Type Design - 2025",
+    year: "type design - 2025",
     extraInfo: ``,
     description: `
       <p class="context-2"><br>
-        MK-97 reinterprets an archival font designed in 1897 for the US Government Printing Office. Through research, 
-        digitisation, and redesign, the forgotten typeface acquires a renewed presence, fusing historical resonance 
-        with contemporary graphic expression. A printed specimen accompanies the project, highlighting the font’s 
-        essential forms and enhancing them with silver textures and low-resolution imagery that enrich its visual 
+        MK-97 reinterprets an archival font designed in 1897 for the US Government Printing Office. through research,
+        digitisation and redesign, the forgotten typeface acquires a renewed presence, fusing historical resonance
+        with contemporary graphic expression. a printed specimen accompanies the project, highlighting the font’s
+        essential forms and enhancing them with silver textures and low-resolution imagery that enrich its visual
         and narrative dimension.
       </p><br>
-      <p class="context margin-bottom">Supervisor Luca Pellegrini<br>Audio Haxan Cloak</p>
+      <p class="context margin-bottom">supervisor Luca Pellegrini<br>audio Haxan Cloak</p>
     `,
     images: [
       "VIMEO:1124034790",
@@ -243,19 +243,19 @@ const PROJECTS = {
   "4": {
     id: "4",
     title: "ГОША",
-    year: "Co-Design AI - 2025",
+    year: "co-design AI - 2025",
     extraInfo: `<br>
     <a class="award-link" href="https://www.photointernational.com/projects/pch25---andrea-gizzi" target="_blank" rel="noopener noreferrer">
     — PHOTO SCHWEIZ 2025</a><br> 
-    Featured project`,
+    featured project`,
     description: `
       <p class="context-2"><br>
-        ROWA is a avant-garde fashion brand set in 2064. In a future marked by social and environmental crises and rapid technological 
-        change, the entire visual identity is generated using AI and ML. The essential, futuristic 
-        images give life to a recognisable visual language that explores identity, resilience and the subtle balance between humans 
-        and technology. The project takes the form of a website and an atmospheric video that encapsulate the brand's mood, philosophy and vision.
+        ROWA is an avant-garde fashion brand set in 2064. in a future marked by social and environmental crises and rapid technological
+        change, the entire visual identity is generated using AI and ML. the essential, futuristic images give life to a recognisable
+        visual language that explores identity, resilience and the subtle balance between humans and technology. the project takes
+        the form of a website and an atmospheric video that encapsulate the brand's mood, philosophy and vision.
       </p><br>
-      <p class="context margin-bottom">Supervisor Leonardo Angelucci<br>Audio BFRND, Ufo361 & Sonus030</p>
+      <p class="context margin-bottom">supervisor Leonardo Angelucci<br>audio BFRND, Ufo361 & Sonus030</p>
     `,
     images: [
       "VIMEO:1072980885",
@@ -273,21 +273,21 @@ const PROJECTS = {
   "5": {
     id: "5",
     title: "SYNC",
-    year: "Interaction Design - 2025",
+    year: "interaction design - 2025",
     extraInfo: `<br>
     <a class="award-link" href="https://www.design.swiss/2025/semester-magazine.html" target="_blank" rel="noopener noreferrer">
     — MILANO DESIGN WEEK 2025</a><br> 
-     Presented by House of Switzerland`,
+     presented by House of Switzerland`,
     description: `
       <p class="context-2"><br>
-        SYNC is an interactive exploration of the intersection of body, technology and visual art. 
-        Drawing from Bauhaus dance principles, the project uses wearable accelerometers as inputs to 
-        capture performers’ gestures and transmits the data to a central server, which translates it 
-        in real time into audiovisual compositions. An immersive interface synchronises movement, sound and imagery 
-        so that dynamically generated lines and sonic textures evolve in harmony, offering a contemporary reinterpretation 
-        of Bauhaus through a constantly shifting performative language. Developed for Semester Magazine 2025.
+        SYNC is an interactive exploration of the intersection of body, technology and visual art.
+        drawing from Bauhaus dance principles, the project uses wearable accelerometers as inputs to
+        capture performers’ gestures and transmits the data to a central server, which translates the data
+        in real time into audiovisual compositions. an immersive interface synchronises movement, sound and imagery
+        so that dynamically generated lines and sonic textures evolve in harmony, offering a contemporary reinterpretation
+        of Bauhaus through a constantly shifting performative language. developed for Semester Magazine 2025.
       </p><br>
-      <p class="context margin-bottom">Supervisor Leonardo Angelucci</p>
+      <p class="context margin-bottom">supervisor Leonardo Angelucci</p>
     `,
     images: [
       "VIMEO:1072983962",
@@ -303,25 +303,25 @@ const PROJECTS = {
   "6": {
     id: "6",
     title: "SENSE<br>Visual system for smart roads",
-    year: "Visual System - 2025",
+    year: "visual system - 2025",
     extraInfo: `<br>
       <a class="award-link" href="https://swissdesignawards.ch/en/andrea-gizzi" target="_blank" rel="noopener noreferrer">
       — SWISS DESIGN AWARDS 2026</a><br>
-      Design Research Finalist
+      design research finalist
       <br><br>
       — SUPSI TALENTHESIS AWARD 2025<br>
-      Visual Communication
+      visual communication
     `,
     description: `
       <p class="context-2"><br>
-        SENSE is a road-signage system readable by both humans and automated systems. 
-        A custom variable typeface combining typographic and pictographic elements was created and iteratively tested with OCR 
-        to improve automatic segmentation while preserving human legibility. 
-        The typeface and its visual grammar generate signs validated on a multicultural annotated dataset and ML models. 
-        A printed manual illustrates the structure of the entire system and supports deployment in urban and logistical contexts, 
+        SENSE is a road-signage system readable by both humans and automated systems.
+        a custom variable typeface combining typographic and pictographic elements was created and iteratively tested with OCR
+        to improve automatic segmentation while preserving human legibility.
+        the typeface and its visual grammar generate signs validated on a multicultural annotated dataset and ML models.
+        a printed manual illustrates the structure of the entire system and supports deployment in urban and logistical contexts,
         promoting safer cooperation between humans and machines.
       </p><br>
-      <p class="context margin-bottom">Supervisor Michael Zehnder</p>
+      <p class="context margin-bottom">supervisor Michael Zehnder</p>
     `,
     images: [
       // "VIMEO:1121218692",
