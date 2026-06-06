@@ -189,7 +189,7 @@ const PROJECTS = {
     year: "editorial design - 2024",
     extraInfo: `<br>
       <a class="award-link" href="https://wfb-issue.ch/" target="_blank" rel="noopener noreferrer">
-      — WFB 7 Space × Time 2025</a><br> 
+      — WFB 7 SPACE × TIME 2025</a><br> 
       featured in Where Flowers Bloom
     `,
     description: `
