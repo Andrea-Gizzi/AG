@@ -250,7 +250,7 @@ const PROJECTS = {
     featured project`,
     description: `
       <p class="context-2"><br>
-        ROWA is an avant-garde fashion brand set in 2064. in a future marked by social and environmental crises and rapid technological
+        ГОША is an avant-garde fashion brand set in 2064. in a future marked by social and environmental crises and rapid technological
         change, the entire visual identity is generated using AI and ML. the essential, futuristic images give life to a recognisable
         visual language that explores identity, resilience and the subtle balance between humans and technology. the project takes
         the form of a website and an atmospheric video that encapsulate the brand's mood, philosophy and vision.
