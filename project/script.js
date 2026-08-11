@@ -341,7 +341,8 @@ const PROJECTS = {
   },
   "7": {
     id: "7",
-    title: "LUGANO É HOCKEY<br>Preseason / Warmup jerseys",
+    // title: "LUGANO É HOCKEY<br>Preseason / Warmup jerseys",
+    title: "THUNDER<br>Preseason / Warmup jerseys",
     year: "graphic design - 2026",
     extraInfo: ``,
     description: `
