@@ -338,6 +338,31 @@ const PROJECTS = {
       "../assets/img/sense/11.jpg",
       "../assets/img/sense/10.jpg"
     ]
+  },
+  "7": {
+    id: "7",
+    title: "LUGANO É HOCKEY<br>Preseason / Warmup jerseys",
+    year: "graphic design - 2026",
+    extraInfo: ``,
+    description: `
+    <p class="context-2"><br>
+      Visual identity and jersey design developed for HC Lugano’s first team.
+      the project translates the club’s strength, intensity and competitive spirit
+      into a bold visual language, developed across colours, symbols, graphics and
+      on-ice uniforms for the preseason and warmup.
+    </p><br>
+    <p class="context margin-bottom">work project for HC Lugano</p>
+  `,
+    images: [
+      "../assets/img/hcl/1.jpg",
+      "../assets/img/hcl/2.jpg",
+      "../assets/img/hcl/3.jpg",
+      "../assets/img/hcl/4.jpg",
+      "../assets/img/hcl/5.jpg",
+      "../assets/img/hcl/6.jpg",
+      "../assets/img/hcl/7.jpg",
+      "../assets/img/hcl/8.jpg"
+    ]
   }
 };
 
