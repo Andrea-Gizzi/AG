@@ -589,3 +589,21 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('dragstart', e => e.preventDefault());
+
+
+/* ---------- NEWS ROTATION ---------- */
+document.addEventListener("DOMContentLoaded", () => {
+  const newsItems = document.querySelectorAll(".news-item");
+
+  if (newsItems.length < 2) return;
+
+  let currentNews = 0;
+
+  setInterval(() => {
+    newsItems[currentNews].classList.remove("active");
+
+    currentNews = (currentNews + 1) % newsItems.length;
+
+    newsItems[currentNews].classList.add("active");
+  }, 10000);
+});

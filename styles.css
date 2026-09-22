@@ -186,6 +186,29 @@ html {
   flex-grow: 1;
 }
 
+.news-info {
+  text-align: center;
+  flex-grow: 1;
+  position: relative;
+  min-height: 14px;
+}
+
+.news-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  text-decoration: none;
+transition: opacity 0.1s linear;
+}
+
+.news-item.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .news-close {
   font-size: var(--grey-text);
   color: var(--primary-color);
@@ -740,11 +763,12 @@ html.is-touch .custom-cursor {
     display: none;
   }
 
-  .news-info {
-    text-align: left;
-    flex-grow: 1;
-    margin-left: var(--lateral-padding-mobile);
-  }
+.news-info {
+  text-align: left;
+  flex-grow: 1;
+  margin-left: var(--lateral-padding-mobile);
+  min-height: 12px;
+}
 
   .news-close {
     font-size: var(--responsive-text);
