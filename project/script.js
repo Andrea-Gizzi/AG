@@ -305,6 +305,10 @@ const PROJECTS = {
     title: "SENSE<br>Visual system for smart roads",
     year: "visual system - 2025",
     extraInfo: `<br>
+      <a class="award-link" href="https://www.graphicdays.it/neologia/sense-andrea-gizzi-2" target="_blank" rel="noopener noreferrer">
+      — NEOLOGIA 2026</a><br>
+      editorial design selected
+      <br><br>
       <a class="award-link" href="https://swissdesignawards.ch/en/andrea-gizzi" target="_blank" rel="noopener noreferrer">
       — SWISS DESIGN AWARDS 2026</a><br>
       design research finalist
