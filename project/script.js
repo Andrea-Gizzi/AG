@@ -314,7 +314,7 @@ const PROJECTS = {
       design research finalist
       <br><br>
       <a class="award-link" href="https://aris.supsi.ch/entities/publication/963061ac-ede2-4c47-b120-27471f0ff96c" target="_blank" rel="noopener noreferrer">
-      — SUPSI TALENTHESIS AWARD 2025</a><br>
+      — SUPSI TALENT AWARD 2025</a><br>
       visual communication
     `,
     description: `
