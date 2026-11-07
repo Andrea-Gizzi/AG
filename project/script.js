@@ -309,7 +309,7 @@ const PROJECTS = {
       — NEOLOGIA 2026</a><br>
       editorial design selected
       <br><br>
-      <a class="award-link" href="https://swissdesignawards.ch/en/andrea-gizzi" target="_blank" rel="noopener noreferrer">
+      <a class="award-link" href="https://2026.swissdesignawards.ch/it/andrea-gizzi" target="_blank" rel="noopener noreferrer">
       — SWISS DESIGN AWARDS 2026</a><br>
       design research finalist
       <br><br>
